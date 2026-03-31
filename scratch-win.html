@@ -1,304 +1,363 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-
-<!-- Mirrored from play104.topprojectideas.com/scratch-win by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Mar 2026 06:41:38 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Scratch Card</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link rel="stylesheet" href="css/style.css" />
 
     <link rel="preconnect" href="https://pagead2.googlesyndication.com/" />
     <link rel="preconnect" href="https://googleads.g.doubleclick.net/" />
-    <script async src="../pagead2.googlesyndication.com/pagead/js/fbb6f.txt?client=ca-pub-4385060080295439" crossorigin="anonymous"></script>
+    <script
+      async
+      data-ad-frequency-hint="30s"
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4788685016218460"
+      crossorigin="anonymous"
+    ></script>
 
     <style>
-        /* ── Scratch area wrapper ── */
-        .scratch-area {
-            width: calc(100% - 32px);
-            margin: 8px 16px 16px;
-            position: relative;
-            border-radius: 16px;
-            overflow: hidden;
-            display: block;
-        }
+      /* ── Scratch area wrapper ── */
+      .scratch-area {
+        width: calc(100% - 32px);
+        margin: 8px 16px 16px;
+        position: relative;
+        border-radius: 16px;
+        overflow: hidden;
+        display: block;
+      }
 
-        .scratch-reveal-bg {
-            width: 100%;
-            border-radius: 16px;
-            background: #000A19A3;
-            border: 1px solid #FFFFFF29;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 30px 20px;
-            box-sizing: border-box;
-            min-height: 200px;
-        }
+      .scratch-reveal-bg {
+        width: 100%;
+        border-radius: 16px;
+        background: #000a19a3;
+        border: 1px solid #ffffff29;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 30px 20px;
+        box-sizing: border-box;
+        min-height: 200px;
+      }
 
-        .gift-box-img {
-            width: 65px;
-            height: 75px;
-            object-fit: contain;
-            display: block;
-            margin: 0 auto 10px;
-        }
+      .gift-box-img {
+        width: 65px;
+        height: 75px;
+        object-fit: contain;
+        display: block;
+        margin: 0 auto 10px;
+      }
 
-        .reveal-number {
-            font-size: 36px;
-            font-weight: 800;
-            color: #ffffff;
-            line-height: 1.4;
-        }
+      .reveal-number {
+        font-size: 36px;
+        font-weight: 800;
+        color: #ffffff;
+        line-height: 1.4;
+      }
 
-        #scratchCanvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 16px;
-            cursor: crosshair;
-            touch-action: none;
-        }
+      #scratchCanvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 16px;
+        cursor: crosshair;
+        touch-action: none;
+      }
 
-        .party-popper {
-            display: none;
-            position: relative;
-        }
+      .party-popper {
+        display: none;
+        position: relative;
+      }
 
-        .party-popper.show {
-            display: block;
-            animation: fadeIn 0.5s ease forwards;
-        }
+      .party-popper.show {
+        display: block;
+        animation: fadeIn 0.5s ease forwards;
+      }
 
-        .party-img {
-            width: 120px;
-            height: 120px;
-            object-fit: contain;
-            position: absolute;
-            top: 0px;
-            left: 52%;
-            transform: translateX(-50%);
-            animation: float 2.5s ease-in-out infinite;
-            filter: drop-shadow(0 10px 20px rgba(242, 190, 31, 0.35));
-        }
+      .party-img {
+        width: 120px;
+        height: 120px;
+        object-fit: contain;
+        position: absolute;
+        top: 0px;
+        left: 52%;
+        transform: translateX(-50%);
+        animation: float 2.5s ease-in-out infinite;
+        filter: drop-shadow(0 10px 20px rgba(242, 190, 31, 0.35));
+      }
 
-        .congrats-card {
-            display: none;
-            width: calc(100% - 32px);
-            margin: 60px 16px 22px;
-            background: rgba(234, 208, 126, 0.12);
-            border: 1px solid rgba(242, 190, 31, 0.25);
-            border-radius: 18px;
-            padding: 60px 20px 28px;
-            text-align: center;
-            position: relative;
-            opacity: 0;
-            transform: translateY(20px);
-        }
+      .congrats-card {
+        display: none;
+        width: calc(100% - 32px);
+        margin: 60px 16px 22px;
+        background: rgba(234, 208, 126, 0.12);
+        border: 1px solid rgba(242, 190, 31, 0.25);
+        border-radius: 18px;
+        padding: 60px 20px 28px;
+        text-align: center;
+        position: relative;
+        opacity: 0;
+        transform: translateY(20px);
+      }
 
-        .congrats-card.show {
-            display: block;
-            animation: cardReveal 0.6s ease forwards;
-        }
+      .congrats-card.show {
+        display: block;
+        animation: cardReveal 0.6s ease forwards;
+      }
 
-        .congrats-text {
-            font-size: 17px;
-            font-weight: 600;
-            color: #ffffff;
-            margin-bottom: 8px;
-        }
+      .congrats-text {
+        font-size: 17px;
+        font-weight: 600;
+        color: #ffffff;
+        margin-bottom: 8px;
+      }
 
-        .reward-text {
-            font-size: 26px;
-            font-weight: 800;
-            color: #F2BE1F;
-            letter-spacing: 1px;
-            animation: glow 1.5s ease-in-out infinite alternate;
-        }
+      .reward-text {
+        font-size: 26px;
+        font-weight: 800;
+        color: #f2be1f;
+        letter-spacing: 1px;
+        animation: glow 1.5s ease-in-out infinite alternate;
+      }
 
-        @keyframes float {
-            0%   { transform: translate(-50%, 0px); }
-            50%  { transform: translate(-50%, -8px); }
-            100% { transform: translate(-50%, 0px); }
+      @keyframes float {
+        0% {
+          transform: translate(-50%, 0px);
         }
+        50% {
+          transform: translate(-50%, -8px);
+        }
+        100% {
+          transform: translate(-50%, 0px);
+        }
+      }
 
-        @keyframes cardReveal {
-            to { opacity: 1; transform: translateY(0); }
+      @keyframes cardReveal {
+        to {
+          opacity: 1;
+          transform: translateY(0);
         }
+      }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to   { opacity: 1; }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
         }
+        to {
+          opacity: 1;
+        }
+      }
 
-        @keyframes glow {
-            from { text-shadow: 0 0 8px rgba(242, 190, 31, 0.4); }
-            to   { text-shadow: 0 0 18px rgba(242, 190, 31, 0.8); }
+      @keyframes glow {
+        from {
+          text-shadow: 0 0 8px rgba(242, 190, 31, 0.4);
         }
+        to {
+          text-shadow: 0 0 18px rgba(242, 190, 31, 0.8);
+        }
+      }
 
-        .gadsbanner {
-            width: calc(100% - 32px);
-            margin: 0 16px 16px;
-        }
+      .gadsbanner {
+        width: calc(100% - 32px);
+        margin: 0 16px 16px;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <section>
-        <main>
-            <div class="main_div">
+      <main>
+        <div class="main_div">
+          <!-- Header -->
+          <div class="header" style="width: 100%">
+            <img
+              src="assets/robux/back.webp"
+              alt="Back"
+              class="back-button"
+              id="backBtn"
+              loading="lazy"
+            />
+            <h1 class="home-title">Scratch Card</h1>
+          </div>
 
-                <!-- Header -->
-                <div class="header" style="width:100%;">
-                    <img src="assets/robux/back.webp" alt="Back" class="back-button" id="backBtn" loading="lazy">
-                    <h1 class="home-title">Scratch Card</h1>
-                </div>
-
-                <div class="scratch-area" id="scratchArea">
-
-                    <div class="scratch-reveal-bg">
-                        <img class="gift-box-img" src="assets/robux/gift_box.png" alt="Gift Box" loading="lazy">
-                        <div class="reveal-number" id="revealNumber">0</div>
-                    </div>
-
-                    <canvas id="scratchCanvas"></canvas>
-                </div>
-
-                <div style="width: 100%;">
-                    <div class="party-popper" id="partyPopper">
-                        <img class="party-img" src="assets/robux/win.png" alt="Congrats" loading="lazy">
-                    </div>
-
-                    <div class="congrats-card" id="congratsCard">
-                        <p class="congrats-text">Congratulation</p>
-                        <p class="reward-text" id="rewardText">Your Reward: 0</p>
-                    </div>
-                </div>
-
-                <div class="gadsbanner">
-                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4385060080295439" data-ad-slot="7944603731"
-                        data-ad-format="auto" data-full-width-responsive="true"></ins>
-                    <label
-                        style="display:block;margin:0 auto;width:fit-content;letter-spacing:4px;color:rgb(65,77,101);font:400 9px/2 Arial,sans-serif;opacity:0.7;">ADVERTISEMENT</label>
-                    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-                </div>
-
+          <div class="scratch-area" id="scratchArea">
+            <div class="scratch-reveal-bg">
+              <img
+                class="gift-box-img"
+                src="assets/robux/gift_box.png"
+                alt="Gift Box"
+                loading="lazy"
+              />
+              <div class="reveal-number" id="revealNumber">0</div>
             </div>
-        </main>
+
+            <canvas id="scratchCanvas"></canvas>
+          </div>
+
+          <div style="width: 100%">
+            <div class="party-popper" id="partyPopper">
+              <img class="party-img" src="assets/robux/win.png" alt="Congrats" loading="lazy" />
+            </div>
+
+            <div class="congrats-card" id="congratsCard">
+              <p class="congrats-text">Congratulation</p>
+              <p class="reward-text" id="rewardText">Your Reward: 0</p>
+            </div>
+          </div>
+
+          <div class="gadsbanner">
+            <ins
+              class="adsbygoogle"
+              style="display: block"
+              data-ad-client="ca-pub-4788685016218460"
+              data-ad-slot="7944603731"
+              data-ad-format="auto"
+              data-full-width-responsive="true"
+            ></ins>
+            <label
+              style="
+                display: block;
+                margin: 0 auto;
+                width: fit-content;
+                letter-spacing: 4px;
+                color: rgb(65, 77, 101);
+                font:
+                  400 9px/2 Arial,
+                  sans-serif;
+                opacity: 0.7;
+              "
+              >ADVERTISEMENT</label
+            >
+            <script>
+              (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+          </div>
+        </div>
+      </main>
     </section>
 
     <script>
-        document.getElementById("backBtn").addEventListener("click", () => window.history.back());
+      document.getElementById("backBtn").addEventListener("click", () => window.history.back());
 
-        const rewardPool = [20, 40, 60, 79, 100, 120, 125, 131, 137, 159, 237, 400, 475, 666, 777];
-        const selectedReward = rewardPool[Math.floor(Math.random() * rewardPool.length)];
+      const rewardPool = [20, 40, 60, 79, 100, 120, 125, 131, 137, 159, 237, 400, 475, 666, 777];
+      const selectedReward = rewardPool[Math.floor(Math.random() * rewardPool.length)];
 
-        document.getElementById("revealNumber").textContent = selectedReward;
-        document.getElementById("rewardText").textContent = `Your Reward: ${selectedReward}`;
+      document.getElementById("revealNumber").textContent = selectedReward;
+      document.getElementById("rewardText").textContent = `Your Reward: ${selectedReward}`;
 
-        const scratchArea  = document.getElementById("scratchArea");
-        const canvas       = document.getElementById("scratchCanvas");
-        const ctx          = canvas.getContext("2d");
+      const scratchArea = document.getElementById("scratchArea");
+      const canvas = document.getElementById("scratchCanvas");
+      const ctx = canvas.getContext("2d");
 
-        let isScratching = false;
-        let revealed     = false;
-        let imageLoaded  = false;
+      let isScratching = false;
+      let revealed = false;
+      let imageLoaded = false;
 
-        const scratchImage = new Image();
-        scratchImage.src   = "assets/robux/scratch_card_bg.webp";
+      const scratchImage = new Image();
+      scratchImage.src = "assets/robux/scratch_card_bg.webp";
 
-        function initCanvas() {
-            const revealBg = scratchArea.querySelector(".scratch-reveal-bg");
-            canvas.width  = scratchArea.offsetWidth;
-            canvas.height = revealBg.offsetHeight || 200;
-            drawScratchCover();
+      function initCanvas() {
+        const revealBg = scratchArea.querySelector(".scratch-reveal-bg");
+        canvas.width = scratchArea.offsetWidth;
+        canvas.height = revealBg.offsetHeight || 200;
+        drawScratchCover();
+      }
+
+      function drawScratchCover() {
+        if (scratchImage.complete && scratchImage.naturalWidth > 0) {
+          ctx.drawImage(scratchImage, 0, 0, canvas.width, canvas.height);
+          imageLoaded = true;
+        } else {
+          const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+          grad.addColorStop(0, "#7a7aaa");
+          grad.addColorStop(1, "#5a5a8a");
+          ctx.fillStyle = grad;
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
         }
+      }
 
-        function drawScratchCover() {
-            if (scratchImage.complete && scratchImage.naturalWidth > 0) {
-                ctx.drawImage(scratchImage, 0, 0, canvas.width, canvas.height);
-                imageLoaded = true;
-            } else {
-                const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-                grad.addColorStop(0, "#7a7aaa");
-                grad.addColorStop(1, "#5a5a8a");
-                ctx.fillStyle = grad;
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-            }
-        }
+      scratchImage.onload = () => {
+        imageLoaded = true;
+        initCanvas();
+      };
 
-        scratchImage.onload = () => {
-            imageLoaded = true;
-            initCanvas();
+      window.addEventListener("load", initCanvas);
+
+      function getPos(e) {
+        const rect = canvas.getBoundingClientRect();
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+        const src = e.touches ? e.touches[0] : e;
+        return {
+          x: (src.clientX - rect.left) * scaleX,
+          y: (src.clientY - rect.top) * scaleY,
         };
+      }
 
-        window.addEventListener("load", initCanvas);
+      function doScratch(e) {
+        if (!isScratching || revealed) return;
+        e.preventDefault();
 
-        function getPos(e) {
-            const rect   = canvas.getBoundingClientRect();
-            const scaleX = canvas.width  / rect.width;
-            const scaleY = canvas.height / rect.height;
-            const src    = e.touches ? e.touches[0] : e;
-            return {
-                x: (src.clientX - rect.left) * scaleX,
-                y: (src.clientY - rect.top)  * scaleY
-            };
+        const {x, y} = getPos(e);
+        ctx.globalCompositeOperation = "destination-out";
+        ctx.beginPath();
+        ctx.arc(x, y, 26, 0, Math.PI * 2);
+        ctx.fill();
+
+        checkReveal();
+      }
+
+      canvas.addEventListener("mousedown", (e) => {
+        isScratching = true;
+        doScratch(e);
+      });
+      canvas.addEventListener("mouseup", () => {
+        isScratching = false;
+      });
+      canvas.addEventListener("mouseleave", () => {
+        isScratching = false;
+      });
+      canvas.addEventListener("mousemove", doScratch);
+      canvas.addEventListener(
+        "touchstart",
+        (e) => {
+          isScratching = true;
+          doScratch(e);
+        },
+        {passive: false},
+      );
+      canvas.addEventListener("touchend", () => {
+        isScratching = false;
+      });
+      canvas.addEventListener("touchmove", doScratch, {passive: false});
+
+      function checkReveal() {
+        const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+        let transparent = 0;
+        for (let i = 3; i < pixels.length; i += 16) {
+          if (pixels[i] < 128) transparent++;
         }
+        const pct = (transparent / (pixels.length / 16)) * 100;
+        if (pct > 50) revealReward();
+      }
 
-        function doScratch(e) {
-            if (!isScratching || revealed) return;
-            e.preventDefault();
+      function revealReward() {
+        revealed = true;
+        canvas.style.pointerEvents = "none";
 
-            const { x, y } = getPos(e);
-            ctx.globalCompositeOperation = "destination-out";
-            ctx.beginPath();
-            ctx.arc(x, y, 26, 0, Math.PI * 2);
-            ctx.fill();
+        canvas.style.transition = "opacity 0.4s ease";
+        canvas.style.opacity = "0";
 
-            checkReveal();
-        }
-
-        canvas.addEventListener("mousedown",  (e) => { isScratching = true;  doScratch(e); });
-        canvas.addEventListener("mouseup",    ()  => { isScratching = false; });
-        canvas.addEventListener("mouseleave", ()  => { isScratching = false; });
-        canvas.addEventListener("mousemove",  doScratch);
-        canvas.addEventListener("touchstart", (e) => { isScratching = true;  doScratch(e); }, { passive: false });
-        canvas.addEventListener("touchend",   ()  => { isScratching = false; });
-        canvas.addEventListener("touchmove",  doScratch, { passive: false });
-
-        function checkReveal() {
-            const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
-            let transparent = 0;
-            for (let i = 3; i < pixels.length; i += 16) {
-                if (pixels[i] < 128) transparent++;
-            }
-            const pct = (transparent / (pixels.length / 16)) * 100;
-            if (pct > 50) revealReward();
-        }
-
-        function revealReward() {
-            revealed = true;
-            canvas.style.pointerEvents = "none";
-
-            canvas.style.transition = "opacity 0.4s ease";
-            canvas.style.opacity    = "0";
-
-            setTimeout(() => {
-                canvas.style.display = "none";
-                document.getElementById("partyPopper").classList.add("show");
-                document.getElementById("congratsCard").classList.add("show");
-            }, 400);
-        }
+        setTimeout(() => {
+          canvas.style.display = "none";
+          document.getElementById("partyPopper").classList.add("show");
+          document.getElementById("congratsCard").classList.add("show");
+        }, 400);
+      }
     </script>
-<!-- Cloudflare Pages Analytics --><script defer src='../static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "1154478053354d3c8fc4116079963feb"}'></script><!-- Cloudflare Pages Analytics --></body>
-
-
-<!-- Mirrored from play104.topprojectideas.com/scratch-win by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Mar 2026 06:41:39 GMT -->
+  </body>
 </html>

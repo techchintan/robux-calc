@@ -1,385 +1,432 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<!-- Mirrored from play104.topprojectideas.com/spin_to_win by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Mar 2026 06:41:37 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
     <title>Spin Wheel</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link rel="stylesheet" href="css/style.css" />
 
     <link rel="preconnect" href="https://pagead2.googlesyndication.com/" />
     <link rel="preconnect" href="https://googleads.g.doubleclick.net/" />
-    <script async src="../pagead2.googlesyndication.com/pagead/js/fbb6f.txt?client=ca-pub-4385060080295439" crossorigin="anonymous"></script>
+    <script
+      async
+      data-ad-frequency-hint="30s"
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4788685016218460"
+      crossorigin="anonymous"
+    ></script>
 
     <style>
-        .party-popper {
-            display: none;
-            position: relative;
+      .party-popper {
+        display: none;
+        position: relative;
+      }
+
+      .party-popper.show {
+        display: block;
+        animation: fadeIn 0.5s ease forwards;
+      }
+
+      .party-img {
+        width: 120px;
+        height: 120px;
+        object-fit: contain;
+        position: absolute;
+        top: 0px;
+        left: 52%;
+        transform: translateX(-50%);
+        animation: float 2.5s ease-in-out infinite;
+        filter: drop-shadow(0 10px 20px rgba(242, 190, 31, 0.35));
+      }
+
+      .congrats-card {
+        display: none;
+        width: calc(100% - 32px);
+        margin: 60px 16px 22px;
+        background: rgba(234, 208, 126, 0.12);
+        border: 1px solid rgba(242, 190, 31, 0.25);
+        border-radius: 18px;
+        padding: 60px 20px 28px;
+        text-align: center;
+        position: relative;
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      .congrats-card.show {
+        display: block;
+        animation: cardReveal 0.6s ease forwards;
+      }
+
+      .congrats-text {
+        font-size: 17px;
+        font-weight: 600;
+        color: #ffffff;
+        margin-bottom: 8px;
+      }
+
+      .reward-text {
+        font-size: 26px;
+        font-weight: 800;
+        color: #f2be1f;
+        letter-spacing: 1px;
+        animation: glow 1.5s ease-in-out infinite alternate;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translate(-50%, 0px);
         }
-    
-        .party-popper.show {
-            display: block;
-            animation: fadeIn 0.5s ease forwards;
+
+        50% {
+          transform: translate(-50%, -8px);
         }
-    
-        .party-img {
-            width: 120px;
-            height: 120px;
-            object-fit: contain;
-            position: absolute;
-            top: 0px;
-            left: 52%;
-            transform: translateX(-50%);
-            animation: float 2.5s ease-in-out infinite;
-            filter: drop-shadow(0 10px 20px rgba(242, 190, 31, 0.35));
+
+        100% {
+          transform: translate(-50%, 0px);
         }
-    
-        .congrats-card {
-            display: none;
-            width: calc(100% - 32px);
-            margin: 60px 16px 22px;
-            background: rgba(234, 208, 126, 0.12);
-            border: 1px solid rgba(242, 190, 31, 0.25);
-            border-radius: 18px;
-            padding: 60px 20px 28px;
-            text-align: center;
-            position: relative;
-            opacity: 0;
-            transform: translateY(20px);
+      }
+
+      @keyframes cardReveal {
+        to {
+          opacity: 1;
+          transform: translateY(0);
         }
-    
-        .congrats-card.show {
-            display: block;
-            animation: cardReveal 0.6s ease forwards;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
         }
-    
-        .congrats-text {
-            font-size: 17px;
-            font-weight: 600;
-            color: #ffffff;
-            margin-bottom: 8px;
+
+        to {
+          opacity: 1;
         }
-    
-        .reward-text {
-            font-size: 26px;
-            font-weight: 800;
-            color: #F2BE1F;
-            letter-spacing: 1px;
-            animation: glow 1.5s ease-in-out infinite alternate;
+      }
+
+      @keyframes glow {
+        from {
+          text-shadow: 0 0 8px rgba(242, 190, 31, 0.4);
         }
-    
-    
-        @keyframes float {
-            0% {
-                transform: translate(-50%, 0px);
-            }
-    
-            50% {
-                transform: translate(-50%, -8px);
-            }
-    
-            100% {
-                transform: translate(-50%, 0px);
-            }
+
+        to {
+          text-shadow: 0 0 18px rgba(242, 190, 31, 0.8);
         }
-    
-        @keyframes cardReveal {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-    
-            to {
-                opacity: 1;
-            }
-        }
-    
-        @keyframes glow {
-            from {
-                text-shadow: 0 0 8px rgba(242, 190, 31, 0.4);
-            }
-    
-            to {
-                text-shadow: 0 0 18px rgba(242, 190, 31, 0.8);
-            }
-        }
-    
-        .wheel-area {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            padding: 10px 20px 30px;
-            position: relative;
-            z-index: 5;
-        }
-    
-        .wheel-container {
-            position: relative;
-            width: 270px;
-            height: 270px;
-            overflow: visible;
-        }
-    
-        .pointer-top {
-            position: absolute;
-            top: 0px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 13px solid transparent;
-            border-right: 13px solid transparent;
-            border-top: 22px solid #ffffff;
-            z-index: 100;
-            filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.7));
-        }
-    
-        .pointer-center {
-            position: absolute;
-            top: calc(50% - 42px);
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 9px solid transparent;
-            border-right: 9px solid transparent;
-            border-bottom: 16px solid #ffffff;
-            z-index: 100;
-            filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.6));
-        }
-    
-        .wheel-ring {
-            position: absolute;
-            inset: 0;
-            border-radius: 50%;
-            border: 8px solid #ffffff;
-            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1), 0 6px 24px rgba(0, 0, 0, 0.5);
-            z-index: 2;
-            pointer-events: none;
-        }
-    
-        #wheelCanvas {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            display: block;
-        }
-    
-        .spin-center {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 58px;
-            height: 58px;
-            border-radius: 50%;
-            background: #ffffff;
-            border: 3px solid #cccccc;
-            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.4);
-            font-size: 11px;
-            font-weight: 800;
-            color: #1a1a2e;
-            letter-spacing: 1.5px;
-            cursor: pointer;
-            z-index: 200;
-            transition: transform 0.1s;
-        }
-    
-        .spin-center:hover {
-            transform: translate(-50%, -50%) scale(1.05);
-        }
-    
-        .spin-center:active {
-            transform: translate(-50%, -50%) scale(0.97);
-        }
-    
-        .spin-center:disabled {
-            opacity: 0.55;
-            cursor: not-allowed;
-            transform: translate(-50%, -50%);
-        }
+      }
+
+      .wheel-area {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        padding: 10px 20px 30px;
+        position: relative;
+        z-index: 5;
+      }
+
+      .wheel-container {
+        position: relative;
+        width: 270px;
+        height: 270px;
+        overflow: visible;
+      }
+
+      .pointer-top {
+        position: absolute;
+        top: 0px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-left: 13px solid transparent;
+        border-right: 13px solid transparent;
+        border-top: 22px solid #ffffff;
+        z-index: 100;
+        filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.7));
+      }
+
+      .pointer-center {
+        position: absolute;
+        top: calc(50% - 42px);
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-left: 9px solid transparent;
+        border-right: 9px solid transparent;
+        border-bottom: 16px solid #ffffff;
+        z-index: 100;
+        filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.6));
+      }
+
+      .wheel-ring {
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        border: 8px solid #ffffff;
+        box-shadow:
+          0 0 0 2px rgba(255, 255, 255, 0.1),
+          0 6px 24px rgba(0, 0, 0, 0.5);
+        z-index: 2;
+        pointer-events: none;
+      }
+
+      #wheelCanvas {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        display: block;
+      }
+
+      .spin-center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 58px;
+        height: 58px;
+        border-radius: 50%;
+        background: #ffffff;
+        border: 3px solid #cccccc;
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.4);
+        font-size: 11px;
+        font-weight: 800;
+        color: #1a1a2e;
+        letter-spacing: 1.5px;
+        cursor: pointer;
+        z-index: 200;
+        transition: transform 0.1s;
+      }
+
+      .spin-center:hover {
+        transform: translate(-50%, -50%) scale(1.05);
+      }
+
+      .spin-center:active {
+        transform: translate(-50%, -50%) scale(0.97);
+      }
+
+      .spin-center:disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+        transform: translate(-50%, -50%);
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <section>
-        <main>
-            <div class="main_div">
+      <main>
+        <div class="main_div">
+          <!-- Header -->
+          <div class="header" style="width: 100%">
+            <img
+              src="assets/robux/back.webp"
+              alt="Back"
+              class="back-button"
+              id="backBtn"
+            />
+            <h1 class="home-title">Spin Wheel</h1>
+          </div>
 
-                <!-- Header -->
-                <div class="header" style="width: 100%;">
-                    <img src="assets/robux/back.webp" alt="Back" class="back-button" id="backBtn">
-                    <h1 class="home-title">Spin Wheel</h1>
-                </div>
-
-                <!-- Congrats Card -->
-                <div style="width: 100%;">
-                    <div class="party-popper" id="partyPopper">
-                        <img class="party-img" src="assets/robux/win.png" alt="Congrats" loading="lazy">
-                    </div>
-
-                    <div class="congrats-card" id="congratsCard">
-                        <p class="congrats-text">Congratulation</p>
-                        <p class="reward-text" id="rewardDisplay">Your Reward: 0</p>
-                    </div>
-                </div>
-
-                <!-- Wheel -->
-                <div class="wheel-area">
-                    <div class="wheel-container">
-                        <div class="wheel-ring"></div>
-                        <canvas id="wheelCanvas" width="270" height="270"></canvas>
-                        <div class="pointer-top"></div>
-                        <div class="pointer-center"></div>
-                        <button class="spin-center" id="spinBtn">SPIN</button>
-                    </div>
-                </div>
-
-                <div class="gadsbanner">
-                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4385060080295439" data-ad-slot="7944603731"
-                        data-ad-format="auto" data-full-width-responsive="true"></ins>
-                    <label
-                        style="display: block; margin: 0px auto; width: fit-content; letter-spacing: 4px; color: rgb(65, 77, 101); font: 400 9px / 2 Arial, sans-serif; opacity: 0.7;">ADVERTISEMENT</label>
-                    <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                </div>
-
+          <!-- Congrats Card -->
+          <div style="width: 100%">
+            <div class="party-popper" id="partyPopper">
+              <img
+                class="party-img"
+                src="assets/robux/win.png"
+                alt="Congrats"
+                loading="lazy"
+              />
             </div>
-        </main>
+
+            <div class="congrats-card" id="congratsCard">
+              <p class="congrats-text">Congratulation</p>
+              <p class="reward-text" id="rewardDisplay">Your Reward: 0</p>
+            </div>
+          </div>
+
+          <!-- Wheel -->
+          <div class="wheel-area">
+            <div class="wheel-container">
+              <div class="wheel-ring"></div>
+              <canvas id="wheelCanvas" width="270" height="270"></canvas>
+              <div class="pointer-top"></div>
+              <div class="pointer-center"></div>
+              <button class="spin-center" id="spinBtn">SPIN</button>
+            </div>
+          </div>
+
+          <div class="gadsbanner">
+            <ins
+              class="adsbygoogle"
+              style="display: block"
+              data-ad-client="ca-pub-4788685016218460"
+              data-ad-slot="7944603731"
+              data-ad-format="auto"
+              data-full-width-responsive="true"
+            ></ins>
+            <label
+              style="
+                display: block;
+                margin: 0px auto;
+                width: fit-content;
+                letter-spacing: 4px;
+                color: rgb(65, 77, 101);
+                font:
+                  400 9px / 2 Arial,
+                  sans-serif;
+                opacity: 0.7;
+              "
+              >ADVERTISEMENT</label
+            >
+            <script>
+              (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+          </div>
+        </div>
+      </main>
     </section>
 
     <script>
-        // ── Back button ──
-        document.getElementById("backBtn").addEventListener("click", () => window.history.back());
+      // ── Back button ──
+      document
+        .getElementById("backBtn")
+        .addEventListener("click", () => window.history.back());
 
-        const segments = [159, 125, 237, 1, 666, 475, 400, 79, 131, 777];
-        const colors = ["#0F1C31", "#2E77E9", "#0F1C31", "#2E77E9", "#0F1C31", "#2E77E9", "#0F1C31", "#2E77E9", "#0F1C31", "#2E77E9"];
-        const NUM_SEG = segments.length;
-        const SEG_ANGLE = (2 * Math.PI) / NUM_SEG; // radians per segment
+      const segments = [159, 125, 237, 1, 666, 475, 400, 79, 131, 777];
+      const colors = [
+        "#0F1C31",
+        "#2E77E9",
+        "#0F1C31",
+        "#2E77E9",
+        "#0F1C31",
+        "#2E77E9",
+        "#0F1C31",
+        "#2E77E9",
+        "#0F1C31",
+        "#2E77E9",
+      ];
+      const NUM_SEG = segments.length;
+      const SEG_ANGLE = (2 * Math.PI) / NUM_SEG; // radians per segment
 
-        const canvas = document.getElementById("wheelCanvas");
-        const ctx = canvas.getContext("2d");
-        const spinBtn = document.getElementById("spinBtn");
-        const congratsCard = document.getElementById("congratsCard");
-        const rewardDisplay = document.getElementById("rewardDisplay");
+      const canvas = document.getElementById("wheelCanvas");
+      const ctx = canvas.getContext("2d");
+      const spinBtn = document.getElementById("spinBtn");
+      const congratsCard = document.getElementById("congratsCard");
+      const rewardDisplay = document.getElementById("rewardDisplay");
 
-        let currentAngle = 0;
+      let currentAngle = 0;
 
-        function drawWheel(rotation) {
-            const cx = canvas.width / 2;
-            const cy = canvas.height / 2;
-            const r = cx - 2;
+      function drawWheel(rotation) {
+        const cx = canvas.width / 2;
+        const cy = canvas.height / 2;
+        const r = cx - 2;
 
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            for (let i = 0; i < NUM_SEG; i++) {
-                const startAngle = rotation + i * SEG_ANGLE;
-                const endAngle = startAngle + SEG_ANGLE;
+        for (let i = 0; i < NUM_SEG; i++) {
+          const startAngle = rotation + i * SEG_ANGLE;
+          const endAngle = startAngle + SEG_ANGLE;
 
-                ctx.beginPath();
-                ctx.moveTo(cx, cy);
-                ctx.arc(cx, cy, r, startAngle, endAngle);
-                ctx.closePath();
-                ctx.fillStyle = colors[i];
-                ctx.fill();
+          ctx.beginPath();
+          ctx.moveTo(cx, cy);
+          ctx.arc(cx, cy, r, startAngle, endAngle);
+          ctx.closePath();
+          ctx.fillStyle = colors[i];
+          ctx.fill();
 
-                ctx.strokeStyle = "rgba(255,255,255,0.15)";
-                ctx.lineWidth = 1.5;
-                ctx.stroke();
+          ctx.strokeStyle = "rgba(255,255,255,0.15)";
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
 
-                ctx.save();
-                ctx.translate(cx, cy);
-                ctx.rotate(startAngle + SEG_ANGLE / 2);
-                ctx.textAlign = "right";
-                ctx.fillStyle = "#ffffff";
-                ctx.font = "bold 14px Montserrat, sans-serif";
-                ctx.fillText(segments[i], r - 14, 5);
-                ctx.restore();
-            }
-
-            ctx.beginPath();
-            ctx.arc(cx, cy, 30, 0, 2 * Math.PI);
-            ctx.fillStyle = "#ffffff";
-            ctx.fill();
+          ctx.save();
+          ctx.translate(cx, cy);
+          ctx.rotate(startAngle + SEG_ANGLE / 2);
+          ctx.textAlign = "right";
+          ctx.fillStyle = "#ffffff";
+          ctx.font = "bold 14px Montserrat, sans-serif";
+          ctx.fillText(segments[i], r - 14, 5);
+          ctx.restore();
         }
 
+        ctx.beginPath();
+        ctx.arc(cx, cy, 30, 0, 2 * Math.PI);
+        ctx.fillStyle = "#ffffff";
+        ctx.fill();
+      }
+
+      drawWheel(currentAngle);
+
+      let spinning = false;
+      let speed = 0;
+      let targetAngle = 0;
+
+      function spinLoop() {
+        if (!spinning) return;
+
+        currentAngle += speed;
         drawWheel(currentAngle);
 
-        let spinning = false;
-        let speed = 0;       
-        let targetAngle = 0;       
+        speed *= 0.985;
 
-        function spinLoop() {
-            if (!spinning) return;
-
-            currentAngle += speed;
-            drawWheel(currentAngle);
-
-            speed *= 0.985;
-
-            if (speed < 0.001) {
-                spinning = false;
-                showResult();
-                return;
-            }
-
-            requestAnimationFrame(spinLoop);
+        if (speed < 0.001) {
+          spinning = false;
+          showResult();
+          return;
         }
 
-        function showResult() {
-            const rot = currentAngle % (2 * Math.PI);
+        requestAnimationFrame(spinLoop);
+      }
 
-            const localPointer = ((-Math.PI / 2 - rot) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
-            const segIndex = Math.floor(localPointer / SEG_ANGLE) % NUM_SEG;
-            const won = segments[segIndex];
+      function showResult() {
+        const rot = currentAngle % (2 * Math.PI);
 
-            rewardDisplay.textContent = `Your Reward: ${won}`;
+        const localPointer =
+          (((-Math.PI / 2 - rot) % (2 * Math.PI)) + 2 * Math.PI) %
+          (2 * Math.PI);
+        const segIndex = Math.floor(localPointer / SEG_ANGLE) % NUM_SEG;
+        const won = segments[segIndex];
 
-            document.getElementById("partyPopper").classList.add("show");
-            congratsCard.classList.add("show");
+        rewardDisplay.textContent = `Your Reward: ${won}`;
 
-            spinBtn.disabled = false;
-        }
+        document.getElementById("partyPopper").classList.add("show");
+        congratsCard.classList.add("show");
 
-        function showAdThenSpin(callback) {
-            adBreak({
-                type: "next",
-                name: "spin_wheel",
-                beforeAd: () => { },
-                adBreakDone: () => callback()
-            });
-        }
+        spinBtn.disabled = false;
+      }
 
-        spinBtn.addEventListener("click", () => {
-            if (spinning) return;
-
-            spinBtn.disabled = true;
-            congratsCard.classList.remove("show");
-            document.getElementById("partyPopper").classList.remove("show");
-
-            const landSegment = Math.floor(Math.random() * NUM_SEG);
-            const segCenter = landSegment * SEG_ANGLE + SEG_ANGLE / 2;
-            const extraSpins = (5 + Math.floor(Math.random() * 5)) * 2 * Math.PI;
-            const targetFinal = (-Math.PI / 2 - segCenter + 2 * Math.PI * 10) % (2 * Math.PI);
-            const totalRotation = extraSpins + targetFinal - (currentAngle % (2 * Math.PI));
-
-            speed = totalRotation / 200; 
-            spinning = true;
-            requestAnimationFrame(spinLoop);
+      function showAdThenSpin(callback) {
+        adBreak({
+          type: "next",
+          name: "spin_wheel",
+          beforeAd: () => {},
+          adBreakDone: () => callback(),
         });
-    </script>
-<!-- Cloudflare Pages Analytics --><script defer src='../static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "1154478053354d3c8fc4116079963feb"}'></script><!-- Cloudflare Pages Analytics --></body>
+      }
 
-<!-- Mirrored from play104.topprojectideas.com/spin_to_win by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Mar 2026 06:41:38 GMT -->
+      spinBtn.addEventListener("click", () => {
+        if (spinning) return;
+
+        spinBtn.disabled = true;
+        congratsCard.classList.remove("show");
+        document.getElementById("partyPopper").classList.remove("show");
+
+        const landSegment = Math.floor(Math.random() * NUM_SEG);
+        const segCenter = landSegment * SEG_ANGLE + SEG_ANGLE / 2;
+        const extraSpins = (5 + Math.floor(Math.random() * 5)) * 2 * Math.PI;
+        const targetFinal =
+          (-Math.PI / 2 - segCenter + 2 * Math.PI * 10) % (2 * Math.PI);
+        const totalRotation =
+          extraSpins + targetFinal - (currentAngle % (2 * Math.PI));
+
+        speed = totalRotation / 200;
+        spinning = true;
+        requestAnimationFrame(spinLoop);
+      });
+    </script>
+  </body>
 </html>
