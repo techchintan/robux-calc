@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from play104.topprojectideas.com/daily-r-converter by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Mar 2026 06:41:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Daily R$ Converter</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="css/style.css" />
+
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com/" />
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net/" />
+
+    <script async src="../pagead2.googlesyndication.com/pagead/js/fbb6f.txt?client=ca-pub-4385060080295439"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <section>
+        <main>
+            <div class="main_div">
+                <div class="fff_game_section">
+
+                    <div class="header">
+                        <img src="assets/robux/back.webp" alt="Back" class="back-button" id="backButton">
+                        <h1 class="home-title">Daily RBX Counter</h1>
+                    </div>
+
+                    <div class="game_section" style="height: auto">
+                        <div class="earnCoinSection">
+                            <a href="daily-free-rbx-cal.html">
+                                <img src="assets/robux/rbx_free_image.webp" alt="Free RBX to Dollar" loading="lazy"
+                                    style="width:100%; display:block;">
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Banner Ad -->
+                    <div class="gadsbanner">
+                        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4385060080295439"
+                            data-ad-slot="7944603731" data-ad-format="auto"
+                            data-full-width-responsive="true"></ins>
+                        <label
+                            style="display:block; margin:0 auto; width:fit-content; letter-spacing:4px; color:rgb(65,77,101); font:400 9px/2 Arial,sans-serif; opacity:0.7;">ADVERTISEMENT</label>
+                        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                    </div>
+
+                    <div class="game_section" style="height: auto">
+
+                        <div style="gap: 12px; display: flex; flex-direction: column;">
+
+                            <div class="earnCoinSection">
+                                <a href="rbx-dollar-cal.html">
+                                    <img src="assets/robux/rbx_doller_image.webp" alt="Free RBX to Dollar"
+                                        loading="lazy" style="width:100%; display:block;">
+                                </a>
+                            </div>
+                            <div class="earnCoinSection">
+                                <a href="dollar-rbx-cal.html">
+                                    <img src="assets/robux/doller_rbx_image.webp" alt="Dollar to RBX Calculator"
+                                        loading="lazy" style="width:100%; display:block;">
+                                </a>
+                            </div>
+                            <div class="earnCoinSection">
+                                <a href="logic-quiz.html">
+                                    <img src="assets/robux/login_quiz_image.webp" alt="Logic Quiz Time" loading="lazy"
+                                        style="width:100%; display:block;">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </main>
+    </section>
+
+    <script>
+
+        document.getElementById("backButton").addEventListener("click", function () {
+            window.history.back();
+        });
+
+        window.adsbygoogle = window.adsbygoogle || [];
+        // window.adReady = false;
+
+        const adBreak = window.adBreak = function (o) {
+            adsbygoogle.push(o);
+        };
+
+        // adBreak({
+        //     preloadAdBreaks: "on",
+        //     onReady: () => {
+        //         window.adReady = true;
+        //         console.log("✅ AdSense API Ready");
+        //     }
+        // });
+
+        function playPrerollAd(callback) {
+            adBreak({
+                type: "preroll",
+                name: "page_transition",
+                beforeAd: () => console.log("Ad starting..."),
+                adBreakDone: (info) => {
+                    console.log("Ad done:", info.breakStatus);
+                    if (typeof callback === "function") callback();
+                }
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            document.body.addEventListener("click", function (event) {
+                const link = event.target.closest("a");
+                if (!link || !link.getAttribute("href")) return;
+
+                const url = link.getAttribute("href");
+
+                if (
+                    url.startsWith("#") ||
+                    url.startsWith("javascript:") ||
+                    url.startsWith("mailto:") ||
+                    url.startsWith("tel:") ||
+                    link.getAttribute("target") === "_blank"
+                ) return;
+
+                event.preventDefault();
+                playPrerollAd(() =>
+                    window.location.href = url
+                );
+            });
+        });
+    </script>
+<!-- Cloudflare Pages Analytics --><script defer src='../static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "1154478053354d3c8fc4116079963feb"}'></script><!-- Cloudflare Pages Analytics --></body>
+
+<!-- Mirrored from play104.topprojectideas.com/daily-r-converter by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Mar 2026 06:41:37 GMT -->
+</html>

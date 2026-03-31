@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from play104.topprojectideas.com/daily-rbx by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Mar 2026 06:41:39 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Daily RBX</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" href="css/style.css" />
+
+<link rel="preconnect" href="https://pagead2.googlesyndication.com/" />
+<link rel="preconnect" href="https://googleads.g.doubleclick.net/" />
+
+<script async src="../pagead2.googlesyndication.com/pagead/js/fbb6f.txt?client=ca-pub-4385060080295439"
+    crossorigin="anonymous"></script>
+
+<style>
+
+/* Header font */
+.header h1{
+    font-family: 'Oblivian Text', sans-serif;
+}
+
+/* Grid */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin: 0px 10px;
+    perspective: 1000px;
+}
+
+/* Card wrapper */
+.card {
+    height: 120px;
+    position: relative;
+    border-radius: 12px;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    cursor: pointer;
+}
+
+/* Flip effect */
+.card.flip {
+    transform: rotateY(180deg);
+}
+
+/* Front & Back */
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backface-visibility: hidden;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Front */
+.card-front {
+    background: linear-gradient(106.87deg, #2C5AD3 0%, #3083F2 100%);
+    color: #ffffff;
+    font-weight: 800;
+}
+
+/* Back */
+.card-back {
+    background: #000A1970;
+    transform: rotateY(180deg);
+}
+
+.card-back img {
+    width: 60px;
+}
+
+/* Borders */
+.coin-border {
+    border: 1px solid #FFFFFF29;
+}
+
+.cross-border {
+    border: 1px solid #FE474536;
+}
+
+/* ───── Party Wrapper ───── */
+.party-popper {
+    display: none;
+    position: relative;
+}
+
+.party-popper.show {
+    display: block;
+    animation: fadeIn 0.5s ease forwards;
+}
+
+/* 🎉 Floating Image */
+.party-img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    position: absolute;
+    top: 0px;
+    left: 52%;
+    transform: translateX(-50%);
+    animation: float 2.5s ease-in-out infinite;
+    filter: drop-shadow(0 10px 20px rgba(242,190,31,0.35));
+}
+
+/* ───── Congrats Card ───── */
+.congrats-card {
+    display: none;
+    width: calc(100% - 32px);
+    margin: 60px 16px 22px;
+    background: rgba(234, 208, 126, 0.12);
+    border: 1px solid rgba(242, 190, 31, 0.25);
+    border-radius: 18px;
+    padding: 60px 20px 28px;
+    text-align: center;
+    position: relative;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.congrats-card.show {
+    display: block;
+    animation: cardReveal 0.6s ease forwards;
+}
+
+/* Text Styling */
+.congrats-text {
+    font-size: 17px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 8px;
+}
+
+.reward-text {
+    font-size: 26px;
+    font-weight: 800;
+    color: #F2BE1F;
+    letter-spacing: 1px;
+    animation: glow 1.5s ease-in-out infinite alternate;
+}
+
+/* ───── Animations ───── */
+
+@keyframes float {
+    0% { transform: translate(-50%, 0px); }
+    50% { transform: translate(-50%, -8px); }
+    100% { transform: translate(-50%, 0px); }
+}
+
+@keyframes cardReveal {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 8px rgba(242,190,31,0.4); }
+    to { text-shadow: 0 0 18px rgba(242,190,31,0.8); }
+}
+
+</style>
+</head>
+
+<body>
+
+<section>
+    <main>
+        <div class="main_div">
+
+            <div class="header">
+                <img src="assets/robux/back.webp" alt="Back" class="back-button" onclick="history.back()">
+                <h1>Daily RBX</h1>
+            </div>
+
+            <div class="grid" id="cardGrid"></div>
+
+            <div style="width: 100%; margin-top: 20px;">
+                <div class="party-popper" id="partyPopper">
+                    <img class="party-img" src="assets/robux/win.png" alt="Congrats" loading="lazy">
+                </div>
+
+                <div class="congrats-card" id="congratsCard">
+                    <p class="congrats-text">Congratulation</p>
+                    <p class="reward-text" id="rewardText">Your Reward: 0</p>
+                </div>
+            </div>
+
+            <div class="gadsbanner">
+                <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4385060080295439"
+                    data-ad-slot="7944603731" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                <label
+                    style="display: block; margin: 0px auto; width: fit-content; letter-spacing: 4px; color: rgb(65, 77, 101); font: 400 9px / 2 Arial, sans-serif; opacity: 0.7;">ADVERTISEMENT</label>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+
+        </div>
+    </main>
+</section>
+
+<script>
+const grid = document.getElementById("cardGrid");
+const partyPopper = document.getElementById("partyPopper");
+const congratsCard = document.getElementById("congratsCard");
+const rewardText = document.getElementById("rewardText");
+
+let totalReward = 0;
+let gameOver = false;
+let openedCards = 0;
+
+const TOTAL_CARDS = 9;
+const CROSS_COUNT = 4; 
+
+let cardTypes = [
+    ...Array(TOTAL_CARDS - CROSS_COUNT).fill(0), 
+    ...Array(CROSS_COUNT).fill(1)               
+];
+
+function shuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+}
+
+shuffle(cardTypes);
+
+for (let i = 0; i < TOTAL_CARDS; i++) {
+
+    let card = document.createElement("div");
+    card.classList.add("card");
+
+    card.innerHTML = `
+        <div class="card-face card-front">TAP TO FLIP</div>
+        <div class="card-face card-back"></div>
+    `;
+
+    card.addEventListener("click", function () {
+        if (card.classList.contains("flip") || gameOver) return;
+
+        card.classList.add("flip");
+        openedCards++;
+
+        let back = card.querySelector(".card-back");
+        const isCross = cardTypes[i] === 1;
+
+        if (isCross) {
+            back.innerHTML = '<img src="assets/icons/cross.png">';
+            back.classList.add("cross-border");
+
+            gameOver = true;
+            showResult();
+
+            document.querySelectorAll(".card").forEach(c => {
+                c.style.pointerEvents = "none";
+            });
+
+        } else {
+            back.innerHTML = '<img src="assets/icons/coin.png">';
+            back.classList.add("coin-border");
+
+            totalReward += Math.floor(Math.random() * 50) + 10;
+
+            if (openedCards === TOTAL_CARDS - CROSS_COUNT) {
+                gameOver = true;
+                showResult();
+            }
+        }
+    });
+
+    grid.appendChild(card);
+}
+
+function showResult() {
+    setTimeout(() => {
+        rewardText.innerText = "Your Reward: " + totalReward;
+        partyPopper.classList.add("show");
+        congratsCard.classList.add("show");
+    }, 400);
+}
+</script>
+
+<!-- Cloudflare Pages Analytics --><script defer src='../static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "1154478053354d3c8fc4116079963feb"}'></script><!-- Cloudflare Pages Analytics --></body>
+
+<!-- Mirrored from play104.topprojectideas.com/daily-rbx by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Mar 2026 06:41:40 GMT -->
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from play104.topprojectideas.com/rbx-dollar-cal by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Mar 2026 06:41:47 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>RBX to Dollar Calculator</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="css/style.css" />
+
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com/" />
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net/" />
+
+    <script async src="../pagead2.googlesyndication.com/pagead/js/fbb6f.txt?client=ca-pub-4385060080295439"
+        crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <section>
+        <main>
+            <div class="main_div">
+                <div class="fff_game_section">
+
+                    <div class="header">
+                        <img src="assets/robux/back.webp" alt="Back" class="back-button" id="backButton">
+                        <h1 class="home-title">RBX to Dollar Calculator</h1>
+                    </div>
+
+                    <div class="game_section" style="height: auto">
+                        <div>
+                            <img src="assets/robux/all_calimage.webp" class="rbximage" loading="eager"
+                                alt="RBX Calculator">
+                        </div>
+                        <div style="display: flex; flex-direction: column; gap: 8px; justify-content: flex-start;">
+                            <p style="text-align: left; color: #ffffff;">Enter Rbx Amount...</p>
+                            <div class="input-wrapper">
+                                <input type="number" class="input-field" id="playerNameInput"
+                                    placeholder="Enter Rbx Amount" min="1">
+                            </div>
+                            <button class="continue-btn" id="continueBtn">Count Now</button>
+                        </div>
+                    </div>
+
+                    <div id="rbxbuilder" style="display: none;">
+                        <div class="gradient-box">
+                            <div style="display: flex; justify-content: center; align-items: center;">
+                                <img src="assets/robux/win.png" height="90px" width="90px" loading="eager" alt="Win">
+                            </div>
+                            <div style="display: flex; flex-direction: column; text-align: left;">
+                                Buying this much RBX will cost :
+                                <div id="result" class="rbxresult"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gadsbanner">
+                        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4385060080295439" data-ad-slot="7944603731"
+                            data-ad-format="auto" data-full-width-responsive="true"></ins>
+                        <label
+                            style="display: block; margin: 0px auto; width: fit-content; letter-spacing: 4px; color: rgb(65, 77, 101); font: 400 9px / 2 Arial, sans-serif; opacity: 0.7;">ADVERTISEMENT</label>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </section>
+
+    <script>
+        document.getElementById("backButton").addEventListener("click", function () {
+            window.history.back();
+        });
+
+        document.getElementById("continueBtn").addEventListener("click", function () {
+            const rbx = parseInt(document.getElementById("playerNameInput").value, 10);
+
+            if (!isNaN(rbx) && rbx > 0) {
+                // Conversion: 1 RBX = $0.0125
+                const total = rbx * 0.0125;
+
+                // Show result
+                document.getElementById("result").innerText = total.toFixed(2) + " $";
+                document.getElementById("rbxbuilder").style.display = "block";
+            } else {
+                alert("Please enter the RBX amount");
+            }
+        });
+    </script>
+
+<!-- Cloudflare Pages Analytics --><script defer src='../static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "1154478053354d3c8fc4116079963feb"}'></script><!-- Cloudflare Pages Analytics --></body>
+
+
+<!-- Mirrored from play104.topprojectideas.com/rbx-dollar-cal by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Mar 2026 06:41:47 GMT -->
+</html>

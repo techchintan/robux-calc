@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from play104.topprojectideas.com/logic-quiz by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Mar 2026 06:41:40 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Logic Quiz</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="css/style.css" />
+
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com/" />
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net/" />
+    
+    <script async src="../pagead2.googlesyndication.com/pagead/js/fbb6f.txt?client=ca-pub-4385060080295439"
+        crossorigin="anonymous"></script>
+
+    <style>
+       
+        .container {
+            width: 100%;
+            max-width: 450px;
+            padding: 8px;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+        }
+
+        .stats-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .badge {
+            background: #00170080;
+            border: 1px solid #00170080;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .badge.level {
+            border-color: #1DA61D;
+            color: #ffffff
+        }
+
+        .badge.score {
+            border-color: #FEC305;
+            color: #ffffff
+        }
+
+        /* Question Area */
+        .question-card {
+            background: #FFFFFF17;
+            opacity: 95%;
+            border: 1px solid #FFFFFF17;
+            padding: 25px 16px;
+            border-radius: 14px;
+            margin-bottom: 12px;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #ffffff;
+            text-wrap: auto;
+        }
+
+        /* Options */
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            flex-grow: 1;
+        }
+
+        .option {
+            background: #000A1970;
+            border: 1px solid #FFFFFF29;
+            padding: 15px 20px;
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+            font-size: 14px;
+            color: #ffffff;
+        }
+
+        .option.correct {
+            border-color: #1C811C;
+            background: #1C811C59;
+            color: #26E226;
+        }
+
+        .option.wrong {
+            border-color: #7D1A19;
+            background: #7D1A1959;
+            color: #F43331
+        }
+
+        /* Footer Button */
+        .next-btn {
+            background: linear-gradient(106.87deg, #2C5AD3 0%, #3083F2 100%);
+            color: #ffffff;
+            border: none;
+            padding: 16px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 20px;
+            width: 100%;
+            border: 1px solid #FFFFFF
+        }
+
+        /* Result Screen (Hidden by default) */
+        #result-screen {
+            display: none;
+            text-align: center;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 12px;
+            height: 100%;
+        }
+
+        .trophy {
+            width: 150px;
+            margin-bottom: 30px;
+        }
+
+        .result-box {
+            background: rgba(234, 208, 126, 0.12);
+            border: 1px solid linear-gradient(180deg, rgba(8, 13, 33, 0.22) 0%, rgba(180, 147, 42, 0.22) 100%);
+            padding: 20px 30px;
+            border-radius: 12px;
+            width: 100%;
+        }
+
+        .result-stats {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 25px;
+            font-weight: 700;
+            color: #F2BE1F;
+        }
+
+        .res-level { color: #F2BE1F; }
+        .res-score { color: #F2BE1F; }
+
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+    <section>
+        <main>
+            <div class="main_div">
+
+                <div class="header">
+                    <img src="assets/robux/back.webp" alt="Back" class="back-button" style="margin-left: 0px;"
+                        onclick="history.back()">
+                    <h1>Logic Quiz</h1>
+                </div>
+                <div class="container" id="quiz-screen">
+
+                    <div class="stats-row">
+                        <div class="badge level" id="level-display">Level 1</div>
+                        <div class="badge score" id="score-display">Score: 0</div>
+                    </div>
+
+                    <div class="gadsbanner">
+                        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4385060080295439" data-ad-slot="7944603731"
+                            data-ad-format="auto" data-full-width-responsive="true"></ins>
+                        <label
+                            style="display: block; margin: 0px auto; width: fit-content; letter-spacing: 4px; color: rgb(65, 77, 101); font: 400 9px / 2 Arial, sans-serif; opacity: 0.7;">ADVERTISEMENT</label>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
+
+                    <div class="question-card" id="question-text">
+                        Loading question...
+                    </div>
+
+                    <div class="options-container" id="options-list">
+                    </div>
+
+                    <button class="next-btn" id="action-btn" onclick="handleAction()">Next Question</button>
+                </div>
+
+                <div id="result-screen" style="padding-top: 12px;">
+                    <img src="assets/robux/trophy.webp" alt="Trophy" class="trophy">
+
+                    <div class="result-box">
+                        <h2 style="margin-top:0; color: #ffffff; font-size: 16px; font-weight: 600; padding: 8px 0px;">
+                            Level Complete</h2>
+                        <div class="result-stats">
+                            <span>Level: <span class="res-level">1</span></span>
+                            <span>Score: <span class="res-score" id="final-score">1</span></span>
+                        </div>
+                    </div>
+
+                    <button class="next-btn" onclick="resetQuiz()">Next Level</button>
+                </div>
+
+            </div>
+        </main>
+    </section>
+
+    <script>
+        const quizData = [
+            { q: "What is the name of the currency used in Roblox?", a: ["Gold", "Coins", "Robux", "Diamonds"], c: 2 },
+            { q: "If you have 50 Robux and you spend 20 Robux, how many do you have left?", a: ["10", "30", "70", "0"], c: 1 },
+            { q: "What do you call the character that represents you in Roblox?", a: ["Hero", "Monster", "Avatar", "Bot"], c: 2 },
+            { q: "Where do you go to change your clothes and skins in Roblox?", a: ["Game Store", "Avatar Editor", "Settings", "Chat Box"], c: 1 },
+            { q: "Which of these is a popular \"Free\" skin look for new players?", a: ["Zombie", "Dragon", "Noob", "Robot"], c: 2 },
+            { q: "If a shirt costs 10 Robux and you want to buy 2 shirts, how many Robux do you need?", a: ["10", "15", "20", "100"], c: 2 },
+            { q: "Can you use a 'Robux Calculator' to see how many Robux you get for your money?", a: ["Yes", "No", "Only on Sundays", "Only in winter"], c: 0 },
+            { q: "What can you buy with Robux in the Avatar Shop?", a: ["Real Food", "Clothes and Accessories", "Homework", "Toys for your house"], c: 1 },
+            { q: "In a 'Daily Counter', what are you usually counting?", a: ["Your friends", "Your Robux or Points", "Your school marks", "Your sleep hours"], c: 1 },
+            { q: "Which item can you wear on your head in Roblox?", a: ["Shoes", "Pants", "Hat", "Gloves"], c: 2 },
+        ];
+
+        let currentIdx = 0;
+        let score = 0;
+        let answered = false;
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function loadQuestion() {
+            answered = false;
+            const data = quizData[currentIdx];
+            document.getElementById('question-text').innerText = data.q;
+            const optionsList = document.getElementById('options-list');
+            optionsList.innerHTML = '';
+
+            data.a.forEach((opt, index) => {
+                const btn = document.createElement('div');
+                btn.className = 'option';
+                btn.innerHTML = `<strong>${String.fromCharCode(65 + index)}.</strong> ${opt}`;
+                btn.onclick = () => checkAnswer(index, btn);
+                optionsList.appendChild(btn);
+            });
+
+            document.getElementById('action-btn').innerText = (currentIdx === quizData.length - 1) ? "Finish Quiz" : "Next Question";
+        }
+
+        function checkAnswer(idx, element) {
+            if (answered) return;
+            answered = true;
+            const correctIdx = quizData[currentIdx].c;
+
+            if (idx === correctIdx) {
+                element.classList.add('correct');
+                score++;
+            } else {
+                element.classList.add('wrong');
+                document.getElementById('options-list').children[correctIdx].classList.add('correct');
+            }
+            document.getElementById('score-display').innerText = `Score: ${score}`;
+        }
+
+        function handleAction() {
+            if (!answered) return alert("Please select an answer first!");
+
+            if (currentIdx < quizData.length - 1) {
+                currentIdx++;
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('quiz-screen').classList.add('hidden');
+            document.getElementById('result-screen').style.display = 'flex';
+            document.getElementById('final-score').innerText = score;
+        }
+
+        function resetQuiz() {
+            location.reload();
+        }
+
+        shuffleArray(quizData);
+        loadQuestion();
+    </script>
+<!-- Cloudflare Pages Analytics --><script defer src='../static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "1154478053354d3c8fc4116079963feb"}'></script><!-- Cloudflare Pages Analytics --></body>
+
+<!-- Mirrored from play104.topprojectideas.com/logic-quiz by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 31 Mar 2026 06:41:40 GMT -->
+</html>
