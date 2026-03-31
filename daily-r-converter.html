@@ -48,7 +48,7 @@
                 class="adsbygoogle"
                 style="display: block"
                 data-ad-client="ca-pub-4788685016218460"
-                data-ad-slot="7944603731"
+                data-ad-slot="8597806557"
                 data-ad-format="auto"
                 data-full-width-responsive="true"
               ></ins>
@@ -116,19 +116,19 @@
       });
 
       window.adsbygoogle = window.adsbygoogle || [];
-      // window.adReady = false;
+      window.adReady = false;
 
       const adBreak = (window.adBreak = function (o) {
         adsbygoogle.push(o);
       });
 
-      // adBreak({
-      //     preloadAdBreaks: "on",
-      //     onReady: () => {
-      //         window.adReady = true;
-      //         console.log("✅ AdSense API Ready");
-      //     }
-      // });
+      adBreak({
+          preloadAdBreaks: "on",
+          onReady: () => {
+              window.adReady = true;
+              console.log("✅ AdSense API Ready");
+          }
+      });
 
       function playPrerollAd(callback) {
         adBreak({

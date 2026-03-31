@@ -55,7 +55,7 @@
                 class="adsbygoogle"
                 style="display: block"
                 data-ad-client="ca-pub-4788685016218460"
-                data-ad-slot="7944603731"
+                data-ad-slot="8597806557"
                 data-ad-format="auto"
                 data-full-width-responsive="true"
               ></ins>
@@ -114,7 +114,7 @@
                 class="adsbygoogle"
                 style="display: block"
                 data-ad-client="ca-pub-4788685016218460"
-                data-ad-slot="7944603731"
+                data-ad-slot="8597806557"
                 data-ad-format="auto"
                 data-full-width-responsive="true"
               ></ins>
@@ -272,53 +272,53 @@
       });
     </script>
 
-    <!-- <script>
-        window.adsbygoogle = window.adsbygoogle || [];
-        
-        const adBreak = adConfig = function (o) {
-            adsbygoogle.push(o);
-        };
+    <script>
+      window.adsbygoogle = window.adsbygoogle || [];
 
-        adConfig({
-            preloadAdBreaks: "on",
-            onReady: () => {
-                console.log("✅ AdSense API Ready");
+      const adBreak = (adConfig = function (o) {
+        adsbygoogle.push(o);
+      });
+
+      adConfig({
+        preloadAdBreaks: "on",
+        onReady: () => {
+          console.log("✅ AdSense API Ready");
+        },
+      });
+
+      function playGameWithAd(callback) {
+        adBreak({
+          type: "preroll",
+          name: "game_started",
+          adBreakDone: function (placementInfo) {
+            if (typeof callback === "function") callback();
+          },
+        });
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        document.body.addEventListener("click", function (event) {
+          const link = event.target.closest("a");
+          if (link && link.getAttribute("href")) {
+            const url = link.getAttribute("href");
+
+            // allow special cases (like #, javascript:, mailto:, tel:) to work normally
+            if (
+              url.startsWith("#") ||
+              url.startsWith("javascript:") ||
+              url.startsWith("mailto:") ||
+              url.startsWith("tel:")
+            ) {
+              return;
             }
-        });
+            event.preventDefault();
 
-        function playGameWithAd(callback) {
-            adBreak({
-                type: 'preroll',
-                name: 'game_started',
-                adBreakDone: function (placementInfo) {
-                    if (typeof callback === "function") callback();
-                }
+            playGameWithAd(function () {
+              window.location.href = url;
             });
-        }
-
-        document.addEventListener("DOMContentLoaded", function () {
-            document.body.addEventListener("click", function (event) {
-                const link = event.target.closest("a"); 
-                if (link && link.getAttribute("href")) {
-                    const url = link.getAttribute("href");
-
-                    // allow special cases (like #, javascript:, mailto:, tel:) to work normally
-                    if (
-                        url.startsWith("#") ||
-                        url.startsWith("javascript:") ||
-                        url.startsWith("mailto:") ||
-                        url.startsWith("tel:")
-                    ) {
-                        return;
-                    }
-                    event.preventDefault();
-
-                    playGameWithAd(function () {
-                        window.location.href = url;
-                    });
-                }
-            });
+          }
         });
-    </script> -->
+      });
+    </script>
   </body>
 </html>

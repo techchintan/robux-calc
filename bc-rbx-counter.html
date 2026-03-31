@@ -79,7 +79,7 @@
                 class="adsbygoogle"
                 style="display: block"
                 data-ad-client="ca-pub-4788685016218460"
-                data-ad-slot="7944603731"
+                data-ad-slot="8597806557"
                 data-ad-format="auto"
                 data-full-width-responsive="true"
               ></ins>
@@ -183,48 +183,46 @@
         window.history.back();
       });
 
-      // window.adsbygoogle = window.adsbygoogle || [];
-      // window.adReady = false;
+      window.adsbygoogle = window.adsbygoogle || [];
+      window.adReady = false;
 
-      // const adBreak = window.adBreak = function (o) {
-      //     adsbygoogle.push(o);
-      // };
+      const adBreak = (window.adBreak = function (o) {
+        adsbygoogle.push(o);
+      });
 
-      // adBreak({
-      //     preloadAdBreaks: "on",
-      //     onReady: () => {
-      //         window.adReady = true;
-      //         console.log("✅ AdSense API Ready");
-      //     }
-      // });
+      adBreak({
+        preloadAdBreaks: "on",
+        onReady: () => {
+          window.adReady = true;
+          console.log("✅ AdSense API Ready");
+        },
+      });
 
-      // function showInterstitialThenResult(days) {
-      //     const btn = document.getElementById("continueBtn");
-      //     btn.textContent = "Loading...";
-      //     btn.disabled = true;
+      function showInterstitialThenResult(days) {
+        const btn = document.getElementById("continueBtn");
+        btn.textContent = "Loading...";
+        btn.disabled = true;
 
-      //     adBreak({
-      //         type: "next",
-      //         name: "show_rbx_result",
+        adBreak({
+          type: "next",
+          name: "show_rbx_result",
 
-      //         beforeAd: () => {
-      //         },
+          beforeAd: () => {},
 
-      //         afterAd: () => {
-      //         },
+          afterAd: () => {},
 
-      //         adBreakDone: (info) => {
-      //             const total = days * 15;
-      //             document.getElementById("result").innerText = total.toFixed(2) + " RBX";
-      //             document.getElementById("rbxbuilder").style.display = "block";
+          adBreakDone: (info) => {
+            const total = days * 15;
+            document.getElementById("result").innerText = total.toFixed(2) + " RBX";
+            document.getElementById("rbxbuilder").style.display = "block";
 
-      //             document.getElementById("rbxbuilder").scrollIntoView({ behavior: "smooth" });
+            document.getElementById("rbxbuilder").scrollIntoView({behavior: "smooth"});
 
-      //             btn.textContent = "Count Now";
-      //             btn.disabled = false;
-      //         }
-      //     });
-      // }
+            btn.textContent = "Count Now";
+            btn.disabled = false;
+          },
+        });
+      }
 
       document.getElementById("continueBtn").addEventListener("click", function () {
         const btn = document.getElementById("continueBtn");
@@ -232,7 +230,7 @@
         const days = parseInt(input, 10);
 
         if (!isNaN(days) && days > 0) {
-          // showInterstitialThenResult(days);
+          showInterstitialThenResult(days);
           const total = days * 15;
           document.getElementById("result").innerText = total.toFixed(2) + " RBX";
           document.getElementById("rbxbuilder").style.display = "block";
