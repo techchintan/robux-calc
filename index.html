@@ -171,10 +171,13 @@
 
       function playGameWithAd(callback) {
         adBreak({
-          type: "preroll",
+          type: "rewarde",
           name: "game_started",
           adBreakDone: function (placementInfo) {
             if (typeof callback === "function") callback();
+          },
+          adViewed: function () {
+            callback();
           },
         });
       }
@@ -194,7 +197,7 @@
             ) {
               return;
             }
-            // event.preventDefault();
+            event.preventDefault();
 
             playGameWithAd(function () {
               window.location.href = url;
