@@ -70,13 +70,13 @@
 
           <div class="game_section" style="height: auto">
             <div>
-              <a href="home.html">
+              <button href="home.html" style="border: none; background: none; cursor: pointer;">
                 <div>
                   <picture>
                     <img src="assets/robux/starting.webp" alt="RBX Counter" />
                   </picture>
                 </div>
-              </a>
+              </button>
             </div>
           </div>
           <div class="resp_about_section" style="justify-content: flex-start; padding: 0 18px">
@@ -168,7 +168,7 @@
         preloadAdBreaks: "on",
         onReady: () => {
           window.adReady = true;
-          console.log("✅ AdSense API Ready 1.0");
+          console.log("✅ AdSense API Ready 2.0");
         },
       });
 
@@ -181,23 +181,11 @@
         document.body.addEventListener("click", function (event) {
           if (adLoading) return;
 
-          const link = event.target.closest("a");
-          if (!link || !link.getAttribute("href")) return;
-
-          const url = link.getAttribute("href");
-
-          if (
-            url.startsWith("#") ||
-            url.startsWith("javascript:") ||
-            url.startsWith("mailto:") ||
-            url.startsWith("tel:")
-          ) {
-            return;
-          }
+          const button = event.target.closest("button");
+          if (!button) return;
 
           event.preventDefault();
           adLoading = true;
-          pendingNavUrl = url;
 
           adBreak({
             type: "reward",
@@ -207,11 +195,11 @@
             },
             adDismissed: () => {
               resetAdState();
+              window.location.href = "/home.html";
             },
             adViewed: () => {
-              const go = pendingNavUrl;
               resetAdState();
-              if (go) window.location.href = go;
+              window.location.href = "/home.html";
             },
             adBreakDone: (placementInfo) => {
               if (
@@ -219,7 +207,7 @@
                 placementInfo.breakStatus !== "dismissed"
               ) {
                 resetAdState();
-                window.location.href = pendingNavUrl;
+                window.location.href = "/home.html";
               }
             },
           });
