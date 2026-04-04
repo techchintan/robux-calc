@@ -1,85 +1,119 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Rbux Counter</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RBX Master: Ultimate Tracker & Calc</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="css/style.css" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&amp;family=Orbitron:wght@700;900&amp;display=swap"
+        rel="stylesheet">
 
     <link rel="preconnect" href="https://pagead2.googlesyndication.com/" />
     <link rel="preconnect" href="https://googleads.g.doubleclick.net/" />
-
+    
     <script
       async
       data-ad-frequency-hint="30s"
       src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4788685016218460"
       crossorigin="anonymous"
     ></script>
+ 
+</head>
 
-    <!-- Google tag (gtag.js) -->
-    <script>
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({
-          "gtm.start": new Date().getTime(),
-          event: "gtm.js",
-        });
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != "dataLayer" ? "&l=" + l : "";
-        j.async = true;
-        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, "script", "dataLayer", "GTM-PXKTPB4M");
-    </script>
-  </head>
+<main>
 
-  <body>
-    <section>
-      <main>
-        <div class="main_div">
-          <div class="gadsbanner">
-            <ins
-              class="adsbygoogle"
-              style="display: block"
-              data-ad-client="ca-pub-4788685016218460"
-              data-ad-slot="8597806557"
-              data-ad-format="auto"
-              data-full-width-responsive="true"
-            ></ins>
-            <label
-              style="
-                display: block;
-                margin: 0px auto;
-                width: fit-content;
-                letter-spacing: 4px;
-                color: rgb(65, 77, 101);
-                font:
-                  400 9px / 2 Arial,
-                  sans-serif;
-                opacity: 0.7;
-              "
-              >ADVERTISEMENT</label
-            >
-            <script>
-              (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-          </div>
-
-          <div class="game_section" style="height: auto">
-            <div>
-              <a href="home.html">
-                <div>
-                  <picture>
-                    <img src="assets/robux/starting.webp" alt="RBX Counter" />
-                  </picture>
-                </div>
-              </a>
+    <!-- Header -->
+    <div class="main_div">
+        <div class="fff_game_section">
+            <div class="header">
+                <h1>RBX Master: Ultimate Tracker & Calc</h1>
             </div>
-          </div>
-          <div class="resp_about_section" style="justify-content: flex-start; padding: 0 18px">
+
+            <!-- Content -->
+            <div class="content">
+                <div class="gadsbanner">
+                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4788685016218460" data-ad-slot="8597806557"
+                        data-ad-format="auto" data-full-width-responsive="true"></ins>
+                    <label
+                        style="display: block; margin: 0px auto; width: fit-content; letter-spacing: 4px; color: rgb(65, 77, 101); font: 400 9px / 2 Arial, sans-serif; opacity: 0.7;">ADVERTISEMENT</label>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+
+                <!-- Earn Card -->
+                <div class="earn-card">
+                    <div class="coin-row">
+                        <span class="coin-icon"><img src="assets/icons/coin-earn.png" alt="coin-earn"
+                                loading="lazy"></img></span>
+                        <span class="coin-count" id="coin">0</span>
+                    </div>
+                    <button class="earn-btn" id="earnCoinBtn">
+                        <span class="coin-sm"><img src="assets/icons/coin.png" style="width: 25px;" alt="coin"
+                                loading="lazy"></img></span>
+                        <span class="ad-badge">Ad</span>
+                        EARN FREE COINS
+                    </button>
+                </div>
+
+                <!-- Daily RBX Counter -->
+                <div class="rbx-counter-card">
+                    <a href="daily-r-converter.html">
+                        <img src="assets/robux/daily_rbx_counter.webp"" alt=" daily-rbx" width="100%"
+                            loading="lazy"></img>
+                    </a>
+                </div>
+
+                
+
+                <!-- Spin Wheel -->
+                <div class="spin-card earnCoin_section2">
+                    <a href="spin_to_win.html">
+                        <img src="assets/robux/spin_image.webp"" alt=" spin_image" width="100%" loading="lazy"></img>
+                    </a>
+                </div>
+
+                <!-- Grid: Scratch Card + Daily RBX -->
+                <div class="grid-2">
+                    <div class="grid-card scratch earnCoin_section2">
+                        <a href="scratch-win.html">
+                            <img src="assets/robux/scrarch_image.webp"" alt=" scrarch_image" loading="lazy"></img>
+                        </a>
+                    </div>
+                    <div class="grid-card daily-rbx earnCoin_section2">
+                        <a href="daily-rbx.html">
+                            <img src="assets/robux/gift_image.webp"" alt="scrarch_image" loading="lazy"></img>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Grid: Logic Quiz + How To Win -->
+                <div class="grid-2">
+                    <div class="grid-card quiz earnCoin_section2">
+                        <a href="logic-quiz.html">
+                            <img src="assets/robux/logic_image.webp" alt="logic_image" loading="lazy"></img>
+                        </a>
+                    </div>
+                    <div class="grid-card how-to">
+                        <a href="how-to-win.html">
+                            <img src="assets/robux/win_image.webp" alt="how_to_win_image" loading="lazy"></img>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Funny Memes -->
+                <div class="meme-card-main">
+                    <a href="meme.html">
+                        <img src="assets/robux/funny_meme_image.webp"" alt=" scrarch_image" width="100%"
+                            loading="lazy"></img>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        <div class="resp_about_section" style="justify-content: flex-start; padding: 0 18px">
             <div class="about_section" style="width: 100%; margin-top: 0">
               <h1>RBX Master <br />Ultimate Tracker &amp; Calc</h1>
 
@@ -149,59 +183,249 @@
               </div>
             </div>
           </div>
-        </div>
-      </main>
-    </section>
+    </div>
+</main>
 
-    <script>
-      window.adsbygoogle = window.adsbygoogle || [];
-      // window.adReady = false;
+<script>
+    let adLoading = false;
+    let clickedGameUrl = null;
 
-      const adBreak = (window.adBreak = function (o) {
+    window.adsbygoogle = window.adsbygoogle || [];
+    window.adReady = false;
+
+    const adBreak = window.adBreak = function (o) {
         adsbygoogle.push(o);
-      });
+    };
 
-      adBreak({
+    adBreak({
         preloadAdBreaks: "on",
         onReady: () => {
-          window.adReady = true;
-          console.log("✅ AdSense API Ready");
-        },
-      });
+            window.adReady = true; 
+            console.log("✅ AdSense API Ready");
+        }
+    });
 
-      function playGameWithAd(callback) {
-        adBreak({
-          type: "preroll",
-          name: "game_started",
-          adBreakDone: function (placementInfo) {
-            if (typeof callback === "function") callback();
-          },
-        });
-      }
+    document.addEventListener("DOMContentLoaded", function () {
+        const userCoins = parseInt(safeGetItem("coins")) || 0;
+        const coinEl = document.getElementById("coin");
+        if (coinEl) coinEl.textContent = userCoins;
+    });
 
-      document.addEventListener("DOMContentLoaded", function () {
-        document.body.addEventListener("click", function (event) {
-          const link = event.target.closest("a");
-          if (link && link.getAttribute("href")) {
-            const url = link.getAttribute("href");
+    function safeGetItem(key) {
+        try { return localStorage.getItem(key); }
+        catch (e) { console.warn("LocalStorage getItem blocked:", e); return null; }
+    }
 
-            // allow special cases (like #, javascript:, mailto:, tel:) to work normally
-            if (
-              url.startsWith("#") ||
-              url.startsWith("javascript:") ||
-              url.startsWith("mailto:") ||
-              url.startsWith("tel:")
-            ) {
-              return;
+    function safeSetItem(key, value) {
+        try { localStorage.setItem(key, value); }
+        catch (e) { console.warn("LocalStorage setItem blocked:", e); }
+    }
+
+    function resetAdState() {
+        adLoading = false;
+    }
+
+    function addCoins(amount) {
+        let coins = parseInt(safeGetItem("coins")) || 0;
+        coins += amount;
+        safeSetItem("coins", coins);
+        document.getElementById("coin").textContent = coins;
+    }
+
+    function showToast() {
+        let toast = document.getElementById("toast");
+        if (!toast) {
+            toast = document.createElement("div");
+            toast.id = "toast";
+            toast.className = "toast-message";
+            document.body.appendChild(toast);
+        }
+        toast.innerHTML = `<img src="assets/icons/correct.png" alt="" style="width:20px;height:20px;margin-right:8px;"> You've received 10 coins`;
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 5000);
+    }
+
+    function ErrorToast() {
+        let toast = document.getElementById("toast");
+        if (!toast) {
+            toast = document.createElement("div");
+            toast.id = "toast";
+            toast.className = "toast-message";
+            document.body.appendChild(toast);
+        }
+        toast.innerHTML = `❌ Ad not available, try again later`;
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 5000);
+    }
+
+    function showToastCountdown(seconds) {
+        let existingToast = document.querySelector(".timer-toast-message");
+        if (existingToast) existingToast.remove();
+
+        let toast = document.createElement("div");
+        toast.className = "timer-toast-message show";
+
+        let img = document.createElement("img");
+        img.src = "assets/icons/clock.png";
+        img.alt = "";
+        img.style.cssText = "width:20px;height:20px;margin-right:8px;vertical-align:middle;";
+
+        let msg = document.createElement("span");
+        msg.textContent = `Wait ${seconds}s...`;
+
+        toast.appendChild(img);
+        toast.appendChild(msg);
+        document.body.appendChild(toast);
+
+        let count = seconds;
+        let timer = setInterval(() => {
+            count--;
+            msg.textContent = `Wait ${count}s...`;
+            if (count <= 0) {
+                clearInterval(timer);
+                toast.remove();
             }
-            // event.preventDefault();
+        }, 1000);
+    }
 
-            // playGameWithAd(function () {
-            //   window.location.href = url;
-            // });
-          }
+    document.getElementById("earnCoinBtn").addEventListener("click", function () {
+        if (adLoading) return;
+
+        const earnBtn = document.getElementById("earnCoinBtn");
+        const originalHTML = earnBtn.innerHTML;
+        earnBtn.innerHTML = "Loading Ad... ⏳";
+        earnBtn.disabled = true;
+        adLoading = true;
+
+        adBreak({
+            type: "reward",
+            name: "earn-coin-reward",
+            beforeReward: (showAdFn) => {
+                showAdFn();
+            },
+            adDismissed: () => {
+                earnBtn.innerHTML = originalHTML;
+                earnBtn.disabled = false;
+                resetAdState();
+            },
+            adViewed: () => {
+                addCoins(10);
+                showToast();
+                earnBtn.innerHTML = originalHTML;
+                earnBtn.disabled = false;
+                resetAdState();
+            },
+            adBreakDone: (placementInfo) => {
+                if (
+                    placementInfo.breakStatus !== "viewed" &&
+                    placementInfo.breakStatus !== "dismissed"
+                ) {
+                    earnBtn.innerHTML = originalHTML;
+                    earnBtn.disabled = false;
+                    ErrorToast();
+                    resetAdState();
+                }
+            },
         });
-      });
-    </script>
-  </body>
+    });
+
+    document.querySelectorAll(".earnCoin_section2").forEach((section) => {
+        section.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            const userCoins = parseInt(safeGetItem("coins")) || 0;
+            const requiredCoins = 10;
+            clickedGameUrl = this.querySelector("a").href;
+
+            if (userCoins < requiredCoins) {
+                showOopsPopup();
+            } else {
+                const updatedCoins = userCoins - requiredCoins;
+                safeSetItem("coins", updatedCoins);
+                document.getElementById("coin").textContent = updatedCoins;
+                window.location.href = clickedGameUrl;
+            }
+        });
+    });
+
+    function showOopsPopup() {
+        const existingPopup = document.getElementById("oopsPopup");
+        if (existingPopup) existingPopup.remove();
+
+        const popupHTML = `
+            <div id="oopsPopup" class="popup" style="display:flex" data-clarity-mask="true">
+                <div class="popup-data">
+                    <img class="oops-img" src="assets/icons/oops.png" alt="Oops!" />
+                    <p class="main-text">You don't have enough coins to join this contest.</p>
+                    <p class="sub-text">Watch an ad to earn free coins</p>
+                    <div class="watch-btn-wrapper">
+                        <button id="watchAdBtn" class="watch-btn shimmer-btn">Watch Video</button>
+                        <span class="ad-tag">Ad</span>
+                    </div>
+                    <button id="skipBtn" class="skip-btn">close</button>
+                </div>
+            </div>`;
+
+        const wrapper = document.createElement("div");
+        wrapper.innerHTML = popupHTML;
+        document.body.appendChild(wrapper.firstElementChild);
+
+        const watchBtn = document.getElementById("watchAdBtn");
+        const skipBtn = document.getElementById("skipBtn");
+        const originalHTML = watchBtn.innerHTML;
+
+        skipBtn.addEventListener("click", closeOopsPopup);
+
+        watchBtn.addEventListener("click", function () {
+            if (adLoading) return;
+
+            watchBtn.innerHTML = "Loading Ad... ⏳";
+            watchBtn.disabled = true;
+            skipBtn.disabled = true;
+            adLoading = true;
+
+            adBreak({
+                type: "reward",
+                name: "oops-popup-reward",
+                beforeReward: (showAdFn) => {
+                    showAdFn();
+                },
+                adDismissed: () => {
+                    watchBtn.innerHTML = originalHTML;
+                    watchBtn.disabled = false;
+                    skipBtn.disabled = false;
+                    resetAdState();
+                },
+                adViewed: () => {
+                    addCoins(10);
+                    showToast();
+                    closeOopsPopup();
+                    if (clickedGameUrl) {
+                        setTimeout(() => window.location.href = clickedGameUrl, 500);
+                    }
+                    resetAdState();
+                },
+                adBreakDone: (placementInfo) => {
+                    if (
+                        placementInfo.breakStatus !== "viewed" &&
+                        placementInfo.breakStatus !== "dismissed"
+                    ) {
+                        watchBtn.innerHTML = originalHTML;
+                        watchBtn.disabled = false;
+                        skipBtn.disabled = false;
+                        ErrorToast();
+                        resetAdState();
+                    }
+                },
+            });
+        });
+    }
+
+    function closeOopsPopup() {
+        const popup = document.getElementById("oopsPopup");
+        if (popup) popup.remove();
+    }
+</script>
+
+</body>
 </html>
