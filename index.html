@@ -154,8 +154,11 @@
     </section>
 
     <script>
+      let adLoading = false;
+      let pendingNavUrl = null;
+
       window.adsbygoogle = window.adsbygoogle || [];
-      // window.adReady = false;
+      window.adReady = false;
 
       const adBreak = (window.adBreak = function (o) {
         adsbygoogle.push(o);
@@ -165,44 +168,61 @@
         preloadAdBreaks: "on",
         onReady: () => {
           window.adReady = true;
-          console.log("✅ AdSense API Ready");
+          console.log("✅ AdSense API Ready 1.0");
         },
       });
 
-      function playGameWithAd(callback) {
-        adBreak({
-          type: "reward",
-          name: "game_started",
-          adBreakDone: function (placementInfo) {
-            if (typeof callback === "function") callback();
-          },
-          adViewed: function () {
-            callback();
-          },
-        });
+      function resetAdState() {
+        adLoading = false;
+        pendingNavUrl = null;
       }
 
       document.addEventListener("DOMContentLoaded", function () {
         document.body.addEventListener("click", function (event) {
+          if (adLoading) return;
+
           const link = event.target.closest("a");
-          if (link && link.getAttribute("href")) {
-            const url = link.getAttribute("href");
+          if (!link || !link.getAttribute("href")) return;
 
-            // allow special cases (like #, javascript:, mailto:, tel:) to work normally
-            if (
-              url.startsWith("#") ||
-              url.startsWith("javascript:") ||
-              url.startsWith("mailto:") ||
-              url.startsWith("tel:")
-            ) {
-              return;
-            }
-            // event.preventDefault();
+          const url = link.getAttribute("href");
 
-            playGameWithAd(function () {
-              window.location.href = url;
-            });
+          if (
+            url.startsWith("#") ||
+            url.startsWith("javascript:") ||
+            url.startsWith("mailto:") ||
+            url.startsWith("tel:")
+          ) {
+            return;
           }
+
+          event.preventDefault();
+          adLoading = true;
+          pendingNavUrl = url;
+
+          adBreak({
+            type: "reward",
+            name: "index-nav-reward",
+            beforeReward: (showAdFn) => {
+              showAdFn();
+            },
+            adDismissed: () => {
+              resetAdState();
+            },
+            adViewed: () => {
+              const go = pendingNavUrl;
+              resetAdState();
+              if (go) window.location.href = go;
+            },
+            adBreakDone: (placementInfo) => {
+              if (
+                placementInfo.breakStatus !== "viewed" &&
+                placementInfo.breakStatus !== "dismissed"
+              ) {
+                resetAdState();
+                window.location.href = pendingNavUrl;
+              }
+            },
+          });
         });
       });
     </script>
