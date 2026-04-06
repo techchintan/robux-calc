@@ -177,7 +177,21 @@
         pendingNavUrl = null;
       }
 
+      let indexPreroll5sFired = false;
+
+      function showIndexAutoPreroll5s() {
+        if (indexPreroll5sFired) return;
+        indexPreroll5sFired = true;
+        adBreak({
+          type: "preroll",
+          name: "index-auto-preroll-5s",
+          adBreakDone: function () {},
+        });
+      }
+
       document.addEventListener("DOMContentLoaded", function () {
+        setTimeout(showIndexAutoPreroll5s, 5000);
+
         document.body.addEventListener("click", function (event) {
           if (adLoading) return;
 
