@@ -209,6 +209,12 @@
         const userCoins = parseInt(safeGetItem("coins")) || 0;
         const coinEl = document.getElementById("coin");
         if (coinEl) coinEl.textContent = userCoins;
+
+        setTimeout(function () {
+            if (!adLoading) {
+                showHomeAutoRewardAd();
+            }
+        }, 5000);
     });
 
     function safeGetItem(key) {
@@ -223,6 +229,35 @@
 
     function resetAdState() {
         adLoading = false;
+    }
+
+    function showHomeAutoRewardAd() {
+        if (adLoading) return;
+        adLoading = true;
+        adBreak({
+            type: "reward",
+            name: "home-auto-reward-5s",
+            beforeReward: (showAdFn) => {
+                showAdFn();
+            },
+            adDismissed: () => {
+                resetAdState();
+            },
+            adViewed: () => {
+                addCoins(10);
+                showToast();
+                resetAdState();
+            },
+            adBreakDone: (placementInfo) => {
+                if (
+                    placementInfo.breakStatus !== "viewed" &&
+                    placementInfo.breakStatus !== "dismissed"
+                ) {
+                    ErrorToast();
+                    resetAdState();
+                }
+            },
+        });
     }
 
     function addCoins(amount) {
