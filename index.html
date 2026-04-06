@@ -185,32 +185,34 @@
           if (!button) return;
 
           event.preventDefault();
-          adLoading = true;
-
-          adBreak({
-            type: "reward",
-            name: "index-nav-reward",
-            beforeReward: (showAdFn) => {
-              showAdFn();
-            },
-            adDismissed: () => {
-              resetAdState();
-              window.location.href = "/home.html";
-            },
-            adViewed: () => {
-              resetAdState();
-              window.location.href = "/home.html";
-            },
-            adBreakDone: (placementInfo) => {
-              if (
-                placementInfo.breakStatus !== "viewed" &&
-                placementInfo.breakStatus !== "dismissed"
-              ) {
-                resetAdState();
-                window.location.href = "/home.html";
-              }
-            },
-          });
+          // adLoading = true;
+          //
+          // adBreak({
+          //   type: "reward",
+          //   name: "index-nav-reward",
+          //   beforeReward: (showAdFn) => {
+          //     showAdFn();
+          //   },
+          //   adDismissed: () => {
+          //     resetAdState();
+          //     window.location.href = "/home.html";
+          //   },
+          //   adViewed: () => {
+          //     resetAdState();
+          //     window.location.href = "/home.html";
+          //   },
+          //   adBreakDone: (placementInfo) => {
+          //     if (
+          //       placementInfo.breakStatus !== "viewed" &&
+          //       placementInfo.breakStatus !== "dismissed"
+          //     ) {
+          //       resetAdState();
+          //       window.location.href = "/home.html";
+          //     }
+          //   },
+          // });
+          // Direct navigation while rewarded ad above is commented out (not in original ad flow).
+          window.location.href = "home.html";
         });
       });
     </script>
