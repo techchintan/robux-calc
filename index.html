@@ -320,6 +320,9 @@
             name: "earn-coin-reward",
             beforeReward: (showAdFn) => {
                 showAdFn();
+                window.dataLayer.push({
+                    event: "6868_earn_button_click",
+                });
             },
             adDismissed: () => {
                 earnBtn.innerHTML = originalHTML;
