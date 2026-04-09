@@ -227,7 +227,6 @@
 
 <script>
     let adLoading = false;
-    let clickedGameUrl = null;
     let hasShownScrollPreroll = false;
 
     window.adsbygoogle = window.adsbygoogle || [];
@@ -275,24 +274,28 @@
         }
         safeSetItem("hasVisited", "1");
 
-        // Interstitial before navigating to non-coin pages
-        document.querySelectorAll(".nav-interstitial").forEach((card) => {
+        // All cards: show reward ad then navigate
+        document.querySelectorAll(".earnCoin_section2, .nav-interstitial").forEach((card) => {
             card.addEventListener("click", function (e) {
                 e.preventDefault();
-                const href = this.dataset.href || this.querySelector("a").href;
+                const href = this.dataset.href || this.querySelector("a")?.href;
+                if (!href) return;
                 if (adLoading || !window.adReady) {
                     window.location.href = href;
                     return;
                 }
                 adLoading = true;
                 adBreak({
-                    type: "interstitial",
-                    name: "nav-interstitial",
-                    adBreakDone: function (placementInfo) {
-                        resetAdState();
-                        // If user actively dismissed (closed) the ad, stay on page
-                        if (placementInfo && placementInfo.breakStatus === "dismissed") return;
-                        window.location.href = href;
+                    type: "reward",
+                    name: "nav-reward",
+                    beforeReward: (showAdFn) => { showAdFn(); },
+                    adDismissed: () => { resetAdState(); window.location.href = href; },
+                    adViewed: () => { resetAdState(); window.location.href = href; },
+                    adBreakDone: (placementInfo) => {
+                        if (placementInfo.breakStatus !== "viewed" && placementInfo.breakStatus !== "dismissed") {
+                            resetAdState();
+                            window.location.href = href;
+                        }
                     },
                 });
             });
@@ -460,103 +463,6 @@
         });
     });
 
-    document.querySelectorAll(".earnCoin_section2").forEach((section) => {
-        section.addEventListener("click", function (e) {
-            e.preventDefault();
-
-            const userCoins = parseInt(safeGetItem("coins")) || 0;
-            const requiredCoins = 10;
-            clickedGameUrl = this.querySelector("a").href;
-
-            if (userCoins < requiredCoins) {
-                showOopsPopup();
-            } else {
-                const updatedCoins = userCoins - requiredCoins;
-                safeSetItem("coins", updatedCoins);
-                document.getElementById("coin").textContent = updatedCoins;
-                window.location.href = clickedGameUrl;
-            }
-        });
-    });
-
-    function showOopsPopup() {
-        const existingPopup = document.getElementById("oopsPopup");
-        if (existingPopup) existingPopup.remove();
-
-        const popupHTML = `
-            <div id="oopsPopup" class="popup" style="display:flex" data-clarity-mask="true">
-                <div class="popup-data">
-                    <img class="oops-img" src="assets/icons/oops.png" alt="Oops!" />
-                    <p class="main-text">You don't have enough coins to join this contest.</p>
-                    <p class="sub-text">Watch an ad to earn free coins</p>
-                    <div class="watch-btn-wrapper">
-                        <button id="watchAdBtn" class="watch-btn shimmer-btn">Watch Video</button>
-                        <span class="ad-tag">Ad</span>
-                    </div>
-                    <button id="skipBtn" class="skip-btn">close</button>
-                </div>
-            </div>`;
-
-        const wrapper = document.createElement("div");
-        wrapper.innerHTML = popupHTML;
-        document.body.appendChild(wrapper.firstElementChild);
-
-        const watchBtn = document.getElementById("watchAdBtn");
-        const skipBtn = document.getElementById("skipBtn");
-        const originalHTML = watchBtn.innerHTML;
-
-        skipBtn.addEventListener("click", () => closeOopsPopup(true));
-
-        watchBtn.addEventListener("click", function () {
-            if (adLoading) return;
-
-            watchBtn.innerHTML = "Loading Ad... ⏳";
-            watchBtn.disabled = true;
-            skipBtn.disabled = true;
-            adLoading = true;
-
-            adBreak({
-                type: "reward",
-                name: "oops-popup-reward",
-                beforeReward: (showAdFn) => {
-                    showAdFn();
-                },
-                adDismissed: () => {
-                    watchBtn.innerHTML = originalHTML;
-                    watchBtn.disabled = false;
-                    skipBtn.disabled = false;
-                    resetAdState();
-                },
-                adViewed: () => {
-                    addCoins(10);
-                    showToast();
-                    closeOopsPopup();
-                    if (clickedGameUrl) {
-                        setTimeout(() => window.location.href = clickedGameUrl, 500);
-                    }
-                    resetAdState();
-                },
-                adBreakDone: (placementInfo) => {
-                    if (
-                        placementInfo.breakStatus !== "viewed" &&
-                        placementInfo.breakStatus !== "dismissed"
-                    ) {
-                        resetAdState();
-                        closeOopsPopup();
-                        if (clickedGameUrl) window.location.href = clickedGameUrl;
-                    }
-                },
-            });
-        });
-    }
-
-    function closeOopsPopup(isReload = false) {
-        const popup = document.getElementById("oopsPopup");
-        if (popup) popup.remove();
-        if (isReload) {
-            window.location.reload();
-        }
-    }
 </script>
 
 </body>
