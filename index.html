@@ -86,20 +86,29 @@
                     </button>
                 </div>
 
+                <!-- Spin Wheel (moved up — #1 tapped element) -->
+                <div class="spin-card earnCoin_section2 spin-pulse">
+                    <a href="spin_to_win.html">
+                        <img src="assets/robux/spin_image.webp" alt=" spin_image" width="100%" loading="lazy"></img>
+                    </a>
+                </div>
+
+                <!-- Banner Ad (between spin and daily rbx — hot zone 30-50% scroll) -->
+                <div class="gadsbanner">
+                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4788685016218460" data-ad-slot="8597806557"
+                        data-ad-format="auto" data-full-width-responsive="true"></ins>
+                    <label
+                        style="display: block; margin: 0px auto; width: fit-content; letter-spacing: 4px; color: rgb(65, 77, 101); font: 400 9px / 2 Arial, sans-serif; opacity: 0.7;">ADVERTISEMENT</label>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+
                 <!-- Daily RBX Counter -->
                 <div class="rbx-counter-card nav-interstitial" data-href="daily-r-converter.html">
                     <a href="daily-r-converter.html">
                         <img src="assets/robux/daily_rbx_counter.webp" alt=" daily-rbx" width="100%"
                             loading="lazy"></img>
-                    </a>
-                </div>
-
-                
-
-                <!-- Spin Wheel -->
-                <div class="spin-card earnCoin_section2">
-                    <a href="spin_to_win.html">
-                        <img src="assets/robux/spin_image.webp" alt=" spin_image" width="100%" loading="lazy"></img>
                     </a>
                 </div>
 
@@ -128,9 +137,10 @@
                     </div>
                 </div>
 
-                <!-- Grid: Logic Quiz + How To Win -->
+                <!-- Grid: Logic Quiz (with earn coins badge) + How To Win -->
                 <div class="grid-2">
-                    <div class="grid-card quiz earnCoin_section2">
+                    <div class="grid-card quiz earnCoin_section2" style="position:relative;">
+                        <span style="position:absolute;top:8px;left:8px;background:linear-gradient(135deg,#f2b21f,#e07c00);color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:20px;z-index:2;letter-spacing:0.5px;pointer-events:none;">🏆 Earn Coins</span>
                         <a href="logic-quiz.html">
                             <img src="assets/robux/logic_image.webp" alt="logic_image" loading="lazy"></img>
                         </a>
