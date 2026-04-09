@@ -288,8 +288,10 @@
                 adBreak({
                     type: "interstitial",
                     name: "nav-interstitial",
-                    adBreakDone: function () {
+                    adBreakDone: function (placementInfo) {
                         resetAdState();
+                        // If user actively dismissed (closed) the ad, stay on page
+                        if (placementInfo && placementInfo.breakStatus === "dismissed") return;
                         window.location.href = href;
                     },
                 });
