@@ -345,11 +345,19 @@
       function handleAction() {
         if (!answered) return alert("Please select an answer first!");
 
-        if (currentIdx < quizData.length - 1) {
-          currentIdx++;
-          loadQuestion();
+        const proceed = () => {
+          if (currentIdx < quizData.length - 1) {
+            currentIdx++;
+            loadQuestion();
+          } else {
+            showResults();
+          }
+        };
+
+        if (window.adReady) {
+          adBreak({ type: "next", name: "quiz_next_question", adBreakDone: proceed });
         } else {
-          showResults();
+          proceed();
         }
       }
 
@@ -365,6 +373,26 @@
 
       shuffleArray(quizData);
       loadQuestion();
+
+      window.adsbygoogle = window.adsbygoogle || [];
+      window.adReady = false;
+      const adBreak = window.adBreak = function(o) { adsbygoogle.push(o); };
+      adBreak({ preloadAdBreaks: "on", onReady: () => { window.adReady = true; } });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const hasVisited = localStorage.getItem("hasVisited");
+        if (hasVisited) {
+          const tryPreroll = () => {
+            if (window.adReady) {
+              adBreak({ type: "preroll", name: "quiz_page_load", adBreakDone: () => {} });
+            } else {
+              setTimeout(tryPreroll, 500);
+            }
+          };
+          tryPreroll();
+        }
+        localStorage.setItem("hasVisited", "1");
+      });
     </script>
   </body>
 </html>

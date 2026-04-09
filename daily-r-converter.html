@@ -126,8 +126,22 @@
           preloadAdBreaks: "on",
           onReady: () => {
               window.adReady = true;
-              console.log("✅ AdSense API Ready");
           }
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+          const hasVisited = localStorage.getItem("hasVisited");
+          if (hasVisited) {
+              const tryPreroll = () => {
+                  if (window.adReady) {
+                      adBreak({ type: "preroll", name: "converter_page_load", adBreakDone: () => {} });
+                  } else {
+                      setTimeout(tryPreroll, 500);
+                  }
+              };
+              tryPreroll();
+          }
+          localStorage.setItem("hasVisited", "1");
       });
 
       function playPrerollAd(callback) {

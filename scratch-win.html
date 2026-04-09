@@ -348,16 +348,46 @@
       function revealReward() {
         revealed = true;
         canvas.style.pointerEvents = "none";
-
         canvas.style.transition = "opacity 0.4s ease";
         canvas.style.opacity = "0";
 
         setTimeout(() => {
           canvas.style.display = "none";
-          document.getElementById("partyPopper").classList.add("show");
-          document.getElementById("congratsCard").classList.add("show");
+          if (window.adReady) {
+            adBreak({
+              type: "next",
+              name: "scratch_reveal",
+              adBreakDone: () => {
+                document.getElementById("partyPopper").classList.add("show");
+                document.getElementById("congratsCard").classList.add("show");
+              },
+            });
+          } else {
+            document.getElementById("partyPopper").classList.add("show");
+            document.getElementById("congratsCard").classList.add("show");
+          }
         }, 400);
       }
+
+      window.adsbygoogle = window.adsbygoogle || [];
+      window.adReady = false;
+      const adBreak = window.adBreak = function(o) { adsbygoogle.push(o); };
+      adBreak({ preloadAdBreaks: "on", onReady: () => { window.adReady = true; } });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const hasVisited = localStorage.getItem("hasVisited");
+        if (hasVisited) {
+          const tryPreroll = () => {
+            if (window.adReady) {
+              adBreak({ type: "preroll", name: "scratch_page_load", adBreakDone: () => {} });
+            } else {
+              setTimeout(tryPreroll, 500);
+            }
+          };
+          tryPreroll();
+        }
+        localStorage.setItem("hasVisited", "1");
+      });
     </script>
   </body>
 </html>

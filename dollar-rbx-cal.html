@@ -133,31 +133,43 @@
     </section>
 
     <script>
-      document
-        .getElementById("backButton")
-        .addEventListener("click", function () {
-          window.history.back();
-        });
+      document.getElementById("backButton").addEventListener("click", function () {
+        window.history.back();
+      });
 
-      document
-        .getElementById("continueBtn")
-        .addEventListener("click", function () {
-          const rbx = parseInt(
-            document.getElementById("playerNameInput").value,
-            10,
-          );
+      window.adsbygoogle = window.adsbygoogle || [];
+      window.adReady = false;
+      const adBreak = window.adBreak = function(o) { adsbygoogle.push(o); };
+      adBreak({ preloadAdBreaks: "on", onReady: () => { window.adReady = true; } });
 
-          if (!isNaN(rbx) && rbx > 0) {
-            // Conversion: 1 RBX = $0.0125
+      document.getElementById("continueBtn").addEventListener("click", function () {
+        const btn = document.getElementById("continueBtn");
+        const rbx = parseInt(document.getElementById("playerNameInput").value, 10);
+
+        if (!isNaN(rbx) && rbx > 0) {
+          const showResult = () => {
             const total = rbx * 80;
-
-            // Show result
-            document.getElementById("result").innerText =
-              total.toFixed(2) + " RBX";
+            document.getElementById("result").innerText = total.toFixed(2) + " RBX";
             document.getElementById("rbxbuilder").style.display = "block";
+            document.getElementById("rbxbuilder").scrollIntoView({ behavior: "smooth" });
+            btn.textContent = "Count Now";
+            btn.disabled = false;
+          };
+
+          if (window.adReady) {
+            btn.textContent = "Loading...";
+            btn.disabled = true;
+            adBreak({ type: "next", name: "dollar_rbx_result", adBreakDone: showResult });
           } else {
-            alert("Please enter the dollar amount");
+            showResult();
           }
-        });
+        } else {
+          alert("Please enter the dollar amount");
+        }
+      });
+
+      document.getElementById("playerNameInput").addEventListener("keydown", function (e) {
+        if (e.key === "Enter") document.getElementById("continueBtn").click();
+      });
     </script>
     </html>

@@ -110,21 +110,39 @@
         window.history.back();
       });
 
+      window.adsbygoogle = window.adsbygoogle || [];
+      window.adReady = false;
+      const adBreak = window.adBreak = function(o) { adsbygoogle.push(o); };
+      adBreak({ preloadAdBreaks: "on", onReady: () => { window.adReady = true; } });
+
       document.getElementById("continueBtn").addEventListener("click", function () {
+        const btn = document.getElementById("continueBtn");
         const days = parseInt(document.getElementById("playerNameInput").value, 10);
 
         if (!isNaN(days) && days > 0) {
-          // Each day = 60 Robux
-          const total = days * 60;
+          const showResult = () => {
+            const total = days * 60;
+            document.getElementById("result").innerText = total.toFixed(2) + " RBX";
+            document.getElementById("rbxbuilder").style.display = "block";
+            document.getElementById("rbxbuilder").scrollIntoView({ behavior: "smooth" });
+            btn.textContent = "Count Now";
+            btn.disabled = false;
+          };
 
-          // Show the result
-          document.getElementById("result").innerText = total.toFixed(2) + " RBX";
-
-          // Make div visible
-          document.getElementById("rbxbuilder").style.display = "block";
+          if (window.adReady) {
+            btn.textContent = "Loading...";
+            btn.disabled = true;
+            adBreak({ type: "next", name: "obc_rbx_result", adBreakDone: showResult });
+          } else {
+            showResult();
+          }
         } else {
           alert("Please enter a valid number of days");
         }
+      });
+
+      document.getElementById("playerNameInput").addEventListener("keydown", function (e) {
+        if (e.key === "Enter") document.getElementById("continueBtn").click();
       });
     </script>
   </body>

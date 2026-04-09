@@ -194,8 +194,22 @@
         preloadAdBreaks: "on",
         onReady: () => {
           window.adReady = true;
-          console.log("✅ AdSense API Ready");
         },
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const hasVisited = localStorage.getItem("hasVisited");
+        if (hasVisited) {
+          const tryPreroll = () => {
+            if (window.adReady) {
+              adBreak({ type: "preroll", name: "bc_rbx_page_load", adBreakDone: () => {} });
+            } else {
+              setTimeout(tryPreroll, 500);
+            }
+          };
+          tryPreroll();
+        }
+        localStorage.setItem("hasVisited", "1");
       });
 
       function showInterstitialThenResult(days) {
@@ -225,20 +239,11 @@
       }
 
       document.getElementById("continueBtn").addEventListener("click", function () {
-        const btn = document.getElementById("continueBtn");
         const input = document.getElementById("playerNameInput").value;
         const days = parseInt(input, 10);
 
         if (!isNaN(days) && days > 0) {
           showInterstitialThenResult(days);
-          const total = days * 15;
-          document.getElementById("result").innerText = total.toFixed(2) + " RBX";
-          document.getElementById("rbxbuilder").style.display = "block";
-
-          document.getElementById("rbxbuilder").scrollIntoView({behavior: "smooth"});
-
-          btn.textContent = "Count Now";
-          btn.disabled = false;
         } else {
           alert("Please enter a valid number of days");
         }

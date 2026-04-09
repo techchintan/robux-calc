@@ -274,16 +274,29 @@
 
     <script>
       window.adsbygoogle = window.adsbygoogle || [];
+      window.adReady = false;
 
-      const adBreak = (adConfig = function (o) {
-        adsbygoogle.push(o);
+      const adBreak = window.adBreak = function (o) { adsbygoogle.push(o); };
+      const adConfig = adBreak;
+
+      adBreak({
+        preloadAdBreaks: "on",
+        onReady: () => { window.adReady = true; },
       });
 
-      adConfig({
-        preloadAdBreaks: "on",
-        onReady: () => {
-          console.log("✅ AdSense API Ready");
-        },
+      document.addEventListener("DOMContentLoaded", function () {
+        const hasVisited = localStorage.getItem("hasVisited");
+        if (hasVisited) {
+          const tryPreroll = () => {
+            if (window.adReady) {
+              adBreak({ type: "preroll", name: "meme_page_load", adBreakDone: () => {} });
+            } else {
+              setTimeout(tryPreroll, 500);
+            }
+          };
+          tryPreroll();
+        }
+        localStorage.setItem("hasVisited", "1");
       });
 
       function playGameWithAd(callback) {

@@ -180,11 +180,23 @@
         window.history.back();
       });
 
-      document.querySelectorAll(".earnCoinSection").forEach((section) => {
-        section.addEventListener("click", function (e) {
-          e.preventDefault();
-          const url = this.querySelector("a").href;
-          window.location.href = url;
+      window.adsbygoogle = window.adsbygoogle || [];
+      window.adReady = false;
+      const adBreak = window.adBreak = function(o) { adsbygoogle.push(o); };
+      adBreak({ preloadAdBreaks: "on", onReady: () => { window.adReady = true; } });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        document.body.addEventListener("click", function (event) {
+          const link = event.target.closest("a");
+          if (!link || !link.getAttribute("href")) return;
+          const url = link.getAttribute("href");
+          if (url.startsWith("#") || url.startsWith("javascript:") || url.startsWith("mailto:") || url.startsWith("tel:") || link.getAttribute("target") === "_blank") return;
+          event.preventDefault();
+          if (window.adReady) {
+            adBreak({ type: "preroll", name: "free_rbx_nav", adBreakDone: () => { window.location.href = url; } });
+          } else {
+            window.location.href = url;
+          }
         });
       });
     </script>

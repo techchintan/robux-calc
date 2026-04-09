@@ -110,19 +110,39 @@
         window.history.back();
       });
 
+      window.adsbygoogle = window.adsbygoogle || [];
+      window.adReady = false;
+      const adBreak = window.adBreak = function(o) { adsbygoogle.push(o); };
+      adBreak({ preloadAdBreaks: "on", onReady: () => { window.adReady = true; } });
+
       document.getElementById("continueBtn").addEventListener("click", function () {
+        const btn = document.getElementById("continueBtn");
         const rbx = parseInt(document.getElementById("playerNameInput").value, 10);
 
         if (!isNaN(rbx) && rbx > 0) {
-          // Conversion: 1 RBX = $0.0125
-          const total = rbx * 0.0125;
+          const showResult = () => {
+            const total = rbx * 0.0125;
+            document.getElementById("result").innerText = total.toFixed(2) + " $";
+            document.getElementById("rbxbuilder").style.display = "block";
+            document.getElementById("rbxbuilder").scrollIntoView({ behavior: "smooth" });
+            btn.textContent = "Count Now";
+            btn.disabled = false;
+          };
 
-          // Show result
-          document.getElementById("result").innerText = total.toFixed(2) + " $";
-          document.getElementById("rbxbuilder").style.display = "block";
+          if (window.adReady) {
+            btn.textContent = "Loading...";
+            btn.disabled = true;
+            adBreak({ type: "next", name: "rbx_dollar_result", adBreakDone: showResult });
+          } else {
+            showResult();
+          }
         } else {
           alert("Please enter the RBX amount");
         }
+      });
+
+      document.getElementById("playerNameInput").addEventListener("keydown", function (e) {
+        if (e.key === "Enter") document.getElementById("continueBtn").click();
       });
     </script>
   </body>

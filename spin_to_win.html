@@ -399,18 +399,28 @@
         spinBtn.disabled = false;
       }
 
-      function showAdThenSpin(callback) {
-        adBreak({
-          type: "next",
-          name: "spin_wheel",
-          beforeAd: () => {},
-          adBreakDone: () => callback(),
-        });
-      }
+      window.adsbygoogle = window.adsbygoogle || [];
+      window.adReady = false;
+      const adBreak = window.adBreak = function(o) { adsbygoogle.push(o); };
+      adBreak({ preloadAdBreaks: "on", onReady: () => { window.adReady = true; } });
 
-      spinBtn.addEventListener("click", () => {
-        if (spinning) return;
+      // Page-load preroll for returning users
+      document.addEventListener("DOMContentLoaded", function () {
+        const hasVisited = localStorage.getItem("hasVisited");
+        if (hasVisited) {
+          const tryPreroll = () => {
+            if (window.adReady) {
+              adBreak({ type: "preroll", name: "spin_page_load", adBreakDone: () => {} });
+            } else {
+              setTimeout(tryPreroll, 500);
+            }
+          };
+          tryPreroll();
+        }
+        localStorage.setItem("hasVisited", "1");
+      });
 
+      function startSpin() {
         spinBtn.disabled = true;
         congratsCard.classList.remove("show");
         document.getElementById("partyPopper").classList.remove("show");
@@ -426,6 +436,19 @@
         speed = totalRotation / 200;
         spinning = true;
         requestAnimationFrame(spinLoop);
+      }
+
+      spinBtn.addEventListener("click", () => {
+        if (spinning) return;
+        if (window.adReady) {
+          adBreak({
+            type: "next",
+            name: "spin_wheel",
+            adBreakDone: () => startSpin(),
+          });
+        } else {
+          startSpin();
+        }
       });
     </script>
   </body>

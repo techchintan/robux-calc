@@ -326,10 +326,41 @@
       function showResult() {
         setTimeout(() => {
           rewardText.innerText = "Your Reward: " + totalReward;
-          partyPopper.classList.add("show");
-          congratsCard.classList.add("show");
+          if (window.adReady) {
+            adBreak({
+              type: "next",
+              name: "daily_rbx_result",
+              adBreakDone: () => {
+                partyPopper.classList.add("show");
+                congratsCard.classList.add("show");
+              },
+            });
+          } else {
+            partyPopper.classList.add("show");
+            congratsCard.classList.add("show");
+          }
         }, 400);
       }
+
+      window.adsbygoogle = window.adsbygoogle || [];
+      window.adReady = false;
+      const adBreak = window.adBreak = function(o) { adsbygoogle.push(o); };
+      adBreak({ preloadAdBreaks: "on", onReady: () => { window.adReady = true; } });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const hasVisited = localStorage.getItem("hasVisited");
+        if (hasVisited) {
+          const tryPreroll = () => {
+            if (window.adReady) {
+              adBreak({ type: "preroll", name: "daily_rbx_page_load", adBreakDone: () => {} });
+            } else {
+              setTimeout(tryPreroll, 500);
+            }
+          };
+          tryPreroll();
+        }
+        localStorage.setItem("hasVisited", "1");
+      });
     </script>
 
 </html>

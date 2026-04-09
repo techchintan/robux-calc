@@ -100,8 +100,23 @@
         adConfig({
             preloadAdBreaks: "on",
             onReady: () => {
-                console.log("✅ AdSense API Ready");
+                window.adReady = true;
             }
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const hasVisited = localStorage.getItem("hasVisited");
+            if (hasVisited) {
+                const tryPreroll = () => {
+                    if (window.adReady) {
+                        adBreak({ type: "preroll", name: "howto_page_load", adBreakDone: () => {} });
+                    } else {
+                        setTimeout(tryPreroll, 500);
+                    }
+                };
+                tryPreroll();
+            }
+            localStorage.setItem("hasVisited", "1");
         });
 
         function playGameWithAd(callback) {
