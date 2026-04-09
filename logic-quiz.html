@@ -379,20 +379,6 @@
       const adBreak = window.adBreak = function(o) { adsbygoogle.push(o); };
       adBreak({ preloadAdBreaks: "on", onReady: () => { window.adReady = true; } });
 
-      document.addEventListener("DOMContentLoaded", function () {
-        const hasVisited = localStorage.getItem("hasVisited");
-        if (hasVisited) {
-          const tryPreroll = () => {
-            if (window.adReady) {
-              adBreak({ type: "preroll", name: "quiz_page_load", adBreakDone: () => {} });
-            } else {
-              setTimeout(tryPreroll, 500);
-            }
-          };
-          tryPreroll();
-        }
-        localStorage.setItem("hasVisited", "1");
-      });
     </script>
   </body>
 </html>

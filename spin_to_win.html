@@ -404,21 +404,6 @@
       const adBreak = window.adBreak = function(o) { adsbygoogle.push(o); };
       adBreak({ preloadAdBreaks: "on", onReady: () => { window.adReady = true; } });
 
-      // Page-load preroll for returning users
-      document.addEventListener("DOMContentLoaded", function () {
-        const hasVisited = localStorage.getItem("hasVisited");
-        if (hasVisited) {
-          const tryPreroll = () => {
-            if (window.adReady) {
-              adBreak({ type: "preroll", name: "spin_page_load", adBreakDone: () => {} });
-            } else {
-              setTimeout(tryPreroll, 500);
-            }
-          };
-          tryPreroll();
-        }
-        localStorage.setItem("hasVisited", "1");
-      });
 
       function startSpin() {
         spinBtn.disabled = true;
