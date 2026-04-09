@@ -539,11 +539,9 @@
                         placementInfo.breakStatus !== "viewed" &&
                         placementInfo.breakStatus !== "dismissed"
                     ) {
-                        watchBtn.innerHTML = originalHTML;
-                        watchBtn.disabled = false;
-                        skipBtn.disabled = false;
-                        ErrorToast();
                         resetAdState();
+                        closeOopsPopup();
+                        if (clickedGameUrl) window.location.href = clickedGameUrl;
                     }
                 },
             });
