@@ -94,7 +94,7 @@
 
                 <!-- Mid Banner Ad -->
                 <div class="gadsbanner">
-                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4788685016218460" data-ad-slot="8597806557"
+                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4788685016218460" data-ad-slot="5516347645"
                         data-ad-format="auto" data-full-width-responsive="true"></ins>
                     <label
                         style="display: block; margin: 0px auto; width: fit-content; letter-spacing: 4px; color: rgb(65, 77, 101); font: 400 9px / 2 Arial, sans-serif; opacity: 0.7;">ADVERTISEMENT</label>
@@ -141,7 +141,7 @@
 
                 <!-- Bottom Banner Ad -->
                 <div class="gadsbanner">
-                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4788685016218460" data-ad-slot="8597806557"
+                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4788685016218460" data-ad-slot="6845741180"
                         data-ad-format="auto" data-full-width-responsive="true"></ins>
                     <label
                         style="display: block; margin: 0px auto; width: fit-content; letter-spacing: 4px; color: rgb(65, 77, 101); font: 400 9px / 2 Arial, sans-serif; opacity: 0.7;">ADVERTISEMENT</label>
@@ -250,16 +250,19 @@
         const coinEl = document.getElementById("coin");
         if (coinEl) coinEl.textContent = userCoins;
 
-        window.addEventListener("scroll", handleScrollPreroll, { passive: true });
-        document.addEventListener("scroll", handleScrollPreroll, { passive: true });
-        const mainDiv = document.querySelector(".main_div");
-        if (mainDiv) {
-            mainDiv.addEventListener("scroll", handleScrollPreroll, { passive: true });
-        }
-        handleScrollPreroll();
-
         // Page-load preroll for returning users
         const hasVisited = safeGetItem("hasVisited");
+
+        // Scroll preroll only for first-time visitors (returning users get page-load preroll instead)
+        if (!hasVisited) {
+            window.addEventListener("scroll", handleScrollPreroll, { passive: true });
+            document.addEventListener("scroll", handleScrollPreroll, { passive: true });
+            const mainDiv = document.querySelector(".main_div");
+            if (mainDiv) {
+                mainDiv.addEventListener("scroll", handleScrollPreroll, { passive: true });
+            }
+            handleScrollPreroll();
+        }
         if (hasVisited && window.adReady) {
             showHomeAutoPrerollAd(() => { resetAdState(); });
         } else if (hasVisited) {
