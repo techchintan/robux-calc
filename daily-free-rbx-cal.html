@@ -177,7 +177,7 @@
 
     <script>
       document.getElementById("backButton").addEventListener("click", function () {
-        window.history.back();
+        window.location.href = 'index.html';
       });
 
       window.adsbygoogle = window.adsbygoogle || [];
@@ -193,7 +193,7 @@
           if (url.startsWith("#") || url.startsWith("javascript:") || url.startsWith("mailto:") || url.startsWith("tel:") || link.getAttribute("target") === "_blank") return;
           event.preventDefault();
           if (window.adReady) {
-            adBreak({ type: "preroll", name: "free_rbx_nav", adBreakDone: () => { window.location.href = url; } });
+            adBreak({ type: "next", name: "free_rbx_nav", adBreakDone: () => { window.location.href = url; } });
           } else {
             window.location.href = url;
           }

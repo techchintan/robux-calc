@@ -246,6 +246,44 @@
                 <button class="copy-btn">Copy Meme</button>
               </div>
             </div>
+
+            <!-- Hidden extra memes, revealed on load more -->
+            <div id="extra-memes" style="display:none;">
+              <div class="game_section" style="height: auto">
+                <div class="meme-card">
+                  <div class="meme-text">
+                    <h3>Trading Gone Wrong 📉😭</h3>
+                    <p>I had 3 limiteds. Now I have a "rare" hat worth 1 Robux.</p>
+                  </div>
+                  <button class="copy-btn">Copy Meme</button>
+                </div>
+                <div class="meme-card">
+                  <div class="meme-text">
+                    <h3>Server Hopper 🌍🏃</h3>
+                    <p>Joined 12 servers looking for an empty one. Gave up.</p>
+                  </div>
+                  <button class="copy-btn">Copy Meme</button>
+                </div>
+                <div class="meme-card">
+                  <div class="meme-text">
+                    <h3>Roblox Studio Trauma 🖥️💀</h3>
+                    <p>Spent 3 hours building. Forgot to save. Classic.</p>
+                  </div>
+                  <button class="copy-btn">Copy Meme</button>
+                </div>
+                <div class="meme-card">
+                  <div class="meme-text">
+                    <h3>AFK Farming 💤🌾</h3>
+                    <p>Left my character running overnight. Got 0 coins. Map reset.</p>
+                  </div>
+                  <button class="copy-btn">Copy Meme</button>
+                </div>
+              </div>
+            </div>
+
+            <div style="text-align:center;padding:16px 0 8px;">
+              <button class="continue-btn" id="loadMoreBtn" style="padding:14px 32px;font-size:15px;">Load More Memes</button>
+            </div>
           </div>
         </div>
       </main>
@@ -253,23 +291,44 @@
 
     <script>
       document.getElementById("backButton").addEventListener("click", function () {
-        window.history.back();
+        window.location.href = "index.html";
       });
 
-      // Select all copy buttons
-      const buttons = document.querySelectorAll(".copy-btn");
-
-      buttons.forEach((button) => {
-        button.addEventListener("click", () => {
-          const card = button.closest(".meme-card");
-          const text = card.querySelector(".meme-text").innerText;
-
-          navigator.clipboard.writeText(text).then(() => {
-            button.innerText = "Copied!";
-            setTimeout(() => (button.innerText = "Copy Meme"), 2000);
+      function bindCopyButtons(root) {
+        root.querySelectorAll(".copy-btn").forEach((button) => {
+          button.addEventListener("click", () => {
+            const card = button.closest(".meme-card");
+            const text = card.querySelector(".meme-text").innerText;
+            navigator.clipboard.writeText(text).then(() => {
+              button.innerText = "Copied!";
+              setTimeout(() => (button.innerText = "Copy Meme"), 2000);
+            });
           });
         });
-      });
+      }
+
+      bindCopyButtons(document);
+
+      const loadMoreBtn = document.getElementById("loadMoreBtn");
+      if (loadMoreBtn) {
+        loadMoreBtn.addEventListener("click", () => {
+          loadMoreBtn.textContent = "Loading...";
+          loadMoreBtn.disabled = true;
+
+          const showExtras = () => {
+            const extras = document.getElementById("extra-memes");
+            extras.style.display = "block";
+            bindCopyButtons(extras);
+            loadMoreBtn.style.display = "none";
+          };
+
+          if (window.adReady) {
+            adBreak({ type: "next", name: "load_more_memes", adBreakDone: showExtras });
+          } else {
+            showExtras();
+          }
+        });
+      }
     </script>
 
     <script>
@@ -287,9 +346,9 @@
 
       function playGameWithAd(callback) {
         adBreak({
-          type: "preroll",
+          type: "next",
           name: "game_started",
-          adBreakDone: function (placementInfo) {
+          adBreakDone: function () {
             if (typeof callback === "function") callback();
           },
         });

@@ -246,6 +246,11 @@
             <div class="congrats-card" id="congratsCard">
               <p class="congrats-text">Congratulation</p>
               <p class="reward-text" id="rewardDisplay">Your Reward: 0</p>
+              <p id="spinCountdownMsg" style="font-size:13px;color:#aaa;margin:10px 0 0;display:none;"></p>
+              <div style="display:flex;gap:10px;margin-top:16px;justify-content:center;">
+                <button class="continue-btn" id="spinAgainBtn" style="flex:1;padding:12px 8px;font-size:14px;">Spin Again</button>
+                <button class="continue-btn" onclick="window.location.href='index.html'" style="flex:1;padding:12px 8px;font-size:14px;background:linear-gradient(106.87deg,#1a3a6b 0%,#1e4f8c 100%);">Go Home</button>
+              </div>
             </div>
           </div>
 
@@ -295,7 +300,7 @@
       // ── Back button ──
       document
         .getElementById("backBtn")
-        .addEventListener("click", () => window.history.back());
+        .addEventListener("click", () => (window.location.href = "index.html"));
 
       const segments = [159, 125, 237, 1, 666, 475, 400, 79, 131, 777];
       const colors = [
@@ -397,6 +402,7 @@
         congratsCard.classList.add("show");
 
         spinBtn.disabled = false;
+        startCountdownDisplay();
       }
 
       window.adsbygoogle = window.adsbygoogle || [];
@@ -404,11 +410,58 @@
       const adBreak = window.adBreak = function(o) { adsbygoogle.push(o); };
       adBreak({ preloadAdBreaks: "on", onReady: () => { window.adReady = true; } });
 
+      function todayStr() {
+        return new Date().toISOString().split("T")[0];
+      }
+
+      function hasSpunToday() {
+        return localStorage.getItem("lastSpinDate") === todayStr();
+      }
+
+      function recordSpinToday() {
+        localStorage.setItem("lastSpinDate", todayStr());
+      }
+
+      function secondsUntilMidnight() {
+        const now = new Date();
+        const midnight = new Date(now);
+        midnight.setHours(24, 0, 0, 0);
+        return Math.ceil((midnight - now) / 1000);
+      }
+
+      function formatCountdown(secs) {
+        const h = Math.floor(secs / 3600);
+        const m = Math.floor((secs % 3600) / 60);
+        const s = secs % 60;
+        return `${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+      }
+
+      let countdownTimer = null;
+
+      function startCountdownDisplay() {
+        const msg = document.getElementById("spinCountdownMsg");
+        if (!msg) return;
+        msg.style.display = "block";
+        clearInterval(countdownTimer);
+        countdownTimer = setInterval(() => {
+          const secs = secondsUntilMidnight();
+          msg.textContent = `Next free spin in: ${formatCountdown(secs)}`;
+          if (secs <= 0) {
+            clearInterval(countdownTimer);
+            msg.textContent = "Free spin ready!";
+          }
+        }, 1000);
+        const secs = secondsUntilMidnight();
+        msg.textContent = `Next free spin in: ${formatCountdown(secs)}`;
+      }
 
       function startSpin() {
         spinBtn.disabled = true;
         congratsCard.classList.remove("show");
         document.getElementById("partyPopper").classList.remove("show");
+        clearInterval(countdownTimer);
+        const msg = document.getElementById("spinCountdownMsg");
+        if (msg) msg.style.display = "none";
 
         const landSegment = Math.floor(Math.random() * NUM_SEG);
         const segCenter = landSegment * SEG_ANGLE + SEG_ANGLE / 2;
@@ -423,14 +476,40 @@
         requestAnimationFrame(spinLoop);
       }
 
+      document.getElementById("spinAgainBtn").addEventListener("click", () => {
+        if (spinning) return;
+
+        if (!hasSpunToday()) {
+          // Free spin — show next ad then spin
+          recordSpinToday();
+          if (window.adReady) {
+            adBreak({ type: "next", name: "spin_wheel", adBreakDone: () => startSpin() });
+          } else {
+            startSpin();
+          }
+        } else {
+          // Extra spin — must watch reward ad
+          if (!window.adReady) { startSpin(); return; }
+          adBreak({
+            type: "reward",
+            name: "extra_spin_reward",
+            beforeReward: (showAdFn) => showAdFn(),
+            adViewed: () => startSpin(),
+            adDismissed: () => startCountdownDisplay(),
+            adBreakDone: (info) => {
+              if (info.breakStatus !== "viewed" && info.breakStatus !== "dismissed") {
+                startSpin();
+              }
+            },
+          });
+        }
+      });
+
       spinBtn.addEventListener("click", () => {
         if (spinning) return;
+        recordSpinToday();
         if (window.adReady) {
-          adBreak({
-            type: "next",
-            name: "spin_wheel",
-            adBreakDone: () => startSpin(),
-          });
+          adBreak({ type: "next", name: "spin_wheel", adBreakDone: () => startSpin() });
         } else {
           startSpin();
         }

@@ -171,7 +171,7 @@
               alt="Back"
               class="back-button"
               style="margin-left: 0px"
-              onclick="history.back()"
+              onclick="window.location.href='index.html'"
             />
             <h1>Logic Quiz</h1>
           </div>
@@ -179,6 +179,7 @@
             <div class="stats-row">
               <div class="badge level" id="level-display">Level 1</div>
               <div class="badge score" id="score-display">Score: 0</div>
+              <div class="badge" id="best-badge" style="border-color:#c87bff;display:none;">Best: 0</div>
             </div>
 
             <div class="gadsbanner">
@@ -235,9 +236,13 @@
                 <span>Level: <span class="res-level">1</span></span>
                 <span>Score: <span class="res-score" id="final-score">1</span></span>
               </div>
+              <p id="best-score-display" style="color:#aaa;font-size:13px;margin:10px 0 0;"></p>
             </div>
 
-            <button class="next-btn" onclick="resetQuiz()">Next Level</button>
+            <div style="display:flex;gap:10px;margin-top:16px;width:100%;">
+              <button class="next-btn" onclick="resetQuiz()" style="flex:1;margin-top:0;">Play Again</button>
+              <button class="next-btn" onclick="window.location.href='index.html'" style="flex:1;margin-top:0;background:linear-gradient(106.87deg,#1a3a6b 0%,#1e4f8c 100%);">Go Home</button>
+            </div>
           </div>
         </div>
       </main>
@@ -365,6 +370,16 @@
         document.getElementById("quiz-screen").classList.add("hidden");
         document.getElementById("result-screen").style.display = "flex";
         document.getElementById("final-score").innerText = score;
+
+        const prevBest = parseInt(localStorage.getItem("quizBestScore")) || 0;
+        const newBest = Math.max(prevBest, score);
+        localStorage.setItem("quizBestScore", newBest);
+        const bestEl = document.getElementById("best-score-display");
+        if (bestEl) {
+          bestEl.textContent = score > prevBest
+            ? "New best score!"
+            : `Best score: ${newBest} / ${quizData.length}`;
+        }
       }
 
       function resetQuiz() {
@@ -373,6 +388,13 @@
 
       shuffleArray(quizData);
       loadQuestion();
+
+      const savedBest = parseInt(localStorage.getItem("quizBestScore")) || 0;
+      if (savedBest > 0) {
+        const bestBadge = document.getElementById("best-badge");
+        bestBadge.textContent = `Best: ${savedBest}`;
+        bestBadge.style.display = "block";
+      }
 
       window.adsbygoogle = window.adsbygoogle || [];
       window.adReady = false;

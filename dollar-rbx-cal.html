@@ -134,7 +134,7 @@
 
     <script>
       document.getElementById("backButton").addEventListener("click", function () {
-        window.history.back();
+        window.location.href = 'index.html';
       });
 
       window.adsbygoogle = window.adsbygoogle || [];
@@ -157,7 +157,7 @@
           };
 
           if (window.adReady) {
-            btn.textContent = "Loading...";
+            btn.textContent = "Calculating... ⏳";
             btn.disabled = true;
             adBreak({ type: "next", name: "dollar_rbx_result", adBreakDone: showResult });
           } else {

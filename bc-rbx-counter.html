@@ -180,7 +180,7 @@
 
     <script>
       document.getElementById("backButton").addEventListener("click", function () {
-        window.history.back();
+        window.location.href = "index.html";
       });
 
       window.adsbygoogle = window.adsbygoogle || [];
@@ -200,24 +200,17 @@
 
       function showInterstitialThenResult(days) {
         const btn = document.getElementById("continueBtn");
-        btn.textContent = "Loading...";
+        btn.textContent = "Calculating... ⏳";
         btn.disabled = true;
 
         adBreak({
           type: "next",
           name: "show_rbx_result",
-
-          beforeAd: () => {},
-
-          afterAd: () => {},
-
-          adBreakDone: (info) => {
+          adBreakDone: () => {
             const total = days * 15;
             document.getElementById("result").innerText = total.toFixed(2) + " RBX";
             document.getElementById("rbxbuilder").style.display = "block";
-
             document.getElementById("rbxbuilder").scrollIntoView({behavior: "smooth"});
-
             btn.textContent = "Count Now";
             btn.disabled = false;
           },

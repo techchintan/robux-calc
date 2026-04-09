@@ -66,6 +66,17 @@
                         <span class="coin-icon"><img src="assets/icons/coin-earn.png" alt="coin-earn"
                                 loading="lazy"></img></span>
                         <span class="coin-count" id="coin">0</span>
+                        <span id="streakBadge" style="display:none;margin-left:10px;background:linear-gradient(135deg,#f2b21f,#e07c00);color:#fff;font-size:11px;font-weight:700;padding:3px 8px;border-radius:20px;letter-spacing:0.5px;white-space:nowrap;">🔥 1 day streak</span>
+                    </div>
+                    <!-- Coin progress bar -->
+                    <div id="coinProgressWrap" style="width:100%;margin:8px 0 4px;">
+                        <div style="display:flex;justify-content:space-between;font-size:11px;color:#aaa;margin-bottom:4px;">
+                            <span>Progress to next milestone</span>
+                            <span id="coinProgressLabel">0 / 100</span>
+                        </div>
+                        <div style="background:#ffffff18;border-radius:10px;height:8px;overflow:hidden;">
+                            <div id="coinProgressBar" style="height:100%;border-radius:10px;background:linear-gradient(90deg,#f2b21f,#e07c00);width:0%;transition:width 0.5s ease;"></div>
+                        </div>
                     </div>
                     <button class="earn-btn" id="earnCoinBtn">
                         <span class="coin-sm"><img src="assets/icons/coin.png" style="width: 25px;" alt="coin"
@@ -227,7 +238,6 @@
 
 <script>
     let adLoading = false;
-    let hasShownScrollPreroll = false;
 
     window.adsbygoogle = window.adsbygoogle || [];
     window.adReady = false;
@@ -249,16 +259,53 @@
         const coinEl = document.getElementById("coin");
         if (coinEl) coinEl.textContent = userCoins;
 
-        // Scroll preroll for all visitors
-        window.addEventListener("scroll", handleScrollPreroll, { passive: true });
-        document.addEventListener("scroll", handleScrollPreroll, { passive: true });
-        const mainDiv = document.querySelector(".main_div");
-        if (mainDiv) {
-            mainDiv.addEventListener("scroll", handleScrollPreroll, { passive: true });
-        }
-        handleScrollPreroll();
-
         safeSetItem("hasVisited", "1");
+
+        // Streak tracking
+        const todayStr = new Date().toISOString().split("T")[0];
+        const lastVisit = safeGetItem("lastVisitDate");
+        let streak = parseInt(safeGetItem("visitStreak")) || 0;
+        if (lastVisit !== todayStr) {
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
+            const yStr = yesterday.toISOString().split("T")[0];
+            streak = (lastVisit === yStr) ? streak + 1 : 1;
+            safeSetItem("visitStreak", streak);
+            safeSetItem("lastVisitDate", todayStr);
+        }
+        if (streak >= 2) {
+            const badge = document.getElementById("streakBadge");
+            if (badge) {
+                badge.textContent = `🔥 ${streak} day streak`;
+                badge.style.display = "inline-block";
+            }
+        }
+
+        // Coin progress bar
+        const milestones = [100, 500, 1000, 5000, 10000];
+        const nextMilestone = milestones.find(m => m > userCoins) || milestones[milestones.length - 1];
+        const prevMilestone = milestones[milestones.indexOf(nextMilestone) - 1] || 0;
+        const pct = Math.min(100, Math.round(((userCoins - prevMilestone) / (nextMilestone - prevMilestone)) * 100));
+        const bar = document.getElementById("coinProgressBar");
+        const label = document.getElementById("coinProgressLabel");
+        if (bar) bar.style.width = pct + "%";
+        if (label) label.textContent = `${userCoins} / ${nextMilestone}`;
+
+        // Scroll-triggered preroll (safe — back button trapped during ad)
+        let hasShownScrollAd = false;
+        const onScroll = () => {
+            const mainDiv = document.querySelector(".main_div");
+            const scrollTop = Math.max(
+                window.scrollY || 0,
+                document.documentElement.scrollTop || 0,
+                mainDiv ? mainDiv.scrollTop : 0
+            );
+            if (hasShownScrollAd || scrollTop <= 200 || adLoading || !window.adReady) return;
+            hasShownScrollAd = true;
+            window.removeEventListener("scroll", onScroll, true);
+            showPrerollSafe(() => { resetAdState(); });
+        };
+        window.addEventListener("scroll", onScroll, { passive: true });
 
         // All cards: show reward ad then navigate
         document.querySelectorAll(".earnCoin_section2, .nav-interstitial").forEach((card) => {
@@ -302,44 +349,33 @@
         adLoading = false;
     }
 
-    function showHomeAutoPrerollAd(callback) {
+    function showPrerollSafe(callback) {
         if (adLoading) return;
         adLoading = true;
+        let adActive = true;
+
+        // Push a guard state — back button hits this instead of leaving the page
+        history.pushState({ adGuard: true }, '');
+
+        const onPopState = () => {
+            if (adActive) {
+                // Re-push to trap back button presses during the ad
+                history.pushState({ adGuard: true }, '');
+            }
+        };
+        window.addEventListener('popstate', onPopState);
+
         adBreak({
-          type: "preroll",
-          name: "home_auto_preroll",
-          adBreakDone: function (placementInfo) {
-            if (typeof callback === "function") callback();
-          },
+            type: 'preroll',
+            name: 'safe_preroll',
+            adBreakDone: () => {
+                adActive = false;
+                window.removeEventListener('popstate', onPopState);
+                // Replace guard state so history is clean after the ad
+                history.replaceState(null, '', location.href);
+                if (typeof callback === 'function') callback();
+            }
         });
-    }
-
-    function handleScrollPreroll() {
-        const mainDiv = document.querySelector(".main_div");
-        const containerScrollTop = mainDiv ? mainDiv.scrollTop : 0;
-        const scrollTop = Math.max(
-            window.scrollY || 0,
-            document.documentElement.scrollTop || 0,
-            document.body.scrollTop || 0,
-            containerScrollTop || 0
-        );
-        if (hasShownScrollPreroll || scrollTop <= 200) return;
-        if (adLoading) return;
-        if (!window.adReady) {
-            setTimeout(handleScrollPreroll, 600);
-            return;
-        }
-
-        hasShownScrollPreroll = true;
-        showHomeAutoPrerollAd(() => {
-            resetAdState();
-        });
-
-        window.removeEventListener("scroll", handleScrollPreroll);
-        document.removeEventListener("scroll", handleScrollPreroll);
-        if (mainDiv) {
-            mainDiv.removeEventListener("scroll", handleScrollPreroll);
-        }
     }
 
     function addCoins(amount) {
@@ -347,6 +383,15 @@
         coins += amount;
         safeSetItem("coins", coins);
         document.getElementById("coin").textContent = coins;
+
+        const milestones = [100, 500, 1000, 5000, 10000];
+        const nextMilestone = milestones.find(m => m > coins) || milestones[milestones.length - 1];
+        const prevMilestone = milestones[milestones.indexOf(nextMilestone) - 1] || 0;
+        const pct = Math.min(100, Math.round(((coins - prevMilestone) / (nextMilestone - prevMilestone)) * 100));
+        const bar = document.getElementById("coinProgressBar");
+        const label = document.getElementById("coinProgressLabel");
+        if (bar) bar.style.width = pct + "%";
+        if (label) label.textContent = `${coins} / ${nextMilestone}`;
     }
 
     function showToast() {

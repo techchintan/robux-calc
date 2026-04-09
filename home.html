@@ -183,11 +183,9 @@
         if (indexPreroll5sFired) return;
         indexPreroll5sFired = true;
         adBreak({
-          type: "preroll",
+          type: "next",
           name: "index-auto-preroll-5s",
-          adBreakDone: function () {
-            window.location.href = "home.html";
-          },
+          adBreakDone: function () {},
         });
       }
 
