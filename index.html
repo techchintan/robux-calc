@@ -76,7 +76,7 @@
                 </div>
 
                 <!-- Daily RBX Counter -->
-                <div class="rbx-counter-card">
+                <div class="rbx-counter-card nav-interstitial" data-href="daily-r-converter.html">
                     <a href="daily-r-converter.html">
                         <img src="assets/robux/daily_rbx_counter.webp" alt=" daily-rbx" width="100%"
                             loading="lazy"></img>
@@ -90,6 +90,17 @@
                     <a href="spin_to_win.html">
                         <img src="assets/robux/spin_image.webp" alt=" spin_image" width="100%" loading="lazy"></img>
                     </a>
+                </div>
+
+                <!-- Mid Banner Ad -->
+                <div class="gadsbanner">
+                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4788685016218460" data-ad-slot="8597806557"
+                        data-ad-format="auto" data-full-width-responsive="true"></ins>
+                    <label
+                        style="display: block; margin: 0px auto; width: fit-content; letter-spacing: 4px; color: rgb(65, 77, 101); font: 400 9px / 2 Arial, sans-serif; opacity: 0.7;">ADVERTISEMENT</label>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
                 </div>
 
                 <!-- Grid: Scratch Card + Daily RBX -->
@@ -113,7 +124,7 @@
                             <img src="assets/robux/logic_image.webp" alt="logic_image" loading="lazy"></img>
                         </a>
                     </div>
-                    <div class="grid-card how-to">
+                    <div class="grid-card how-to nav-interstitial" data-href="how-to-win.html">
                         <a href="how-to-win.html">
                             <img src="assets/robux/win_image.webp" alt="how_to_win_image" loading="lazy"></img>
                         </a>
@@ -121,11 +132,22 @@
                 </div>
 
                 <!-- Funny Memes -->
-                <div class="meme-card-main">
+                <div class="meme-card-main nav-interstitial" data-href="meme.html">
                     <a href="meme.html">
                         <img src="assets/robux/funny_meme_image.webp" alt=" scrarch_image" width="100%"
                             loading="lazy"></img>
                     </a>
+                </div>
+
+                <!-- Bottom Banner Ad -->
+                <div class="gadsbanner">
+                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4788685016218460" data-ad-slot="8597806557"
+                        data-ad-format="auto" data-full-width-responsive="true"></ins>
+                    <label
+                        style="display: block; margin: 0px auto; width: fit-content; letter-spacing: 4px; color: rgb(65, 77, 101); font: 400 9px / 2 Arial, sans-serif; opacity: 0.7;">ADVERTISEMENT</label>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
                 </div>
 
             </div>
@@ -235,6 +257,41 @@
             mainDiv.addEventListener("scroll", handleScrollPreroll, { passive: true });
         }
         handleScrollPreroll();
+
+        // Page-load preroll for returning users
+        const hasVisited = safeGetItem("hasVisited");
+        if (hasVisited && window.adReady) {
+            showHomeAutoPrerollAd(() => { resetAdState(); });
+        } else if (hasVisited) {
+            const waitForReady = setInterval(() => {
+                if (window.adReady) {
+                    clearInterval(waitForReady);
+                    showHomeAutoPrerollAd(() => { resetAdState(); });
+                }
+            }, 500);
+        }
+        safeSetItem("hasVisited", "1");
+
+        // Interstitial before navigating to non-coin pages
+        document.querySelectorAll(".nav-interstitial").forEach((card) => {
+            card.addEventListener("click", function (e) {
+                e.preventDefault();
+                const href = this.dataset.href || this.querySelector("a").href;
+                if (adLoading || !window.adReady) {
+                    window.location.href = href;
+                    return;
+                }
+                adLoading = true;
+                adBreak({
+                    type: "interstitial",
+                    name: "nav-interstitial",
+                    adBreakDone: function () {
+                        resetAdState();
+                        window.location.href = href;
+                    },
+                });
+            });
+        });
     });
 
     function safeGetItem(key) {
