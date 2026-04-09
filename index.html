@@ -229,6 +229,12 @@
         if (coinEl) coinEl.textContent = userCoins;
 
         window.addEventListener("scroll", handleScrollPreroll, { passive: true });
+        document.addEventListener("scroll", handleScrollPreroll, { passive: true });
+        const mainDiv = document.querySelector(".main_div");
+        if (mainDiv) {
+            mainDiv.addEventListener("scroll", handleScrollPreroll, { passive: true });
+        }
+        handleScrollPreroll();
     });
 
     function safeGetItem(key) {
@@ -258,9 +264,20 @@
     }
 
     function handleScrollPreroll() {
-        const scrollTop = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        const mainDiv = document.querySelector(".main_div");
+        const containerScrollTop = mainDiv ? mainDiv.scrollTop : 0;
+        const scrollTop = Math.max(
+            window.scrollY || 0,
+            document.documentElement.scrollTop || 0,
+            document.body.scrollTop || 0,
+            containerScrollTop || 0
+        );
         if (hasShownScrollPreroll || scrollTop <= 200) return;
-        if (adLoading || !window.adReady) return;
+        if (adLoading) return;
+        if (!window.adReady) {
+            setTimeout(handleScrollPreroll, 600);
+            return;
+        }
 
         hasShownScrollPreroll = true;
         showHomeAutoPrerollAd(() => {
@@ -268,6 +285,10 @@
         });
 
         window.removeEventListener("scroll", handleScrollPreroll);
+        document.removeEventListener("scroll", handleScrollPreroll);
+        if (mainDiv) {
+            mainDiv.removeEventListener("scroll", handleScrollPreroll);
+        }
     }
 
     function addCoins(amount) {
