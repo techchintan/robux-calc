@@ -206,6 +206,7 @@
 <script>
     let adLoading = false;
     let clickedGameUrl = null;
+    let hasShownScrollPreroll = false;
 
     window.adsbygoogle = window.adsbygoogle || [];
     window.adReady = false;
@@ -227,11 +228,7 @@
         const coinEl = document.getElementById("coin");
         if (coinEl) coinEl.textContent = userCoins;
 
-        setTimeout(function () {
-            if (!adLoading) {
-                // showHomeAutoPrerollAd();
-            }
-        }, 5000);
+        window.addEventListener("scroll", handleScrollPreroll, { passive: true });
     });
 
     function safeGetItem(key) {
@@ -258,6 +255,19 @@
             if (typeof callback === "function") callback();
           },
         });
+    }
+
+    function handleScrollPreroll() {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        if (hasShownScrollPreroll || scrollTop <= 200) return;
+        if (adLoading || !window.adReady) return;
+
+        hasShownScrollPreroll = true;
+        showHomeAutoPrerollAd(() => {
+            resetAdState();
+        });
+
+        window.removeEventListener("scroll", handleScrollPreroll);
     }
 
     function addCoins(amount) {
@@ -412,7 +422,7 @@
         const skipBtn = document.getElementById("skipBtn");
         const originalHTML = watchBtn.innerHTML;
 
-        skipBtn.addEventListener("click", closeOopsPopup);
+        skipBtn.addEventListener("click", () => closeOopsPopup(true));
 
         watchBtn.addEventListener("click", function () {
             if (adLoading) return;
@@ -459,9 +469,12 @@
         });
     }
 
-    function closeOopsPopup() {
+    function closeOopsPopup(isReload = false) {
         const popup = document.getElementById("oopsPopup");
         if (popup) popup.remove();
+        if (isReload) {
+            window.location.reload();
+        }
     }
 </script>
 
