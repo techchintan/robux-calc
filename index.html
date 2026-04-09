@@ -293,8 +293,9 @@
 
         // Scroll-triggered preroll (safe — back button trapped during ad)
         let hasShownScrollAd = false;
+        const mainDiv = document.querySelector(".main_div");
+
         const onScroll = () => {
-            const mainDiv = document.querySelector(".main_div");
             const scrollTop = Math.max(
                 window.scrollY || 0,
                 document.documentElement.scrollTop || 0,
@@ -302,10 +303,13 @@
             );
             if (hasShownScrollAd || scrollTop <= 200 || adLoading || !window.adReady) return;
             hasShownScrollAd = true;
-            window.removeEventListener("scroll", onScroll, true);
+            window.removeEventListener("scroll", onScroll);
+            if (mainDiv) mainDiv.removeEventListener("scroll", onScroll);
             showPrerollSafe(() => { resetAdState(); });
         };
+
         window.addEventListener("scroll", onScroll, { passive: true });
+        if (mainDiv) mainDiv.addEventListener("scroll", onScroll, { passive: true });
 
         // All cards: show reward ad then navigate
         document.querySelectorAll(".earnCoin_section2, .nav-interstitial").forEach((card) => {
