@@ -249,29 +249,15 @@
         const coinEl = document.getElementById("coin");
         if (coinEl) coinEl.textContent = userCoins;
 
-        // Page-load preroll for returning users
-        const hasVisited = safeGetItem("hasVisited");
+        // Scroll preroll for all visitors
+        window.addEventListener("scroll", handleScrollPreroll, { passive: true });
+        document.addEventListener("scroll", handleScrollPreroll, { passive: true });
+        const mainDiv = document.querySelector(".main_div");
+        if (mainDiv) {
+            mainDiv.addEventListener("scroll", handleScrollPreroll, { passive: true });
+        }
+        handleScrollPreroll();
 
-        // Scroll preroll only for first-time visitors (returning users get page-load preroll instead)
-        if (!hasVisited) {
-            window.addEventListener("scroll", handleScrollPreroll, { passive: true });
-            document.addEventListener("scroll", handleScrollPreroll, { passive: true });
-            const mainDiv = document.querySelector(".main_div");
-            if (mainDiv) {
-                mainDiv.addEventListener("scroll", handleScrollPreroll, { passive: true });
-            }
-            handleScrollPreroll();
-        }
-        if (hasVisited && window.adReady) {
-            showHomeAutoPrerollAd(() => { resetAdState(); });
-        } else if (hasVisited) {
-            const waitForReady = setInterval(() => {
-                if (window.adReady) {
-                    clearInterval(waitForReady);
-                    showHomeAutoPrerollAd(() => { resetAdState(); });
-                }
-            }, 500);
-        }
         safeSetItem("hasVisited", "1");
 
         // All cards: show reward ad then navigate
