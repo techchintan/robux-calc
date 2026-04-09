@@ -244,6 +244,25 @@
               <button class="next-btn" onclick="window.location.href='index.html'" style="flex:1;margin-top:0;background:linear-gradient(106.87deg,#1a3a6b 0%,#1e4f8c 100%);">Go Home</button>
             </div>
           </div>
+
+          <!-- Cross-promo -->
+          <div class="promo-strip" style="margin-top:16px;">
+            <span class="promo-strip-title">Try These Next</span>
+            <div class="promo-scroll">
+              <a href="spin_to_win.html" class="promo-card">
+                <img src="assets/robux/spin_image.webp" alt="Spin Wheel" loading="lazy">
+                <span class="promo-card-name">Spin Wheel</span>
+              </a>
+              <a href="scratch-win.html" class="promo-card">
+                <img src="assets/robux/scrarch_image.webp" alt="Scratch Card" loading="lazy">
+                <span class="promo-card-name">Scratch Card</span>
+              </a>
+              <a href="meme.html" class="promo-card">
+                <img src="assets/robux/funny_meme_image.webp" alt="Funny Memes" loading="lazy">
+                <span class="promo-card-name">Funny Memes</span>
+              </a>
+            </div>
+          </div>
         </div>
       </main>
     </section>
@@ -402,5 +421,14 @@
       adBreak({ preloadAdBreaks: "on", onReady: () => { window.adReady = true; } });
 
     </script>
+
+    <script src="js/nav.js"></script>
+    <nav class="bottom-nav">
+      <a href="index.html"><span class="nav-icon">🏠</span><span>Home</span></a>
+      <a href="spin_to_win.html"><span class="nav-icon">🎰</span><span>Spin</span></a>
+      <a href="scratch-win.html"><span class="nav-icon">🎫</span><span>Scratch</span></a>
+      <a href="logic-quiz.html" class="active"><span class="nav-icon">🧠</span><span>Quiz</span></a>
+      <a href="meme.html"><span class="nav-icon">😂</span><span>Memes</span></a>
+    </nav>
   </body>
 </html>

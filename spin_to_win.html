@@ -254,6 +254,29 @@
             </div>
           </div>
 
+          <!-- Cross-promo (shown after spin result) -->
+          <div class="promo-strip" id="spinPromo" style="display:none;">
+            <span class="promo-strip-title">Try These Next</span>
+            <div class="promo-scroll">
+              <a href="scratch-win.html" class="promo-card">
+                <img src="assets/robux/scrarch_image.webp" alt="Scratch Card" loading="lazy">
+                <span class="promo-card-name">Scratch Card</span>
+              </a>
+              <a href="logic-quiz.html" class="promo-card">
+                <img src="assets/robux/logic_image.webp" alt="Logic Quiz" loading="lazy">
+                <span class="promo-card-name">Logic Quiz</span>
+              </a>
+              <a href="daily-rbx.html" class="promo-card">
+                <img src="assets/robux/gift_image.webp" alt="Daily RBX" loading="lazy">
+                <span class="promo-card-name">Daily RBX</span>
+              </a>
+              <a href="meme.html" class="promo-card">
+                <img src="assets/robux/funny_meme_image.webp" alt="Funny Memes" loading="lazy">
+                <span class="promo-card-name">Funny Memes</span>
+              </a>
+            </div>
+          </div>
+
           <!-- Wheel -->
           <div class="wheel-area">
             <div class="wheel-container">
@@ -292,6 +315,7 @@
               (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
           </div>
+          <div class="bottom-nav-spacer"></div>
         </div>
       </main>
     </section>
@@ -403,6 +427,7 @@
 
         spinBtn.disabled = false;
         startCountdownDisplay();
+        document.getElementById("spinPromo").style.display = "block";
       }
 
       window.adsbygoogle = window.adsbygoogle || [];
@@ -515,5 +540,14 @@
         }
       });
     </script>
+
+    <script src="js/nav.js"></script>
+    <nav class="bottom-nav">
+      <a href="index.html"><span class="nav-icon">🏠</span><span>Home</span></a>
+      <a href="spin_to_win.html" class="active"><span class="nav-icon">🎰</span><span>Spin</span></a>
+      <a href="scratch-win.html"><span class="nav-icon">🎫</span><span>Scratch</span></a>
+      <a href="logic-quiz.html"><span class="nav-icon">🧠</span><span>Quiz</span></a>
+      <a href="meme.html"><span class="nav-icon">😂</span><span>Memes</span></a>
+    </nav>
   </body>
 </html>

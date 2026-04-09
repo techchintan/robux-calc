@@ -142,6 +142,7 @@
 
       document.addEventListener("DOMContentLoaded", function () {
         document.body.addEventListener("click", function (event) {
+          if (event.target.closest(".bottom-nav")) return;
           const link = event.target.closest("a");
           if (!link || !link.getAttribute("href")) return;
 
@@ -161,5 +162,14 @@
         });
       });
     </script>
+
+    <script src="js/nav.js"></script>
+    <nav class="bottom-nav">
+      <a href="index.html"><span class="nav-icon">🏠</span><span>Home</span></a>
+      <a href="spin_to_win.html"><span class="nav-icon">🎰</span><span>Spin</span></a>
+      <a href="scratch-win.html"><span class="nav-icon">🎫</span><span>Scratch</span></a>
+      <a href="logic-quiz.html"><span class="nav-icon">🧠</span><span>Quiz</span></a>
+      <a href="meme.html"><span class="nav-icon">😂</span><span>Memes</span></a>
+    </nav>
   </body>
 </html>

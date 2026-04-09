@@ -224,6 +224,25 @@
             </div>
           </div>
 
+          <!-- Cross-promo -->
+          <div class="promo-strip" id="rbxPromo" style="display:none;">
+            <span class="promo-strip-title">Try These Next</span>
+            <div class="promo-scroll">
+              <a href="spin_to_win.html" class="promo-card">
+                <img src="assets/robux/spin_image.webp" alt="Spin Wheel" loading="lazy">
+                <span class="promo-card-name">Spin Wheel</span>
+              </a>
+              <a href="scratch-win.html" class="promo-card">
+                <img src="assets/robux/scrarch_image.webp" alt="Scratch Card" loading="lazy">
+                <span class="promo-card-name">Scratch Card</span>
+              </a>
+              <a href="logic-quiz.html" class="promo-card">
+                <img src="assets/robux/logic_image.webp" alt="Logic Quiz" loading="lazy">
+                <span class="promo-card-name">Logic Quiz</span>
+              </a>
+            </div>
+          </div>
+
           <div class="gadsbanner">
             <ins
               class="adsbygoogle"
@@ -251,6 +270,7 @@
               (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
           </div>
+        <div class="bottom-nav-spacer"></div>
         </div>
       </main>
     </section>
@@ -330,18 +350,15 @@
       function showResult() {
         setTimeout(() => {
           rewardText.innerText = "Your Reward: " + totalReward;
-          if (window.adReady) {
-            adBreak({
-              type: "next",
-              name: "daily_rbx_result",
-              adBreakDone: () => {
-                partyPopper.classList.add("show");
-                congratsCard.classList.add("show");
-              },
-            });
-          } else {
+          const showPromo = () => {
             partyPopper.classList.add("show");
             congratsCard.classList.add("show");
+            document.getElementById("rbxPromo").style.display = "block";
+          };
+          if (window.adReady) {
+            adBreak({ type: "next", name: "daily_rbx_result", adBreakDone: showPromo });
+          } else {
+            showPromo();
           }
         }, 400);
       }
@@ -353,4 +370,13 @@
 
     </script>
 
+    <script src="js/nav.js"></script>
+    <nav class="bottom-nav">
+      <a href="index.html"><span class="nav-icon">🏠</span><span>Home</span></a>
+      <a href="spin_to_win.html"><span class="nav-icon">🎰</span><span>Spin</span></a>
+      <a href="scratch-win.html"><span class="nav-icon">🎫</span><span>Scratch</span></a>
+      <a href="logic-quiz.html"><span class="nav-icon">🧠</span><span>Quiz</span></a>
+      <a href="meme.html"><span class="nav-icon">😂</span><span>Memes</span></a>
+    </nav>
+  </body>
 </html>

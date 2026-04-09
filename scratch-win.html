@@ -213,6 +213,25 @@
             </div>
           </div>
 
+          <!-- Cross-promo -->
+          <div class="promo-strip" id="scratchPromo" style="display:none;">
+            <span class="promo-strip-title">Try These Next</span>
+            <div class="promo-scroll">
+              <a href="spin_to_win.html" class="promo-card">
+                <img src="assets/robux/spin_image.webp" alt="Spin Wheel" loading="lazy">
+                <span class="promo-card-name">Spin Wheel</span>
+              </a>
+              <a href="daily-rbx.html" class="promo-card">
+                <img src="assets/robux/gift_image.webp" alt="Daily RBX" loading="lazy">
+                <span class="promo-card-name">Daily RBX</span>
+              </a>
+              <a href="logic-quiz.html" class="promo-card">
+                <img src="assets/robux/logic_image.webp" alt="Logic Quiz" loading="lazy">
+                <span class="promo-card-name">Logic Quiz</span>
+              </a>
+            </div>
+          </div>
+
           <div class="gadsbanner">
             <ins
               class="adsbygoogle"
@@ -239,7 +258,7 @@
             <script>
               (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
-          </div>
+          <div class="bottom-nav-spacer"></div>
         </div>
       </main>
     </section>
@@ -357,18 +376,15 @@
 
         setTimeout(() => {
           canvas.style.display = "none";
-          if (window.adReady) {
-            adBreak({
-              type: "next",
-              name: "scratch_reveal",
-              adBreakDone: () => {
-                document.getElementById("partyPopper").classList.add("show");
-                document.getElementById("congratsCard").classList.add("show");
-              },
-            });
-          } else {
+          const showResult = () => {
             document.getElementById("partyPopper").classList.add("show");
             document.getElementById("congratsCard").classList.add("show");
+            document.getElementById("scratchPromo").style.display = "block";
+          };
+          if (window.adReady) {
+            adBreak({ type: "next", name: "scratch_reveal", adBreakDone: showResult });
+          } else {
+            showResult();
           }
         }, 400);
       }
@@ -379,5 +395,14 @@
       adBreak({ preloadAdBreaks: "on", onReady: () => { window.adReady = true; } });
 
     </script>
+
+    <script src="js/nav.js"></script>
+    <nav class="bottom-nav">
+      <a href="index.html"><span class="nav-icon">🏠</span><span>Home</span></a>
+      <a href="spin_to_win.html"><span class="nav-icon">🎰</span><span>Spin</span></a>
+      <a href="scratch-win.html" class="active"><span class="nav-icon">🎫</span><span>Scratch</span></a>
+      <a href="logic-quiz.html"><span class="nav-icon">🧠</span><span>Quiz</span></a>
+      <a href="meme.html"><span class="nav-icon">😂</span><span>Memes</span></a>
+    </nav>
   </body>
 </html>
