@@ -17,6 +17,22 @@
       crossorigin="anonymous"
     ></script>
 
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({
+          "gtm.start": new Date().getTime(),
+          event: "gtm.js",
+        });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-PXKTPB4M");
+    </script>
+
     <link rel="stylesheet" href="css/style.css" />
   </head>
 
@@ -177,23 +193,43 @@
 
     <script>
       document.getElementById("backButton").addEventListener("click", function () {
-        window.location.href = 'index.html';
+        window.location.href = "index.html";
       });
 
       window.adsbygoogle = window.adsbygoogle || [];
       window.adReady = false;
-      const adBreak = window.adBreak = function(o) { adsbygoogle.push(o); };
-      adBreak({ preloadAdBreaks: "on", onReady: () => { window.adReady = true; } });
+      const adBreak = (window.adBreak = function (o) {
+        adsbygoogle.push(o);
+      });
+      adBreak({
+        preloadAdBreaks: "on",
+        onReady: () => {
+          window.adReady = true;
+        },
+      });
 
       document.addEventListener("DOMContentLoaded", function () {
         document.body.addEventListener("click", function (event) {
           const link = event.target.closest("a");
           if (!link || !link.getAttribute("href")) return;
           const url = link.getAttribute("href");
-          if (url.startsWith("#") || url.startsWith("javascript:") || url.startsWith("mailto:") || url.startsWith("tel:") || link.getAttribute("target") === "_blank") return;
+          if (
+            url.startsWith("#") ||
+            url.startsWith("javascript:") ||
+            url.startsWith("mailto:") ||
+            url.startsWith("tel:") ||
+            link.getAttribute("target") === "_blank"
+          )
+            return;
           event.preventDefault();
           if (window.adReady) {
-            adBreak({ type: "next", name: "free_rbx_nav", adBreakDone: () => { window.location.href = url; } });
+            adBreak({
+              type: "next",
+              name: "free_rbx_nav",
+              adBreakDone: () => {
+                window.location.href = url;
+              },
+            });
           } else {
             window.location.href = url;
           }

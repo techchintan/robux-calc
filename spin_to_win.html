@@ -3,10 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Spin Wheel</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
     <link rel="stylesheet" href="css/style.css" />
@@ -19,6 +16,21 @@
       src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4788685016218460"
       crossorigin="anonymous"
     ></script>
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({
+          "gtm.start": new Date().getTime(),
+          event: "gtm.js",
+        });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-PXKTPB4M");
+    </script>
 
     <style>
       .party-popper {
@@ -223,51 +235,61 @@
         <div class="main_div">
           <!-- Header -->
           <div class="header" style="width: 100%">
-            <img
-              src="assets/robux/back.webp"
-              alt="Back"
-              class="back-button"
-              id="backBtn"
-            />
+            <img src="assets/robux/back.webp" alt="Back" class="back-button" id="backBtn" />
             <h1 class="home-title">Spin Wheel</h1>
           </div>
 
           <!-- Congrats Card -->
           <div style="width: 100%">
             <div class="party-popper" id="partyPopper">
-              <img
-                class="party-img"
-                src="assets/robux/win.png"
-                alt="Congrats"
-                loading="lazy"
-              />
+              <img class="party-img" src="assets/robux/win.png" alt="Congrats" loading="lazy" />
             </div>
 
             <div class="congrats-card" id="congratsCard">
               <p class="congrats-text">Congratulation</p>
               <p class="reward-text" id="rewardDisplay">Your Reward: 0</p>
-              <p id="spinCountdownMsg" style="font-size:13px;color:#aaa;margin:10px 0 0;display:none;"></p>
-              <div style="display:flex;gap:10px;margin-top:16px;justify-content:center;">
-                <button class="continue-btn" id="spinAgainBtn" style="flex:1;padding:12px 8px;font-size:14px;">Spin Again</button>
-                <button class="continue-btn" onclick="window.location.href='index.html'" style="flex:1;padding:12px 8px;font-size:14px;background:linear-gradient(106.87deg,#1a3a6b 0%,#1e4f8c 100%);">Go Home</button>
+              <p
+                id="spinCountdownMsg"
+                style="font-size: 13px; color: #aaa; margin: 10px 0 0; display: none"
+              ></p>
+              <div style="display: flex; gap: 10px; margin-top: 16px; justify-content: center">
+                <button
+                  class="continue-btn"
+                  id="spinAgainBtn"
+                  style="flex: 1; padding: 12px 8px; font-size: 14px"
+                >
+                  Spin Again
+                </button>
+                <button
+                  class="continue-btn"
+                  onclick="window.location.href = 'index.html'"
+                  style="
+                    flex: 1;
+                    padding: 12px 8px;
+                    font-size: 14px;
+                    background: linear-gradient(106.87deg, #1a3a6b 0%, #1e4f8c 100%);
+                  "
+                >
+                  Go Home
+                </button>
               </div>
             </div>
           </div>
 
           <!-- Cross-promo (shown after spin result) -->
-          <div class="promo-strip" id="spinPromo" style="display:none;">
+          <div class="promo-strip" id="spinPromo" style="display: none">
             <span class="promo-strip-title">Try These Next</span>
             <div class="promo-scroll">
               <a href="scratch-win.html" class="promo-card">
-                <img src="assets/robux/scrarch_image.webp" alt="Scratch Card" loading="lazy">
+                <img src="assets/robux/scrarch_image.webp" alt="Scratch Card" loading="lazy" />
                 <span class="promo-card-name">Scratch Card</span>
               </a>
               <a href="logic-quiz.html" class="promo-card">
-                <img src="assets/robux/logic_image.webp" alt="Logic Quiz" loading="lazy">
+                <img src="assets/robux/logic_image.webp" alt="Logic Quiz" loading="lazy" />
                 <span class="promo-card-name">Logic Quiz</span>
               </a>
               <a href="daily-rbx.html" class="promo-card">
-                <img src="assets/robux/gift_image.webp" alt="Daily RBX" loading="lazy">
+                <img src="assets/robux/gift_image.webp" alt="Daily RBX" loading="lazy" />
                 <span class="promo-card-name">Daily RBX</span>
               </a>
             </div>
@@ -410,9 +432,7 @@
       function showResult() {
         const rot = currentAngle % (2 * Math.PI);
 
-        const localPointer =
-          (((-Math.PI / 2 - rot) % (2 * Math.PI)) + 2 * Math.PI) %
-          (2 * Math.PI);
+        const localPointer = (((-Math.PI / 2 - rot) % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
         const segIndex = Math.floor(localPointer / SEG_ANGLE) % NUM_SEG;
         const won = segments[segIndex];
 
@@ -428,8 +448,15 @@
 
       window.adsbygoogle = window.adsbygoogle || [];
       window.adReady = false;
-      const adBreak = window.adBreak = function(o) { adsbygoogle.push(o); };
-      adBreak({ preloadAdBreaks: "on", onReady: () => { window.adReady = true; } });
+      const adBreak = (window.adBreak = function (o) {
+        adsbygoogle.push(o);
+      });
+      adBreak({
+        preloadAdBreaks: "on",
+        onReady: () => {
+          window.adReady = true;
+        },
+      });
 
       function todayStr() {
         return new Date().toISOString().split("T")[0];
@@ -454,7 +481,7 @@
         const h = Math.floor(secs / 3600);
         const m = Math.floor((secs % 3600) / 60);
         const s = secs % 60;
-        return `${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+        return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
       }
 
       let countdownTimer = null;
@@ -487,10 +514,8 @@
         const landSegment = Math.floor(Math.random() * NUM_SEG);
         const segCenter = landSegment * SEG_ANGLE + SEG_ANGLE / 2;
         const extraSpins = (5 + Math.floor(Math.random() * 5)) * 2 * Math.PI;
-        const targetFinal =
-          (-Math.PI / 2 - segCenter + 2 * Math.PI * 10) % (2 * Math.PI);
-        const totalRotation =
-          extraSpins + targetFinal - (currentAngle % (2 * Math.PI));
+        const targetFinal = (-Math.PI / 2 - segCenter + 2 * Math.PI * 10) % (2 * Math.PI);
+        const totalRotation = extraSpins + targetFinal - (currentAngle % (2 * Math.PI));
 
         speed = totalRotation / 200;
         spinning = true;
@@ -504,13 +529,16 @@
           // Free spin — show next ad then spin
           recordSpinToday();
           if (window.adReady) {
-            adBreak({ type: "next", name: "spin_wheel", adBreakDone: () => startSpin() });
+            adBreak({type: "next", name: "spin_wheel", adBreakDone: () => startSpin()});
           } else {
             startSpin();
           }
         } else {
           // Extra spin — must watch reward ad
-          if (!window.adReady) { startSpin(); return; }
+          if (!window.adReady) {
+            startSpin();
+            return;
+          }
           adBreak({
             type: "reward",
             name: "extra_spin_reward",
@@ -530,7 +558,7 @@
         if (spinning) return;
         recordSpinToday();
         if (window.adReady) {
-          adBreak({ type: "next", name: "spin_wheel", adBreakDone: () => startSpin() });
+          adBreak({type: "next", name: "spin_wheel", adBreakDone: () => startSpin()});
         } else {
           startSpin();
         }
@@ -540,7 +568,9 @@
     <script src="js/nav.js"></script>
     <nav class="bottom-nav">
       <a href="index.html"><span class="nav-icon">🏠</span><span>Home</span></a>
-      <a href="spin_to_win.html" class="active"><span class="nav-icon">🎰</span><span>Spin</span></a>
+      <a href="spin_to_win.html" class="active"
+        ><span class="nav-icon">🎰</span><span>Spin</span></a
+      >
       <a href="scratch-win.html"><span class="nav-icon">🎫</span><span>Scratch</span></a>
       <a href="logic-quiz.html"><span class="nav-icon">🧠</span><span>Quiz</span></a>
       <a href="meme.html"><span class="nav-icon">😂</span><span>Memes</span></a>

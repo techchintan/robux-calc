@@ -12,11 +12,26 @@
     <link rel="preconnect" href="https://googleads.g.doubleclick.net/" />
 
     <script
-    async
-    data-ad-frequency-hint="30s"
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4788685016218460"
-    crossorigin="anonymous"
-  ></script>
+      async
+      data-ad-frequency-hint="30s"
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4788685016218460"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({
+          "gtm.start": new Date().getTime(),
+          event: "gtm.js",
+        });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-PXKTPB4M");
+    </script>
   </head>
 
   <body>
@@ -107,13 +122,20 @@
 
     <script>
       document.getElementById("backButton").addEventListener("click", function () {
-        window.location.href = 'index.html';
+        window.location.href = "index.html";
       });
 
       window.adsbygoogle = window.adsbygoogle || [];
       window.adReady = false;
-      const adBreak = window.adBreak = function(o) { adsbygoogle.push(o); };
-      adBreak({ preloadAdBreaks: "on", onReady: () => { window.adReady = true; } });
+      const adBreak = (window.adBreak = function (o) {
+        adsbygoogle.push(o);
+      });
+      adBreak({
+        preloadAdBreaks: "on",
+        onReady: () => {
+          window.adReady = true;
+        },
+      });
 
       document.getElementById("continueBtn").addEventListener("click", function () {
         const btn = document.getElementById("continueBtn");
@@ -124,7 +146,7 @@
             const total = days * 60;
             document.getElementById("result").innerText = total.toFixed(2) + " RBX";
             document.getElementById("rbxbuilder").style.display = "block";
-            document.getElementById("rbxbuilder").scrollIntoView({ behavior: "smooth" });
+            document.getElementById("rbxbuilder").scrollIntoView({behavior: "smooth"});
             btn.textContent = "Count Now";
             btn.disabled = false;
           };
@@ -132,7 +154,7 @@
           if (window.adReady) {
             btn.textContent = "Calculating... ⏳";
             btn.disabled = true;
-            adBreak({ type: "next", name: "obc_rbx_result", adBreakDone: showResult });
+            adBreak({type: "next", name: "obc_rbx_result", adBreakDone: showResult});
           } else {
             showResult();
           }

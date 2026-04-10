@@ -16,6 +16,21 @@
       src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4788685016218460"
       crossorigin="anonymous"
     ></script>
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({
+          "gtm.start": new Date().getTime(),
+          event: "gtm.js",
+        });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-PXKTPB4M");
+    </script>
 
     <style>
       .container {
@@ -171,7 +186,7 @@
               alt="Back"
               class="back-button"
               style="margin-left: 0px"
-              onclick="window.location.href='index.html'"
+              onclick="window.location.href = 'index.html'"
             />
             <h1>Logic Quiz</h1>
           </div>
@@ -179,7 +194,9 @@
             <div class="stats-row">
               <div class="badge level" id="level-display">Level 1</div>
               <div class="badge score" id="score-display">Score: 0</div>
-              <div class="badge" id="best-badge" style="border-color:#c87bff;display:none;">Best: 0</div>
+              <div class="badge" id="best-badge" style="border-color: #c87bff; display: none">
+                Best: 0
+              </div>
             </div>
 
             <div class="gadsbanner">
@@ -236,29 +253,41 @@
                 <span>Level: <span class="res-level">1</span></span>
                 <span>Score: <span class="res-score" id="final-score">1</span></span>
               </div>
-              <p id="best-score-display" style="color:#aaa;font-size:13px;margin:10px 0 0;"></p>
+              <p id="best-score-display" style="color: #aaa; font-size: 13px; margin: 10px 0 0"></p>
             </div>
 
-            <div style="display:flex;gap:10px;margin-top:16px;width:100%;">
-              <button class="next-btn" onclick="resetQuiz()" style="flex:1;margin-top:0;">Play Again</button>
-              <button class="next-btn" onclick="window.location.href='index.html'" style="flex:1;margin-top:0;background:linear-gradient(106.87deg,#1a3a6b 0%,#1e4f8c 100%);">Go Home</button>
+            <div style="display: flex; gap: 10px; margin-top: 16px; width: 100%">
+              <button class="next-btn" onclick="resetQuiz()" style="flex: 1; margin-top: 0">
+                Play Again
+              </button>
+              <button
+                class="next-btn"
+                onclick="window.location.href = 'index.html'"
+                style="
+                  flex: 1;
+                  margin-top: 0;
+                  background: linear-gradient(106.87deg, #1a3a6b 0%, #1e4f8c 100%);
+                "
+              >
+                Go Home
+              </button>
             </div>
           </div>
 
           <!-- Cross-promo -->
-          <div class="promo-strip" style="margin-top:16px;">
+          <div class="promo-strip" style="margin-top: 16px">
             <span class="promo-strip-title">Try These Next</span>
             <div class="promo-scroll">
               <a href="daily-rbx.html" class="promo-card">
-                <img src="assets/robux/gift_image.webp" alt="Daily RBX" loading="lazy">
+                <img src="assets/robux/gift_image.webp" alt="Daily RBX" loading="lazy" />
                 <span class="promo-card-name">Daily RBX</span>
               </a>
               <a href="scratch-win.html" class="promo-card">
-                <img src="assets/robux/scrarch_image.webp" alt="Scratch Card" loading="lazy">
+                <img src="assets/robux/scrarch_image.webp" alt="Scratch Card" loading="lazy" />
                 <span class="promo-card-name">Scratch Card</span>
               </a>
               <a href="meme.html" class="promo-card">
-                <img src="assets/robux/funny_meme_image.webp" alt="Funny Memes" loading="lazy">
+                <img src="assets/robux/funny_meme_image.webp" alt="Funny Memes" loading="lazy" />
                 <span class="promo-card-name">Funny Memes</span>
               </a>
             </div>
@@ -379,7 +408,7 @@
         };
 
         if (window.adReady) {
-          adBreak({ type: "next", name: "quiz_next_question", adBreakDone: proceed });
+          adBreak({type: "next", name: "quiz_next_question", adBreakDone: proceed});
         } else {
           proceed();
         }
@@ -395,9 +424,8 @@
         localStorage.setItem("quizBestScore", newBest);
         const bestEl = document.getElementById("best-score-display");
         if (bestEl) {
-          bestEl.textContent = score > prevBest
-            ? "New best score!"
-            : `Best score: ${newBest} / ${quizData.length}`;
+          bestEl.textContent =
+            score > prevBest ? "New best score!" : `Best score: ${newBest} / ${quizData.length}`;
         }
       }
 
@@ -417,9 +445,15 @@
 
       window.adsbygoogle = window.adsbygoogle || [];
       window.adReady = false;
-      const adBreak = window.adBreak = function(o) { adsbygoogle.push(o); };
-      adBreak({ preloadAdBreaks: "on", onReady: () => { window.adReady = true; } });
-
+      const adBreak = (window.adBreak = function (o) {
+        adsbygoogle.push(o);
+      });
+      adBreak({
+        preloadAdBreaks: "on",
+        onReady: () => {
+          window.adReady = true;
+        },
+      });
     </script>
 
     <script src="js/nav.js"></script>
