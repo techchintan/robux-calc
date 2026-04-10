@@ -347,6 +347,7 @@
         if (mainDiv) mainDiv.addEventListener("scroll", onScroll, { passive: true });
 
         // All cards: show reward ad then navigate
+        const NAV_REWARD_FALLBACK_MS = 2000;
         document.querySelectorAll(".earnCoin_section2, .nav-interstitial").forEach((card) => {
             card.addEventListener("click", function (e) {
                 e.preventDefault();
@@ -357,16 +358,25 @@
                     return;
                 }
                 adLoading = true;
+                let navDone = false;
+                function finishNav() {
+                    if (navDone) return;
+                    navDone = true;
+                    clearTimeout(navFallbackTimer);
+                    resetAdState();
+                    window.location.href = href;
+                }
+                const navFallbackTimer = setTimeout(finishNav, NAV_REWARD_FALLBACK_MS);
                 adBreak({
                     type: "reward",
                     name: "nav-reward",
                     beforeReward: (showAdFn) => { showAdFn(); },
-                    adDismissed: () => { resetAdState(); window.location.href = href; },
-                    adViewed: () => { resetAdState(); window.location.href = href; },
+                    adDismissed: () => finishNav(),
+                    adViewed: () => finishNav(),
                     adBreakDone: (placementInfo) => {
-                        if (placementInfo.breakStatus !== "viewed" && placementInfo.breakStatus !== "dismissed") {
-                            resetAdState();
-                            window.location.href = href;
+                        const status = placementInfo && placementInfo.breakStatus;
+                        if (status !== "viewed" && status !== "dismissed") {
+                            finishNav();
                         }
                     },
                 });
@@ -392,6 +402,7 @@
         if (adLoading) return;
         adLoading = true;
         let adActive = true;
+        const PREROLL_FALLBACK_MS = 8000;
 
         // Push a guard state — back button hits this instead of leaving the page
         history.pushState({ adGuard: true }, '');
@@ -404,15 +415,23 @@
         };
         window.addEventListener('popstate', onPopState);
 
+        function cleanupAndCallback() {
+            if (!adActive) return;
+            adActive = false;
+            clearTimeout(prerollFallbackTimer);
+            window.removeEventListener('popstate', onPopState);
+            history.replaceState(null, '', location.href);
+            if (typeof callback === 'function') callback();
+        }
+
+        const prerollFallbackTimer = setTimeout(cleanupAndCallback, PREROLL_FALLBACK_MS);
+
         adBreak({
             type: 'preroll',
             name: 'safe_preroll',
             adBreakDone: () => {
-                adActive = false;
-                window.removeEventListener('popstate', onPopState);
-                // Replace guard state so history is clean after the ad
-                history.replaceState(null, '', location.href);
-                if (typeof callback === 'function') callback();
+                clearTimeout(prerollFallbackTimer);
+                cleanupAndCallback();
             }
         });
     }
