@@ -374,7 +374,11 @@
           <div class="result-card" id="resultCard">
             <p class="result-title" id="resultTitle">You Won!</p>
             <p id="resultAmountEl" class="result-amount"></p>
-            <p id="resultLinesEl" style="font-size:12px;color:#aaa;margin:4px 0 14px;"></p>
+            <p id="resultLinesEl" style="font-size:12px;color:#aaa;margin:4px 0 10px;"></p>
+            <!-- Double-win reward ad button (only shown on a win) -->
+            <button id="doubleWinBtn" style="display:none;width:100%;padding:13px;margin-bottom:10px;background:linear-gradient(135deg,#f2b21f,#e07c00);color:#fff;font-size:14px;font-weight:800;border:none;border-radius:14px;cursor:pointer;box-shadow:0 4px 14px rgba(242,178,31,0.35);">
+              📺 &nbsp;Watch Ad — Double Your Coins!
+            </button>
             <div style="display:flex;gap:10px;justify-content:center;">
               <button class="continue-btn" id="spinAgainBtn" style="flex:1;padding:12px 8px;font-size:14px;">
                 Spin Again
@@ -577,9 +581,10 @@
     ];
 
     // ── State ──────────────────────────────────────────────────────
-    let spinning   = false;
-    let adLoading  = false;
-    let jackpot    = 1000;
+    let spinning      = false;
+    let adLoading     = false;
+    let jackpot       = 1000;
+    let lastWinAmount = 0;   // tracks last payout for double-win ad
 
     // ── Helpers ────────────────────────────────────────────────────
     function safeGet(k)   { try { return localStorage.getItem(k); } catch(e) { return null; } }
@@ -767,7 +772,12 @@
 
       clearOverlay();
 
+      const doubleBtn = document.getElementById('doubleWinBtn');
+
       if (wins.length > 0) {
+        // Store for double-win ad
+        lastWinAmount = totalPayout;
+
         // Handle jackpot
         const isJackpot = wins.some(w => w.syms.filter(s => s !== '🍀')[0] === '7️⃣' && w.payout === jackpot);
         if (isJackpot) {
@@ -800,6 +810,11 @@
         linesEl.textContent  = `${wins.length} winning line${wins.length > 1 ? 's' : ''}`;
         popperEl.classList.add('show');
 
+        // Show double-win button (reset state)
+        doubleBtn.style.display = 'block';
+        doubleBtn.textContent   = '📺 Watch Ad — Double Your Coins!';
+        doubleBtn.disabled      = false;
+
         setTimeout(() => {
           hideWinPopup();
           resultCard.classList.add('show');
@@ -807,7 +822,9 @@
         }, 2400);
 
       } else {
-        // No win
+        // No win — hide double-win button
+        lastWinAmount = 0;
+        doubleBtn.style.display = 'none';
         titleEl.textContent  = 'No Match';
         amountEl.className   = 'result-zero';
         amountEl.textContent = 'Try again!';
@@ -872,7 +889,18 @@
         const total = wins.reduce((s, w) => s + w.payout, 0);
 
         if (window.adReady) {
-          adBreak({ type: 'next', name: 'slots_result', adBreakDone: () => showResult(grid, wins, total) });
+          let resultShown = false;
+          // Fallback: if SDK hangs, show result after 3s anyway
+          const fallback = setTimeout(() => {
+            if (!resultShown) { resultShown = true; showResult(grid, wins, total); }
+          }, 3000);
+          adBreak({
+            type: 'next', name: 'slots_result',
+            adBreakDone: () => {
+              clearTimeout(fallback);
+              if (!resultShown) { resultShown = true; showResult(grid, wins, total); }
+            }
+          });
         } else {
           showResult(grid, wins, total);
         }
@@ -881,7 +909,11 @@
 
     // ── Event handlers ─────────────────────────────────────────────
     document.getElementById('backBtn').addEventListener('click', () => {
-      window.location.href = 'index.html';
+      if (!window.adReady || adLoading) { window.location.href = 'index.html'; return; }
+      let navDone = false;
+      function goHome() { if (!navDone) { navDone = true; window.location.href = 'index.html'; } }
+      setTimeout(goHome, 2500); // fallback
+      adBreak({ type: 'next', name: 'slots_back_nav', adBreakDone: goHome });
     });
 
     document.getElementById('spinBtn').addEventListener('click', () => {
@@ -946,6 +978,48 @@
         window.adReady = true;
         (adsbygoogle = window.adsbygoogle || []).push({});
       },
+    });
+
+    // ── 5s auto preroll on page load ───────────────────────────────
+    let autoPrerollFired = false;
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        if (autoPrerollFired || !window.adReady || spinning) return;
+        autoPrerollFired = true;
+        adBreak({ type: 'next', name: 'slots_auto_preroll', adBreakDone: () => {} });
+      }, 5000);
+    });
+
+    // ── Double-win reward ad ───────────────────────────────────────
+    document.getElementById('doubleWinBtn').addEventListener('click', function() {
+      if (adLoading || !window.adReady) return;
+      adLoading = true;
+      const btn = this;
+      btn.textContent = 'Loading Ad... ⏳';
+      btn.disabled = true;
+      adBreak({
+        type: 'reward', name: 'slots_double_win',
+        beforeReward: (showFn) => showFn(),
+        adViewed: () => {
+          addCoins(lastWinAmount); // add again = 2×
+          document.getElementById('resultAmountEl').textContent = `+${lastWinAmount * 2} 🪙 (2×!)`;
+          btn.textContent = '✅ Doubled!';
+          btn.disabled = true;
+          resetAdState();
+        },
+        adDismissed: () => {
+          btn.textContent = '📺 Watch Ad — Double Your Coins!';
+          btn.disabled = false;
+          resetAdState();
+        },
+        adBreakDone: (info) => {
+          if (info.breakStatus !== 'viewed' && info.breakStatus !== 'dismissed') {
+            btn.textContent = '📺 Watch Ad — Double Your Coins!';
+            btn.disabled = false;
+            resetAdState();
+          }
+        },
+      });
     });
 
     // ── Init ───────────────────────────────────────────────────────
