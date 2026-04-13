@@ -63,7 +63,7 @@
                         <span class="coin-icon"><img src="assets/icons/coin-earn.png" alt="coin-earn"
                                 loading="lazy"></img></span>
                         <span class="coin-count" id="coin">0</span>
-                        <span id="streakBadge" style="display:none;margin-left:10px;background:linear-gradient(135deg,#f2b21f,#e07c00);color:#fff;font-size:11px;font-weight:700;padding:3px 8px;border-radius:20px;letter-spacing:0.5px;white-space:nowrap;">🔥 1 day streak</span>
+                        <span id="streakBadge" style="display:none;margin-left:10px;background:linear-gradient(135deg,#f2b21f,#e07c00);color:#fff;font-size:11px;font-weight:700;padding:3px 8px;border-radius:20px;letter-spacing:0.5px;white-space:nowrap;cursor:pointer;" title="Tap to claim streak bonus!">🔥 1 day streak</span>
                     </div>
                     <!-- Coin progress bar -->
                     <div id="coinProgressWrap" style="width:100%;margin:8px 0 4px;">
@@ -90,6 +90,22 @@
                     </a>
                 </div>
 
+                <!-- Grid: Logic Quiz + Scratch Card (moved up for visibility) -->
+                <div class="grid-2">
+                    <div class="grid-card quiz earnCoin_section2" style="position:relative;">
+                        <span style="position:absolute;top:8px;left:8px;background:linear-gradient(135deg,#f2b21f,#e07c00);color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:20px;z-index:2;letter-spacing:0.5px;pointer-events:none;">🏆 Earn Coins</span>
+                        <a href="logic-quiz.html">
+                            <img src="assets/robux/logic_image.webp" alt="logic_image" loading="lazy"></img>
+                        </a>
+                    </div>
+                    <div class="grid-card scratch earnCoin_section2" style="position:relative;">
+                        <span style="position:absolute;top:8px;left:8px;background:linear-gradient(135deg,#a259ff,#6c2fff);color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:20px;z-index:2;letter-spacing:0.5px;pointer-events:none;">🎫 Daily Scratch</span>
+                        <a href="scratch-win.html">
+                            <img src="assets/robux/scrarch_image.webp" alt=" scrarch_image" loading="lazy"></img>
+                        </a>
+                    </div>
+                </div>
+
                 <!-- Daily RBX Counter -->
                 <div class="rbx-counter-card nav-interstitial" data-href="daily-r-converter.html">
                     <a href="daily-r-converter.html">
@@ -98,26 +114,12 @@
                     </a>
                 </div>
 
-                <!-- Grid: Scratch Card + Daily RBX -->
+                <!-- Grid: Daily RBX Gift + How To Win -->
                 <div class="grid-2">
-                    <div class="grid-card scratch earnCoin_section2">
-                        <a href="scratch-win.html">
-                            <img src="assets/robux/scrarch_image.webp" alt=" scrarch_image" loading="lazy"></img>
-                        </a>
-                    </div>
-                    <div class="grid-card daily-rbx earnCoin_section2">
+                    <div class="grid-card daily-rbx earnCoin_section2" style="position:relative;">
+                        <span style="position:absolute;top:8px;left:8px;background:linear-gradient(135deg,#22c55e,#15803d);color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:20px;z-index:2;letter-spacing:0.5px;pointer-events:none;">🎁 Claim Today</span>
                         <a href="daily-rbx.html">
-                            <img src="assets/robux/gift_image.webp" alt="scrarch_image" loading="lazy"></img>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Grid: Logic Quiz (with earn coins badge) + How To Win -->
-                <div class="grid-2">
-                    <div class="grid-card quiz earnCoin_section2" style="position:relative;">
-                        <span style="position:absolute;top:8px;left:8px;background:linear-gradient(135deg,#f2b21f,#e07c00);color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:20px;z-index:2;letter-spacing:0.5px;pointer-events:none;">🏆 Earn Coins</span>
-                        <a href="logic-quiz.html">
-                            <img src="assets/robux/logic_image.webp" alt="logic_image" loading="lazy"></img>
+                            <img src="assets/robux/gift_image.webp" alt="gift_image" loading="lazy"></img>
                         </a>
                     </div>
                     <div class="grid-card how-to nav-interstitial" data-href="how-to-win.html">
@@ -130,7 +132,7 @@
                 <!-- Funny Memes -->
                 <div class="meme-card-main nav-interstitial" data-href="meme.html">
                     <a href="meme.html">
-                        <img src="assets/robux/funny_meme_image.webp" alt=" scrarch_image" width="100%"
+                        <img src="assets/robux/funny_meme_image.webp" alt=" funny_meme_image" width="100%"
                             loading="lazy"></img>
                     </a>
                 </div>
@@ -516,6 +518,61 @@
             },
         });
     });
+
+    // Streak badge — tap to claim daily streak bonus via rewarded ad
+    const streakBadgeEl = document.getElementById("streakBadge");
+    if (streakBadgeEl) {
+        streakBadgeEl.addEventListener("click", function () {
+            if (adLoading) return;
+
+            const todayStr = new Date().toISOString().split("T")[0];
+            const lastStreakClaim = safeGetItem("lastStreakClaim");
+            if (lastStreakClaim === todayStr) {
+                let toast = document.getElementById("toast");
+                if (!toast) {
+                    toast = document.createElement("div");
+                    toast.id = "toast";
+                    toast.className = "toast-message";
+                    document.body.appendChild(toast);
+                }
+                toast.innerHTML = "🔥 Streak bonus already claimed today!";
+                toast.classList.add("show");
+                setTimeout(() => toast.classList.remove("show"), 3000);
+                return;
+            }
+
+            const streak = parseInt(safeGetItem("visitStreak")) || 1;
+            const bonus = Math.min(streak * 5, 50); // 5 coins per streak day, max 50
+
+            const originalText = streakBadgeEl.textContent;
+            streakBadgeEl.textContent = "⏳ Loading...";
+            adLoading = true;
+
+            adBreak({
+                type: "reward",
+                name: "streak-bonus-reward",
+                beforeReward: (showAdFn) => { showAdFn(); },
+                adDismissed: () => {
+                    streakBadgeEl.textContent = originalText;
+                    resetAdState();
+                },
+                adViewed: () => {
+                    addCoins(bonus);
+                    safeSetItem("lastStreakClaim", todayStr);
+                    streakBadgeEl.textContent = `✅ +${bonus} claimed!`;
+                    setTimeout(() => { streakBadgeEl.textContent = originalText; }, 3000);
+                    resetAdState();
+                },
+                adBreakDone: (placementInfo) => {
+                    if (placementInfo.breakStatus !== "viewed" && placementInfo.breakStatus !== "dismissed") {
+                        streakBadgeEl.textContent = originalText;
+                        ErrorToast();
+                        resetAdState();
+                    }
+                },
+            });
+        });
+    }
 
 </script>
 
