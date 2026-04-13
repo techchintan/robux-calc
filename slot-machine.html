@@ -513,15 +513,6 @@
 
         </div><!-- /arcade-wrap -->
 
-        <!-- Banner ad -->
-        <div class="gadsbanner">
-          <ins class="adsbygoogle" style="display:block"
-            data-ad-client="ca-pub-4788685016218460"
-            data-ad-slot="9417114220"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-          <label style="display:block;margin:0 auto;width:fit-content;letter-spacing:4px;color:rgb(65,77,101);font:400 9px/2 Arial,sans-serif;opacity:0.7;">ADVERTISEMENT</label>
-        </div>
 
         <div class="bottom-nav-spacer"></div>
       </div>
@@ -540,6 +531,23 @@
     // ═══════════════════════════════════════════════════════════════
     //  ARCADE SLOTS — Full implementation
     // ═══════════════════════════════════════════════════════════════
+
+    // ── AdSense setup (MUST be first — mirrors spin_to_win pattern) ─
+    window.adsbygoogle = window.adsbygoogle || [];
+    window.adReady = false;
+    const adBreak = (window.adBreak = function(o) { adsbygoogle.push(o); });
+    adBreak({
+      preloadAdBreaks: 'on',
+      onReady: () => {
+        window.adReady = true;
+        // Auto preroll 5s after SDK ready (DOMContentLoaded already fired at body-bottom)
+        setTimeout(() => {
+          if (!spinning) {
+            adBreak({ type: 'next', name: 'slots_auto_preroll', adBreakDone: () => {} });
+          }
+        }, 5000);
+      },
+    });
 
     // ── Config ────────────────────────────────────────────────────
     const CELL_H        = 80;    // px per symbol cell
@@ -969,28 +977,6 @@
           }
         },
       });
-    });
-
-    // ── AdSense setup ──────────────────────────────────────────────
-    window.adsbygoogle = window.adsbygoogle || [];
-    window.adReady = false;
-    const adBreak = window.adBreak = function(o) { adsbygoogle.push(o); };
-    adBreak({
-      preloadAdBreaks: 'on',
-      onReady: () => {
-        window.adReady = true;
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      },
-    });
-
-    // ── 5s auto preroll on page load ───────────────────────────────
-    let autoPrerollFired = false;
-    document.addEventListener('DOMContentLoaded', () => {
-      setTimeout(() => {
-        if (autoPrerollFired || !window.adReady || spinning) return;
-        autoPrerollFired = true;
-        adBreak({ type: 'next', name: 'slots_auto_preroll', adBreakDone: () => {} });
-      }, 5000);
     });
 
     // ── Double-win reward ad ───────────────────────────────────────
