@@ -329,9 +329,6 @@
               "
               >ADVERTISEMENT</label
             >
-            <script>
-              (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
           </div>
           <div class="bottom-nav-spacer"></div>
         </div>
@@ -476,6 +473,7 @@
         preloadAdBreaks: "on",
         onReady: () => {
           window.adReady = true;
+          (adsbygoogle = window.adsbygoogle || []).push({});
         },
       });
 

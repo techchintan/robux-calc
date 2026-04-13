@@ -55,9 +55,6 @@
                         data-ad-format="auto" data-full-width-responsive="true"></ins>
                     <label
                         style="display: block; margin: 0px auto; width: fit-content; letter-spacing: 4px; color: rgb(65, 77, 101); font: 400 9px / 2 Arial, sans-serif; opacity: 0.7;">ADVERTISEMENT</label>
-                    <script>
-                        (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
                 </div>
 
                 <!-- Earn Card -->
@@ -251,8 +248,9 @@
     adBreak({
         preloadAdBreaks: "on",
         onReady: () => {
-            window.adReady = true; 
+            window.adReady = true;
             console.log("✅ AdSense API Ready");
+            (adsbygoogle = window.adsbygoogle || []).push({});
         }
     });
 

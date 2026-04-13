@@ -270,9 +270,6 @@
               "
               >ADVERTISEMENT</label
             >
-            <script>
-              (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
           <div class="bottom-nav-spacer"></div>
         </div>
       </main>
@@ -407,7 +404,7 @@
       window.adsbygoogle = window.adsbygoogle || [];
       window.adReady = false;
       const adBreak = window.adBreak = function(o) { adsbygoogle.push(o); };
-      adBreak({ preloadAdBreaks: "on", onReady: () => { window.adReady = true; } });
+      adBreak({ preloadAdBreaks: "on", onReady: () => { window.adReady = true; (adsbygoogle = window.adsbygoogle || []).push({}); } });
 
     </script>
 

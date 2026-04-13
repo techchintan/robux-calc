@@ -88,9 +88,6 @@
                 "
                 >ADVERTISEMENT</label
               >
-              <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-              </script>
             </div>
 
             <div class="game_section" style="height: auto">
@@ -147,9 +144,6 @@
                 "
                 >ADVERTISEMENT</label
               >
-              <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-              </script>
             </div>
 
             <div class="game_section" style="height: auto">
@@ -355,7 +349,7 @@
 
       adBreak({
         preloadAdBreaks: "on",
-        onReady: () => { window.adReady = true; },
+        onReady: () => { window.adReady = true; document.querySelectorAll('.adsbygoogle').forEach(() => { (adsbygoogle = window.adsbygoogle || []).push({}); }); },
       });
 
 

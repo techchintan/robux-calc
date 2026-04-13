@@ -111,9 +111,6 @@
                 "
                 >ADVERTISEMENT</label
               >
-              <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-              </script>
             </div>
           </div>
         </div>
@@ -128,7 +125,7 @@
       window.adsbygoogle = window.adsbygoogle || [];
       window.adReady = false;
       const adBreak = window.adBreak = function(o) { adsbygoogle.push(o); };
-      adBreak({ preloadAdBreaks: "on", onReady: () => { window.adReady = true; } });
+      adBreak({ preloadAdBreaks: "on", onReady: () => { window.adReady = true; (adsbygoogle = window.adsbygoogle || []).push({}); } });
 
       document.getElementById("continueBtn").addEventListener("click", function () {
         const btn = document.getElementById("continueBtn");

@@ -222,9 +222,6 @@
                 "
                 >ADVERTISEMENT</label
               >
-              <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-              </script>
             </div>
 
             <div class="question-card" id="question-text">Loading question...</div>
@@ -452,6 +449,7 @@
         preloadAdBreaks: "on",
         onReady: () => {
           window.adReady = true;
+          (adsbygoogle = window.adsbygoogle || []).push({});
         },
       });
     </script>

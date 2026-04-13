@@ -111,9 +111,6 @@
                 "
                 >ADVERTISEMENT</label
               >
-              <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-              </script>
             </div>
           </div>
         </div>
@@ -134,6 +131,7 @@
         preloadAdBreaks: "on",
         onReady: () => {
           window.adReady = true;
+          (adsbygoogle = window.adsbygoogle || []).push({});
         },
       });
 
