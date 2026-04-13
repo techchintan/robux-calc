@@ -949,29 +949,34 @@
     });
 
     document.getElementById('extraPullBtn').addEventListener('click', () => {
-      if (spinning || adLoading || !window.adReady) return;
-      adLoading = true;
+      if (spinning) return;
       const btn = document.getElementById('extraPullBtn');
       const orig = btn.textContent;
-      btn.textContent = 'Loading Ad... ⏳';
       btn.disabled = true;
+      btn.textContent = 'Loading Ad... ⏳';
+      adLoading = false; // clear any stale lock before ad call
+
+      if (!window.adReady) {
+        // SDK not ready — give spin as fallback (mirrors spin_to_win pattern)
+        btn.textContent = orig;
+        btn.disabled = false;
+        doSpin();
+        return;
+      }
 
       adBreak({
         type: 'reward', name: 'extra_slot_spin',
         beforeReward: (showFn) => showFn(),
         adViewed: () => {
-          resetAdState();
           btn.textContent = orig;
           doSpin();
         },
         adDismissed: () => {
-          resetAdState();
           btn.textContent = orig;
           btn.disabled = false;
         },
         adBreakDone: (info) => {
           if (info.breakStatus !== 'viewed' && info.breakStatus !== 'dismissed') {
-            resetAdState();
             btn.textContent = orig;
             btn.disabled = false;
           }
