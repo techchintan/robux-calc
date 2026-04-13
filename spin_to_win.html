@@ -458,7 +458,6 @@
         let coins = parseInt(safeGetItem("coins")) || 0;
         coins += won;
         safeSetItem("coins", coins);
-        document.getElementById("coin").textContent = coins;
 
         document.getElementById("partyPopper").classList.add("show");
         congratsCard.classList.add("show");
