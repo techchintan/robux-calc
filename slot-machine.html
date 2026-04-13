@@ -887,24 +887,33 @@
       Promise.all(reelPromises).then(() => {
         const wins = checkAllPaylines(grid);
         const total = wins.reduce((s, w) => s + w.payout, 0);
-
-        if (window.adReady) {
-          let resultShown = false;
-          // Fallback: if SDK hangs, show result after 3s anyway
-          const fallback = setTimeout(() => {
-            if (!resultShown) { resultShown = true; showResult(grid, wins, total); }
-          }, 3000);
-          adBreak({
-            type: 'next', name: 'slots_result',
-            adBreakDone: () => {
-              clearTimeout(fallback);
-              if (!resultShown) { resultShown = true; showResult(grid, wins, total); }
-            }
-          });
-        } else {
-          showResult(grid, wins, total);
-        }
+        showResult(grid, wins, total);
       });
+    }
+
+    // ── Spin with pre-spin interstitial ────────────────────────────
+    // Shows type:'next' BEFORE reels start — fires on every spin tap
+    function triggerSpin() {
+      if (spinning || adLoading) return;
+      if (getPullsLeft() <= 0) return;
+      consumePull();
+      refreshPullUI();
+
+      if (window.adReady) {
+        adLoading = true;
+        let spinStarted = false;
+        function startSpin() {
+          if (!spinStarted) { spinStarted = true; adLoading = false; doSpin(); }
+        }
+        // Fallback: if SDK hangs, start spin anyway after 2.5s
+        const fallback = setTimeout(startSpin, 2500);
+        adBreak({
+          type: 'next', name: 'slots_pre_spin',
+          adBreakDone: () => { clearTimeout(fallback); startSpin(); }
+        });
+      } else {
+        doSpin();
+      }
     }
 
     // ── Event handlers ─────────────────────────────────────────────
@@ -917,11 +926,7 @@
     });
 
     document.getElementById('spinBtn').addEventListener('click', () => {
-      if (spinning || adLoading) return;
-      if (getPullsLeft() <= 0) return;
-      consumePull();
-      refreshPullUI();
-      doSpin();
+      triggerSpin();
     });
 
     document.getElementById('spinAgainBtn').addEventListener('click', () => {
@@ -929,9 +934,7 @@
       document.getElementById('resultCard').classList.remove('show');
       document.getElementById('partyPopper').classList.remove('show');
       if (getPullsLeft() > 0) {
-        consumePull();
-        refreshPullUI();
-        doSpin();
+        triggerSpin();
       } else {
         refreshPullUI(); // show extra pull button
       }
