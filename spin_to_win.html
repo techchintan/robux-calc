@@ -429,6 +429,23 @@
         requestAnimationFrame(spinLoop);
       }
 
+      function safeGetItem(key) {
+        try {
+          return localStorage.getItem(key);
+        } catch (e) {
+          console.warn("LocalStorage getItem blocked:", e);
+          return null;
+        }
+      }
+
+      function safeSetItem(key, value) {
+        try {
+          localStorage.setItem(key, value);
+        } catch (e) {
+          console.warn("LocalStorage setItem blocked:", e);
+        }
+      }
+
       function showResult() {
         const rot = currentAngle % (2 * Math.PI);
 
@@ -437,6 +454,11 @@
         const won = segments[segIndex];
 
         rewardDisplay.textContent = `Your Reward: ${won}`;
+
+        let coins = parseInt(safeGetItem("coins")) || 0;
+        coins += won;
+        safeSetItem("coins", coins);
+        document.getElementById("coin").textContent = coins;
 
         document.getElementById("partyPopper").classList.add("show");
         congratsCard.classList.add("show");
