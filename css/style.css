@@ -95,23 +95,48 @@
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: center; /* centers h1 */
-    padding: 28px 12px 16px;
+    justify-content: center;
+    padding: 16px 52px;
+    background: linear-gradient(180deg, rgba(48, 60, 120, 0.28) 0%, transparent 100%);
+    border-bottom: 1px solid rgba(100, 120, 255, 0.18);
+}
+
+.header::after {
+    content: '';
+    position: absolute;
+    bottom: -1px; left: 20%; right: 20%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(100, 130, 255, 0.5) 50%, transparent);
+    pointer-events: none;
 }
 
 .back-button {
     position: absolute;
-    left: 12px;
-    width: 24px; /* adjust if needed */
+    left: 14px;
+    width: 32px;
+    height: 32px;
+    padding: 7px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 50%;
     cursor: pointer;
+    object-fit: contain;
+    box-sizing: border-box;
+    transition: background 0.2s;
+}
+
+.back-button:active {
+    background: rgba(255, 255, 255, 0.14);
 }
 
 .header h1 {
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 800;
     color: #fff;
-    letter-spacing: 0.3px;
+    letter-spacing: 0.5px;
     margin: 0;
+    text-align: center;
+    text-shadow: 0 0 18px rgba(100, 140, 255, 0.5);
 }
 
 /* ── Scrollable content ── */
@@ -906,18 +931,14 @@ footer {
     visibility: hidden;
 }
 
-.back-button {
-    width: 20px;
-    height: 20px;
-    margin-right: 40px;
-    cursor: pointer;
-    margin-left: 12px;
-}
-
 .home-title {
-    font-size: 20px;
-    margin-left: 35px;
-    color: #ffffff;
+    font-size: 17px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 0.5px;
+    margin: 0;
+    text-align: center;
+    text-shadow: 0 0 18px rgba(100, 140, 255, 0.5);
 }
 
 .title {
@@ -1950,6 +1971,20 @@ footer {
 .spin-pulse {
     border-radius: 16px;
     animation: spinPulse 2s ease-in-out 1s 3;
+}
+
+/* ── Slot card gold pulse animation (NEW feature attention loop) ── */
+@keyframes slotPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(242, 190, 31, 0),   0 4px 20px rgba(242,190,31,0.08); transform: scale(1); }
+    40%  { box-shadow: 0 0 0 8px rgba(242, 190, 31, 0.22), 0 4px 24px rgba(242,190,31,0.22); transform: scale(1.016); }
+    70%  { box-shadow: 0 0 0 14px rgba(242, 190, 31, 0.08), 0 4px 28px rgba(242,190,31,0.15); transform: scale(1.008); }
+    100% { box-shadow: 0 0 0 0 rgba(242, 190, 31, 0),   0 4px 20px rgba(242,190,31,0.08); transform: scale(1); }
+}
+
+.slot-pulse {
+    border-radius: 16px;
+    animation: slotPulse 2.4s ease-in-out infinite;
+    transform-origin: center;
 }
 
 /* ── Bottom Navigation Bar ── */
