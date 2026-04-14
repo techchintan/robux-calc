@@ -84,6 +84,9 @@
                     <button id="doubleCoinsBtn" style="display:none;width:100%;margin-top:8px;padding:10px;border:none;border-radius:12px;background:linear-gradient(135deg,#22c55e,#15803d);color:#fff;font-size:13px;font-weight:800;cursor:pointer;letter-spacing:0.5px;">
                         🎯 Watch Ad to Double! <span id="doubleTimer">10</span>s
                     </button>
+                    <button id="dailyBonusBtn" style="width:100%;margin-top:8px;padding:10px;border:none;border-radius:12px;background:linear-gradient(135deg,#a259ff,#6c2fff);color:#fff;font-size:13px;font-weight:800;cursor:pointer;letter-spacing:0.5px;">
+                        🎁 Daily Bonus — Watch Ad (+5 coins)
+                    </button>
                 </div>
 
                 <!-- Spin Wheel (moved up — #1 tapped element) -->
@@ -292,6 +295,16 @@
                 badge.textContent = `🔥 ${streak} day streak`;
                 badge.style.display = "inline-block";
             }
+        }
+
+        // Daily bonus button state
+        const dailyBonusBtn = document.getElementById("dailyBonusBtn");
+        const lastDailyClaim = safeGetItem("lastDailyClaim");
+        if (lastDailyClaim === todayStr) {
+            dailyBonusBtn.disabled = true;
+            dailyBonusBtn.style.opacity = "0.45";
+            dailyBonusBtn.style.cursor = "not-allowed";
+            dailyBonusBtn.textContent = "🎁 Daily Bonus Claimed";
         }
 
         // Coin progress bar
@@ -568,6 +581,63 @@
                     placementInfo.breakStatus !== "viewed" &&
                     placementInfo.breakStatus !== "dismissed"
                 ) {
+                    ErrorToast();
+                    resetAdState();
+                }
+            },
+        });
+    });
+
+    document.getElementById("dailyBonusBtn").addEventListener("click", function () {
+        if (adLoading || this.disabled) return;
+        const btn = this;
+        const todayStr = new Date().toISOString().split("T")[0];
+        if (safeGetItem("lastDailyClaim") === todayStr) {
+            btn.disabled = true;
+            btn.style.opacity = "0.45";
+            btn.style.cursor = "not-allowed";
+            btn.textContent = "🎁 Daily Bonus Claimed";
+            return;
+        }
+        const originalText = btn.textContent;
+        btn.textContent = "Loading Ad... ⏳";
+        btn.disabled = true;
+        adLoading = true;
+        adBreak({
+            type: "reward",
+            name: "daily-bonus-reward",
+            beforeReward: (showAdFn) => { showAdFn(); },
+            adDismissed: () => {
+                btn.textContent = originalText;
+                btn.disabled = false;
+                resetAdState();
+            },
+            adViewed: () => {
+                addCoins(5);
+                safeSetItem("lastDailyClaim", todayStr);
+                btn.disabled = true;
+                btn.style.opacity = "0.45";
+                btn.style.cursor = "not-allowed";
+                btn.textContent = "🎁 Daily Bonus Claimed";
+                resetAdState();
+                let toast = document.getElementById("toast");
+                if (!toast) {
+                    toast = document.createElement("div");
+                    toast.id = "toast";
+                    toast.className = "toast-message";
+                    document.body.appendChild(toast);
+                }
+                toast.innerHTML = `<img src="assets/icons/coin-earn.png" alt="" style="width:20px;height:20px;margin-right:8px;"> You've received 5 bonus coins!`;
+                toast.classList.add("show");
+                setTimeout(() => toast.classList.remove("show"), 5000);
+            },
+            adBreakDone: (placementInfo) => {
+                if (
+                    placementInfo.breakStatus !== "viewed" &&
+                    placementInfo.breakStatus !== "dismissed"
+                ) {
+                    btn.textContent = originalText;
+                    btn.disabled = false;
                     ErrorToast();
                     resetAdState();
                 }
