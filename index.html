@@ -81,6 +81,9 @@
                         <span class="ad-badge">Ad</span>
                         EARN FREE COINS
                     </button>
+                    <button id="doubleCoinsBtn" style="display:none;width:100%;margin-top:8px;padding:10px;border:none;border-radius:12px;background:linear-gradient(135deg,#22c55e,#15803d);color:#fff;font-size:13px;font-weight:800;cursor:pointer;letter-spacing:0.5px;">
+                        🎯 Watch Ad to Double! <span id="doubleTimer">10</span>s
+                    </button>
                 </div>
 
                 <!-- Spin Wheel (moved up — #1 tapped element) -->
@@ -510,6 +513,7 @@
                 earnBtn.innerHTML = originalHTML;
                 earnBtn.disabled = false;
                 resetAdState();
+                showDoubleBtn();
             },
             adBreakDone: (placementInfo) => {
                 if (
@@ -518,6 +522,52 @@
                 ) {
                     earnBtn.innerHTML = originalHTML;
                     earnBtn.disabled = false;
+                    ErrorToast();
+                    resetAdState();
+                }
+            },
+        });
+    });
+
+    function showDoubleBtn() {
+        const btn = document.getElementById("doubleCoinsBtn");
+        const timerEl = document.getElementById("doubleTimer");
+        if (!btn) return;
+        btn.style.display = "block";
+        let count = 10;
+        timerEl.textContent = count;
+        clearInterval(btn._hideInterval);
+        btn._hideInterval = setInterval(() => {
+            count--;
+            timerEl.textContent = count;
+            if (count <= 0) {
+                clearInterval(btn._hideInterval);
+                btn.style.display = "none";
+            }
+        }, 1000);
+    }
+
+    document.getElementById("doubleCoinsBtn").addEventListener("click", function () {
+        if (adLoading) return;
+        const btn = this;
+        clearInterval(btn._hideInterval);
+        btn.style.display = "none";
+        adLoading = true;
+        adBreak({
+            type: "reward",
+            name: "double-coin-reward",
+            beforeReward: (showAdFn) => { showAdFn(); },
+            adDismissed: () => { resetAdState(); },
+            adViewed: () => {
+                addCoins(10);
+                showToast();
+                resetAdState();
+            },
+            adBreakDone: (placementInfo) => {
+                if (
+                    placementInfo.breakStatus !== "viewed" &&
+                    placementInfo.breakStatus !== "dismissed"
+                ) {
                     ErrorToast();
                     resetAdState();
                 }
