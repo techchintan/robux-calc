@@ -262,7 +262,7 @@
                 </button>
                 <button
                   class="continue-btn"
-                  onclick="window.location.href = 'index.html'"
+                  onclick="goHomeWithAd()"
                   style="
                     flex: 1;
                     padding: 12px 8px;
@@ -333,9 +333,27 @@
 
     <script>
       // ── Back button ──
-      document
-        .getElementById("backBtn")
-        .addEventListener("click", () => (window.location.href = "index.html"));
+      document.getElementById("backBtn").addEventListener("click", () => {
+        if (!window.adReady) {
+          window.location.href = "index.html";
+          return;
+        }
+        let done = false;
+        function goHome() {
+          if (done) return;
+          done = true;
+          window.location.href = "index.html";
+        }
+        const fallback = setTimeout(goHome, 2000);
+        adBreak({
+          type: "next",
+          name: "spin_back_interstitial",
+          adBreakDone: () => {
+            clearTimeout(fallback);
+            goHome();
+          },
+        });
+      });
 
       const segments = [159, 125, 237, 1, 666, 475, 400, 79, 131, 777];
       const colors = [
@@ -452,12 +470,23 @@
         coins += won;
         safeSetItem("coins", coins);
 
-        document.getElementById("partyPopper").classList.add("show");
-        congratsCard.classList.add("show");
-
         spinBtn.disabled = false;
         startCountdownDisplay();
         document.getElementById("spinPromo").style.display = "block";
+
+        if (window.adReady) {
+          adBreak({
+            type: "next",
+            name: "spin_result_interstitial",
+            adBreakDone: () => {
+              document.getElementById("partyPopper").classList.add("show");
+              congratsCard.classList.add("show");
+            },
+          });
+        } else {
+          document.getElementById("partyPopper").classList.add("show");
+          congratsCard.classList.add("show");
+        }
       }
 
       window.adsbygoogle = window.adsbygoogle || [];
@@ -539,34 +568,24 @@
 
       document.getElementById("spinAgainBtn").addEventListener("click", () => {
         if (spinning) return;
-
-        if (!hasSpunToday()) {
-          // Free spin — show next ad then spin
-          recordSpinToday();
-          if (window.adReady) {
-            adBreak({type: "next", name: "spin_wheel", adBreakDone: () => startSpin()});
-          } else {
+        adBreak({
+          type: "reward",
+          name: "spin_again_reward",
+          beforeReward: (showAdFn) => { showAdFn(); },
+          adViewed: () => {
+            recordSpinToday();
             startSpin();
-          }
-        } else {
-          // Extra spin — must watch reward ad
-          if (!window.adReady) {
+          },
+          adDismissed: () => {
+            recordSpinToday();
             startSpin();
-            return;
-          }
-          adBreak({
-            type: "reward",
-            name: "extra_spin_reward",
-            beforeReward: (showAdFn) => showAdFn(),
-            adViewed: () => startSpin(),
-            adDismissed: () => startCountdownDisplay(),
-            adBreakDone: (info) => {
-              if (info.breakStatus !== "viewed" && info.breakStatus !== "dismissed") {
-                startSpin();
-              }
-            },
-          });
-        }
+          },
+          adBreakDone: (info) => {
+            if (info.breakStatus !== "viewed" && info.breakStatus !== "dismissed") {
+              startCountdownDisplay();
+            }
+          },
+        });
       });
 
       spinBtn.addEventListener("click", () => {
@@ -578,6 +597,28 @@
           startSpin();
         }
       });
+
+      function goHomeWithAd() {
+        if (!window.adReady) {
+          window.location.href = "index.html";
+          return;
+        }
+        let done = false;
+        function go() {
+          if (done) return;
+          done = true;
+          window.location.href = "index.html";
+        }
+        const fallback = setTimeout(go, 2000);
+        adBreak({
+          type: "next",
+          name: "spin_gohome_interstitial",
+          adBreakDone: () => {
+            clearTimeout(fallback);
+            go();
+          },
+        });
+      }
     </script>
 
     <script src="js/nav.js"></script>
