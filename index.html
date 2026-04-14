@@ -345,7 +345,10 @@
                 adBreak({
                     type: "reward",
                     name: "nav-reward",
-                    beforeReward: (showAdFn) => { showAdFn(); },
+                    beforeReward: (showAdFn) => {
+                        clearTimeout(navFallbackTimer);
+                        showAdFn();
+                    },
                     adDismissed: () => finishNav(),
                     adViewed: () => finishNav(),
                     adBreakDone: () => finishNav(),
