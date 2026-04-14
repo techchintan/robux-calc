@@ -321,8 +321,8 @@
         window.addEventListener("scroll", onScroll, { passive: true });
         if (mainDiv) mainDiv.addEventListener("scroll", onScroll, { passive: true });
 
-        // All cards: show interstitial ad then navigate
-        const NAV_INTERSTITIAL_FALLBACK_MS = 2000;
+        // All cards: show reward ad then navigate
+        const NAV_REWARD_FALLBACK_MS = 2000;
         document.querySelectorAll(".earnCoin_section2, .nav-interstitial").forEach((card) => {
             card.addEventListener("click", function (e) {
                 e.preventDefault();
@@ -341,10 +341,13 @@
                     resetAdState();
                     window.location.href = href;
                 }
-                const navFallbackTimer = setTimeout(finishNav, NAV_INTERSTITIAL_FALLBACK_MS);
+                const navFallbackTimer = setTimeout(finishNav, NAV_REWARD_FALLBACK_MS);
                 adBreak({
-                    type: "next",
-                    name: "nav-interstitial",
+                    type: "reward",
+                    name: "nav-reward",
+                    beforeReward: (showAdFn) => { showAdFn(); },
+                    adDismissed: () => finishNav(),
+                    adViewed: () => finishNav(),
                     adBreakDone: () => finishNav(),
                 });
             });
