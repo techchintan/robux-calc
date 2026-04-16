@@ -10,18 +10,8 @@
         href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&amp;family=Orbitron:wght@700;900&amp;display=swap"
         rel="stylesheet">
 
-    <link rel="preconnect" href="https://pagead2.googlesyndication.com/" />
-    <link rel="preconnect" href="https://googleads.g.doubleclick.net/" />
-    
-    <script
-      async
-      data-ad-frequency-hint="30s"
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4788685016218460"
-      crossorigin="anonymous"
-    ></script>
-
-     <!-- Google tag (gtag.js) -->
-     <script>
+    <!-- Google Tag Manager (must be first script in head) -->
+    <script>
         (function (w, d, s, l, i) {
           w[l] = w[l] || [];
           w[l].push({
@@ -35,9 +25,24 @@
           j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
           f.parentNode.insertBefore(j, f);
         })(window, document, "script", "dataLayer", "GTM-PXKTPB4M");
-      </script>
- 
+    </script>
+
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com/" />
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net/" />
+
+    <script
+      async
+      data-ad-frequency-hint="30s"
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4788685016218460"
+      crossorigin="anonymous"
+    ></script>
+
 </head>
+
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PXKTPB4M"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <main>
 
@@ -510,10 +515,10 @@
             type: "reward",
             name: "earn-coin-reward",
             beforeReward: (showAdFn) => {
+                if (window.dataLayer) {
+                    window.dataLayer.push({ event: "6868_earn_button_click" });
+                }
                 showAdFn();
-                window.dataLayer.push({
-                    event: "6868_earn_button_click",
-                });
             },
             adDismissed: () => {
                 earnBtn.innerHTML = originalHTML;
