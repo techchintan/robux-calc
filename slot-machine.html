@@ -546,7 +546,18 @@
         // Auto preroll 5s after SDK ready (DOMContentLoaded already fired at body-bottom)
         setTimeout(() => {
           if (!spinning) {
-            adBreak({ type: 'next', name: 'slots_auto_preroll', adBreakDone: () => {} });
+            adBreak({
+              type: 'next', name: 'slots_auto_preroll',
+              beforeAd: () => {
+                document.getElementById('spinBtn').disabled = true;
+                document.getElementById('extraPullBtn').disabled = true;
+              },
+              afterAd: () => {
+                document.getElementById('spinBtn').disabled = false;
+                refreshPullUI();
+              },
+              adBreakDone: () => {},
+            });
           }
         }, 5000);
       },
@@ -920,7 +931,15 @@
         const fallback = setTimeout(startSpin, 2500);
         adBreak({
           type: 'next', name: 'slots_pre_spin',
-          adBreakDone: () => { clearTimeout(fallback); startSpin(); }
+          beforeAd: () => {
+            document.getElementById('spinBtn').disabled = true;
+            document.getElementById('extraPullBtn').disabled = true;
+          },
+          afterAd: () => {
+            document.getElementById('spinBtn').disabled = false;
+            refreshPullUI();
+          },
+          adBreakDone: () => { clearTimeout(fallback); startSpin(); },
         });
       } else {
         doSpin();
@@ -933,7 +952,11 @@
       let navDone = false;
       function goHome() { if (!navDone) { navDone = true; window.location.href = 'index.html'; } }
       setTimeout(goHome, 2500); // fallback
-      adBreak({ type: 'next', name: 'slots_back_nav', adBreakDone: goHome });
+      adBreak({
+        type: 'next', name: 'slots_back_nav',
+        beforeAd: () => { document.getElementById('backBtn').disabled = true; },
+        adBreakDone: goHome,
+      });
     });
 
     document.getElementById('spinBtn').addEventListener('click', () => {

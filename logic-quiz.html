@@ -408,7 +408,19 @@
         };
 
         if (window.adReady) {
-          adBreak({type: "next", name: "quiz_next_question", adBreakDone: proceed});
+          adBreak({
+            type: "next",
+            name: "quiz_next_question",
+            beforeAd: () => {
+              document.querySelectorAll("#options-list li").forEach(el => el.style.pointerEvents = "none");
+              document.getElementById("action-btn").disabled = true;
+            },
+            afterAd: () => {
+              document.querySelectorAll("#options-list li").forEach(el => el.style.pointerEvents = "");
+              document.getElementById("action-btn").disabled = false;
+            },
+            adBreakDone: proceed,
+          });
         } else {
           proceed();
         }

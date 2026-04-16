@@ -397,7 +397,12 @@
             document.getElementById("scratchPromo").style.display = "block";
           };
           if (window.adReady) {
-            adBreak({ type: "next", name: "scratch_reveal", adBreakDone: showResult });
+            adBreak({
+              type: "next",
+              name: "scratch_reveal",
+              beforeAd: () => { canvas.style.pointerEvents = "none"; },
+              adBreakDone: showResult,
+            });
           } else {
             showResult();
           }

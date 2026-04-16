@@ -177,7 +177,13 @@
           if (window.adReady) {
             btn.textContent = "Calculating... ⏳";
             btn.disabled = true;
-            adBreak({ type: "next", name: "dollar_rbx_result", adBreakDone: showResult });
+            adBreak({
+              type: "next",
+              name: "dollar_rbx_result",
+              beforeAd: () => { btn.disabled = true; },
+              afterAd:  () => { btn.disabled = false; btn.textContent = "Count Now"; },
+              adBreakDone: showResult,
+            });
           } else {
             showResult();
           }

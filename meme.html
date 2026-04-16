@@ -335,7 +335,12 @@
           };
 
           if (window.adReady) {
-            adBreak({ type: "next", name: "load_more_memes", adBreakDone: showExtras });
+            adBreak({
+              type: "next",
+              name: "load_more_memes",
+              beforeAd: () => { loadMoreBtn.disabled = true; },
+              adBreakDone: showExtras,
+            });
           } else {
             showExtras();
           }

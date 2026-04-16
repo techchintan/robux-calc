@@ -240,6 +240,8 @@
         adBreak({
           type: "next",
           name: "show_rbx_result",
+          beforeAd: () => { btn.disabled = true; },
+          afterAd:  () => { btn.disabled = false; btn.textContent = "Count Now"; },
           adBreakDone: () => {
             const total = days * 15;
             document.getElementById("result").innerText = total.toFixed(2) + " RBX";

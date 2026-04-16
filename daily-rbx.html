@@ -379,7 +379,13 @@
             document.getElementById("rbxPromo").style.display = "block";
           };
           if (window.adReady) {
-            adBreak({type: "next", name: "daily_rbx_result", adBreakDone: showPromo});
+            adBreak({
+              type: "next",
+              name: "daily_rbx_result",
+              beforeAd: () => { document.querySelectorAll("button").forEach(el => el.disabled = true); },
+              afterAd:  () => { document.querySelectorAll("button").forEach(el => el.disabled = false); },
+              adBreakDone: showPromo,
+            });
           } else {
             showPromo();
           }

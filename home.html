@@ -186,6 +186,8 @@
         adBreak({
           type: "next",
           name: "index-auto-preroll-5s",
+          beforeAd: () => { document.querySelectorAll("button, a").forEach(el => el.style.pointerEvents = "none"); },
+          afterAd:  () => { document.querySelectorAll("button, a").forEach(el => el.style.pointerEvents = ""); },
           adBreakDone: function () {},
         });
       }

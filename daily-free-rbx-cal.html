@@ -227,6 +227,7 @@
             adBreak({
               type: "next",
               name: "free_rbx_nav",
+              beforeAd: () => { document.querySelectorAll("a, button").forEach(el => el.style.pointerEvents = "none"); },
               adBreakDone: () => {
                 window.location.href = url;
               },

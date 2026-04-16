@@ -351,6 +351,7 @@
         adBreak({
           type: "next",
           name: "spin_back_interstitial",
+          beforeAd: () => { document.getElementById("backBtn").disabled = true; },
           adBreakDone: () => {
             clearTimeout(fallback);
             goHome();
@@ -481,6 +482,8 @@
           adBreak({
             type: "next",
             name: "spin_result_interstitial",
+            beforeAd: () => { document.getElementById("spinAgainBtn").disabled = true; },
+            afterAd:  () => { document.getElementById("spinAgainBtn").disabled = false; },
             adBreakDone: () => {
               document.getElementById("partyPopper").classList.add("show");
               congratsCard.classList.add("show");
@@ -595,7 +598,13 @@
         if (spinning) return;
         recordSpinToday();
         if (window.adReady) {
-          adBreak({type: "next", name: "spin_wheel", adBreakDone: () => startSpin()});
+          adBreak({
+            type: "next",
+            name: "spin_wheel",
+            beforeAd: () => { spinBtn.disabled = true; },
+            afterAd:  () => { spinBtn.disabled = false; },
+            adBreakDone: () => startSpin(),
+          });
         } else {
           startSpin();
         }
@@ -616,6 +625,7 @@
         adBreak({
           type: "next",
           name: "spin_gohome_interstitial",
+          beforeAd: () => { document.querySelector('[onclick="goHomeWithAd()"]') && (document.querySelector('[onclick="goHomeWithAd()"]').disabled = true); },
           adBreakDone: () => {
             clearTimeout(fallback);
             go();
