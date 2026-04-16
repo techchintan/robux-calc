@@ -821,15 +821,15 @@
         linesEl.textContent  = `${wins.length} winning line${wins.length > 1 ? 's' : ''}`;
         popperEl.classList.add('show');
 
-        // Show double-win button (reset state)
-        doubleBtn.style.display = 'block';
-        doubleBtn.textContent   = '📺 Watch Ad — Double Your Coins!';
-        doubleBtn.disabled      = false;
-
         setTimeout(() => {
           hideWinPopup();
           resultCard.classList.add('show');
           document.getElementById('slotPromo').style.display = 'block';
+          // Show double-win button only after all animations are done
+          // so its ad doesn't get disrupted by DOM changes
+          doubleBtn.style.display = 'block';
+          doubleBtn.textContent   = '📺 Watch Ad — Double Your Coins!';
+          doubleBtn.disabled      = false;
         }, 2400);
 
       } else {
