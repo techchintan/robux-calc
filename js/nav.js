@@ -18,7 +18,7 @@
     if (typeof window.adBreak === "function" && window.adReady) {
       var fallback = setTimeout(go, 8000);
       window.adBreak({
-        type: "next",
+        type: "browse",
         name: "bottom_nav",
         beforeAd: function () { clearTimeout(fallback); },
         adBreakDone: function () {
