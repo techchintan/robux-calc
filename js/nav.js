@@ -34,4 +34,4 @@
   t.src = "https://www.clarity.ms/tag/" + i;
   y = l.getElementsByTagName(r)[0];
   y.parentNode.insertBefore(t, y);
-})(window, document, "clarity", "script", "wd1659t4ck");
+})(window, document, "clarity", "script", "k101a0h8p1");
