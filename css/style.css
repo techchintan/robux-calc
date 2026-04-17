@@ -1195,8 +1195,10 @@ footer {
 
 .gadsbanner {
     margin-top: 16px;
-    min-height: 250px !important;
-    height: 250px !important;
+    min-height: 100px;
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
 }
 
 .imgnotaval {
