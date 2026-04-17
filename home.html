@@ -314,26 +314,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         if (bar) bar.style.width = pct + "%";
         if (label) label.textContent = `${userCoins} / ${nextMilestone}`;
 
-        // Scroll-triggered preroll (safe — back button trapped during ad)
-        let hasShownScrollAd = false;
-        const mainDiv = document.querySelector(".main_div");
-
-        const onScroll = () => {
-            const scrollTop = Math.max(
-                window.scrollY || 0,
-                document.documentElement.scrollTop || 0,
-                mainDiv ? mainDiv.scrollTop : 0
-            );
-            if (hasShownScrollAd || scrollTop <= 200 || adLoading || !window.adReady) return;
-            hasShownScrollAd = true;
-            window.removeEventListener("scroll", onScroll);
-            if (mainDiv) mainDiv.removeEventListener("scroll", onScroll);
-            showPrerollSafe(() => { resetAdState(); });
-        };
-
-        window.addEventListener("scroll", onScroll, { passive: true });
-        if (mainDiv) mainDiv.addEventListener("scroll", onScroll, { passive: true });
-
         // All cards: show interstitial ad then navigate
         document.querySelectorAll(".earnCoin_section2, .nav-interstitial").forEach((card) => {
             card.addEventListener("click", function (e) {
@@ -379,44 +359,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     function resetAdState() {
         adLoading = false;
-    }
-
-    function showPrerollSafe(callback) {
-        if (adLoading) return;
-        adLoading = true;
-        let adActive = true;
-        const PREROLL_FALLBACK_MS = 8000;
-
-        // Push a guard state — back button hits this instead of leaving the page
-        history.pushState({ adGuard: true }, '');
-
-        const onPopState = () => {
-            if (adActive) {
-                // Re-push to trap back button presses during the ad
-                history.pushState({ adGuard: true }, '');
-            }
-        };
-        window.addEventListener('popstate', onPopState);
-
-        function cleanupAndCallback() {
-            if (!adActive) return;
-            adActive = false;
-            clearTimeout(prerollFallbackTimer);
-            window.removeEventListener('popstate', onPopState);
-            history.replaceState(null, '', location.href);
-            if (typeof callback === 'function') callback();
-        }
-
-        const prerollFallbackTimer = setTimeout(cleanupAndCallback, PREROLL_FALLBACK_MS);
-
-        adBreak({
-            type: 'preroll',
-            name: 'safe_preroll',
-            adBreakDone: () => {
-                clearTimeout(prerollFallbackTimer);
-                cleanupAndCallback();
-            }
-        });
     }
 
     function addCoins(amount) {
