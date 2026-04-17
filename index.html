@@ -34,6 +34,47 @@
         f.parentNode.insertBefore(j, f);
       })(window, document, "script", "dataLayer", "GTM-PXKTPB4M");
     </script>
+
+    <style>
+      .splash-shell {
+        display: flex;
+        flex-direction: column;
+        height: 100dvh;
+        max-width: 400px;
+        width: 100%;
+        overflow: hidden;
+        background-image: url(assets/icons/main_bg.webp);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+        color: var(--text_color);
+      }
+
+      .splash-scroll {
+        flex: 1;
+        overflow-y: auto;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-bottom: 24px;
+      }
+
+      .splash-btn {
+        border: none;
+        background: none;
+        cursor: pointer;
+        display: block;
+        width: 100%;
+        padding: 0;
+      }
+
+      .splash-btn img {
+        width: 100%;
+        display: block;
+      }
+    </style>
   </head>
 
   <body>
@@ -46,55 +87,52 @@
         style="display: none; visibility: hidden"
       ></iframe
     ></noscript>
+
     <section>
       <main>
-        <div class="main_div" style="overflow-y: auto; height: auto; min-height: 100%">
-          <div class="gadsbanner">
-            <ins
-              class="adsbygoogle"
-              style="display: block"
-              data-ad-client="ca-pub-4788685016218460"
-              data-ad-slot="9147865924"
-              data-ad-format="auto"
-              data-full-width-responsive="true"
-            ></ins>
-            <label
-              style="
-                display: block;
-                margin: 0px auto;
-                width: fit-content;
-                letter-spacing: 4px;
-                color: rgb(65, 77, 101);
-                font:
-                  400 9px / 2 Arial,
-                  sans-serif;
-                opacity: 0.7;
-              "
-              >ADVERTISEMENT</label
-            >
-          </div>
-          <div >
-            <div
-              class="game_section"
-              style="height: auto; margin-top: 280px; position: relative; z-index: 1"
-            >
-              <div>
-                <button href="home.html" style="border: none; background: none; cursor: pointer">
-                  <div>
-                    <picture>
-                      <img src="assets/robux/starting.webp" alt="RBX Counter" />
-                    </picture>
-                  </div>
-                </button>
-              </div>
+        <div class="splash-shell">
+
+          <!-- Scrollable content — banner + content scroll together -->
+          <div class="splash-scroll">
+
+            <div class="gadsbanner" style="width: 100%; position: relative; overflow: hidden;">
+              <ins
+                class="adsbygoogle"
+                style="display: block"
+                data-ad-client="ca-pub-4788685016218460"
+                data-ad-slot="9147865924"
+                data-ad-format="auto"
+                data-full-width-responsive="true"
+              ></ins>
+              <label
+                style="
+                  display: block;
+                  margin: 0 auto;
+                  width: fit-content;
+                  letter-spacing: 4px;
+                  color: rgb(65, 77, 101);
+                  font: 400 9px / 2 Arial, sans-serif;
+                  opacity: 0.7;
+                "
+                >ADVERTISEMENT</label
+              >
             </div>
-            <div class="resp_about_section" style="justify-content: flex-start; padding: 0 18px">
+
+            <div class="game_section" style="width: 100%; padding: 16px 16px 0;">
+              <button id="startBtn" class="splash-btn">
+                <picture>
+                  <img src="assets/robux/starting.webp" alt="RBX Counter" />
+                </picture>
+              </button>
+            </div>
+
+            <div class="resp_about_section" style="justify-content: flex-start; padding: 0 18px; width: 100%;">
               <div class="about_section" style="width: 100%; margin-top: 0">
                 <h1>RBX Master <br />Ultimate Tracker &amp; Calc</h1>
 
                 <p>
-                  Manage your counts, convert values, and stay updated. Your all-in-one companion
-                  for your favorite platform.
+                  Manage your counts, convert values, and stay updated. Your all-in-one companion for
+                  your favorite platform.
                 </p>
 
                 <h1 class="section-title features-title" style="margin: 20px 0 10px 0">Features</h1>
@@ -138,13 +176,12 @@
                   <p>
                     RBX Master: Ultimate Tracker &amp; Calc is an independent and unofficial
                     application and is not affiliated with, endorsed by, or sponsored by Roblox
-                    Corporation. This app is created for informational and entertainment purposes
-                    only and is intended for players and fans.
+                    Corporation. This app is created for informational and entertainment purposes only
+                    and is intended for players and fans.
                   </p>
                   <p>
-                    All names, logos, and trademarks mentioned belong to their respective owners.
-                    Any references to Roblox are used in accordance with the community usage
-                    guidelines.
+                    All names, logos, and trademarks mentioned belong to their respective owners. Any
+                    references to Roblox are used in accordance with the community usage guidelines.
                   </p>
                   <p>For more information, please refer to the official guidelines:</p>
                   <p>
@@ -159,14 +196,14 @@
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+
+          </div><!-- end splash-scroll -->
+        </div><!-- end splash-shell -->
       </main>
     </section>
 
     <script>
       let adLoading = false;
-      let pendingNavUrl = null;
 
       window.adsbygoogle = window.adsbygoogle || [];
       window.adReady = false;
@@ -179,52 +216,41 @@
         preloadAdBreaks: "on",
         onReady: () => {
           window.adReady = true;
-          console.log("✅ AdSense API Ready 4.0");
           (adsbygoogle = window.adsbygoogle || []).push({});
         },
       });
 
-      function resetAdState() {
-        adLoading = false;
-        pendingNavUrl = null;
-      }
+      document.getElementById("startBtn").addEventListener("click", function () {
+        if (adLoading) return;
 
-      document.addEventListener("DOMContentLoaded", function () {
-        document.body.addEventListener("click", function (event) {
-          if (adLoading) return;
+        if (!window.adReady) {
+          window.location.href = "home.html";
+          return;
+        }
 
-          const button = event.target.closest("button");
-          if (!button) return;
+        adLoading = true;
+        const btn = this;
+        let navDone = false;
 
-          event.preventDefault();
+        function goNext() {
+          if (navDone) return;
+          navDone = true;
+          adLoading = false;
+          window.location.href = "home.html";
+        }
 
-          if (!window.adReady) {
-            window.location.href = "home.html";
-            return;
-          }
-
-          adLoading = true;
-          let navDone = false;
-          function goNext() {
-            if (navDone) return;
-            navDone = true;
-            resetAdState();
-            window.location.href = "home.html";
-          }
-
-          const fallback = setTimeout(goNext, 8000);
-          adBreak({
-            type: "browse",
-            name: "home-start-interstitial",
-            beforeAd: () => {
-              clearTimeout(fallback);
-              button.style.pointerEvents = "none";
-            },
-            adBreakDone: () => {
-              clearTimeout(fallback);
-              goNext();
-            },
-          });
+        const fallback = setTimeout(goNext, 8000);
+        adBreak({
+          type: "next",
+          name: "home-start-interstitial",
+          beforeAd: () => {
+            clearTimeout(fallback);
+            btn.style.pointerEvents = "none";
+          },
+          adBreakDone: () => {
+            clearTimeout(fallback);
+            goNext();
+          },
         });
       });
     </script>
