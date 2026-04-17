@@ -320,7 +320,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 e.preventDefault();
                 const href = this.dataset.href || this.querySelector("a")?.href;
                 if (!href) return;
-                if (adLoading || !window.adReady) {
+                if (adLoading) {
                     window.location.href = href;
                     return;
                 }
