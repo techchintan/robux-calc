@@ -357,17 +357,22 @@
                     return;
                 }
                 adLoading = true;
+                let adHandled = false;
+                const doNavigate = () => {
+                    if (adHandled) return;
+                    adHandled = true;
+                    resetAdState();
+                    window.location.href = href;
+                };
                 adBreak({
                     type: "reward",
                     name: "nav-reward",
                     beforeReward: (showAdFn) => { showAdFn(); },
-                    adDismissed: () => { resetAdState(); window.location.href = href; },
-                    adViewed: () => { resetAdState(); window.location.href = href; },
+                    adDismissed: () => { resetAdState(); },
+                    adViewed: () => { doNavigate(); },
                     adBreakDone: (placementInfo) => {
-                        if (placementInfo.breakStatus !== "viewed" && placementInfo.breakStatus !== "dismissed") {
-                            resetAdState();
-                            window.location.href = href;
-                        }
+                        const noAdShown = placementInfo.breakStatus !== "viewed" && placementInfo.breakStatus !== "dismissed";
+                        if (noAdShown) doNavigate(); else resetAdState();
                     },
                 });
             });
