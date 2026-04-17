@@ -1,12 +1,31 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Rbux Counter</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RBX Master: Ultimate Tracker & Calc</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="css/style.css" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&amp;family=Orbitron:wght@700;900&amp;display=swap"
+        rel="stylesheet">
+
+    <!-- Google Tag Manager (must be first script in head) -->
+    <script>
+        (function (w, d, s, l, i) {
+          w[l] = w[l] || [];
+          w[l].push({
+            "gtm.start": new Date().getTime(),
+            event: "gtm.js",
+          });
+          var f = d.getElementsByTagName(s)[0],
+            j = d.createElement(s),
+            dl = l != "dataLayer" ? "&l=" + l : "";
+          j.async = true;
+          j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+          f.parentNode.insertBefore(j, f);
+        })(window, document, "script", "dataLayer", "GTM-PXKTPB4M");
+    </script>
 
     <link rel="preconnect" href="https://pagead2.googlesyndication.com/" />
     <link rel="preconnect" href="https://googleads.g.doubleclick.net/" />
@@ -18,68 +37,120 @@
       crossorigin="anonymous"
     ></script>
 
-    <!-- Google tag (gtag.js) -->
-    <script>
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({
-          "gtm.start": new Date().getTime(),
-          event: "gtm.js",
-        });
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != "dataLayer" ? "&l=" + l : "";
-        j.async = true;
-        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, "script", "dataLayer", "GTM-PXKTPB4M");
-    </script>
-  </head>
+</head>
 
-  <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PXKTPB4M"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <section>
-      <main>
-        <div class="main_div">
-          <div class="gadsbanner">
-            <ins
-              class="adsbygoogle"
-              style="display: block"
-              data-ad-client="ca-pub-4788685016218460"
-              data-ad-slot="9147865924"
-              data-ad-format="auto"
-              data-full-width-responsive="true"
-            ></ins>
-            <label
-              style="
-                display: block;
-                margin: 0px auto;
-                width: fit-content;
-                letter-spacing: 4px;
-                color: rgb(65, 77, 101);
-                font:
-                  400 9px / 2 Arial,
-                  sans-serif;
-                opacity: 0.7;
-              "
-              >ADVERTISEMENT</label
-            >
-          </div>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PXKTPB4M"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
-          <div class="game_section" style="height: auto">
-            <div>
-              <button href="home.html" style="border: none; background: none; cursor: pointer;">
-                <div>
-                  <picture>
-                    <img src="assets/robux/starting.webp" alt="RBX Counter" />
-                  </picture>
-                </div>
-              </button>
+<main>
+
+    <!-- Header -->
+    <div class="main_div">
+        <div class="fff_game_section">
+            <div class="header">
+                <h1>RBX Master: Ultimate Tracker & Calc</h1>
             </div>
-          </div>
-          <div class="resp_about_section" style="justify-content: flex-start; padding: 0 18px">
+
+            <!-- Content -->
+            <div class="content">
+                <div class="gadsbanner">
+                    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4788685016218460" data-ad-slot="9147865924"
+                        data-ad-format="auto" data-full-width-responsive="true"></ins>
+                    <label
+                        style="display: block; margin: 0px auto; width: fit-content; letter-spacing: 4px; color: rgb(65, 77, 101); font: 400 9px / 2 Arial, sans-serif; opacity: 0.7;">ADVERTISEMENT</label>
+                </div>
+
+                <!-- Earn Card -->
+                <div class="earn-card">
+                    <div class="coin-row">
+                        <span class="coin-icon"><img src="assets/icons/coin-earn.png" alt="coin-earn"
+                                loading="lazy"></img></span>
+                        <span class="coin-count" id="coin">0</span>
+                        <span id="streakBadge" style="display:none;margin-left:10px;background:linear-gradient(135deg,#f2b21f,#e07c00);color:#fff;font-size:11px;font-weight:700;padding:3px 8px;border-radius:20px;letter-spacing:0.5px;white-space:nowrap;cursor:pointer;" title="Tap to claim streak bonus!">🔥 1 day streak</span>
+                    </div>
+                    <!-- Coin progress bar -->
+                    <div id="coinProgressWrap" style="width:100%;margin:8px 0 4px;">
+                        <div style="display:flex;justify-content:space-between;font-size:11px;color:#aaa;margin-bottom:4px;">
+                            <span>Progress to next milestone</span>
+                            <span id="coinProgressLabel">0 / 100</span>
+                        </div>
+                        <div style="background:#ffffff18;border-radius:10px;height:8px;overflow:hidden;">
+                            <div id="coinProgressBar" style="height:100%;border-radius:10px;background:linear-gradient(90deg,#f2b21f,#e07c00);width:0%;transition:width 0.5s ease;"></div>
+                        </div>
+                    </div>
+                    <button class="earn-btn" id="earnCoinBtn">
+                        <span class="coin-sm"><img src="assets/icons/coin.png" style="width: 25px;" alt="coin"
+                                loading="lazy"></img></span>
+                        <span class="ad-badge">Ad</span>
+                        EARN FREE COINS
+                    </button>
+                    <button id="doubleCoinsBtn" style="display:none;width:100%;margin-top:8px;padding:10px;border:none;border-radius:12px;background:linear-gradient(135deg,#22c55e,#15803d);color:#fff;font-size:13px;font-weight:800;cursor:pointer;letter-spacing:0.5px;">
+                        🎯 Watch Ad to Double! <span id="doubleTimer">10</span>s
+                    </button>
+                    <button id="dailyBonusBtn" style="width:100%;margin-top:8px;padding:10px;border:none;border-radius:12px;background:linear-gradient(135deg,#a259ff,#6c2fff);color:#fff;font-size:13px;font-weight:800;cursor:pointer;letter-spacing:0.5px;">
+                        🎁 Daily Bonus — Watch Ad (+5 coins)
+                    </button>
+                </div>
+
+                <!-- Spin Wheel (moved up — #1 tapped element) -->
+                <div class="spin-card earnCoin_section2 spin-pulse">
+                    <a href="spin_to_win.html">
+                        <img src="assets/robux/spin_image.webp" alt=" spin_image" width="100%" loading="lazy"></img>
+                    </a>
+                </div>
+
+                <!-- Grid: Logic Quiz + Scratch Card (moved up for visibility) -->
+                <div class="grid-2">
+                    <div class="grid-card quiz earnCoin_section2" style="position:relative;">
+                        <span style="position:absolute;top:8px;left:8px;background:linear-gradient(135deg,#f2b21f,#e07c00);color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:20px;z-index:2;letter-spacing:0.5px;pointer-events:none;">🏆 Earn Coins</span>
+                        <a href="logic-quiz.html">
+                            <img src="assets/robux/logic_image.webp" alt="logic_image" loading="lazy"></img>
+                        </a>
+                    </div>
+                    <div class="grid-card scratch earnCoin_section2" style="position:relative;">
+                        <span style="position:absolute;top:8px;left:8px;background:linear-gradient(135deg,#a259ff,#6c2fff);color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:20px;z-index:2;letter-spacing:0.5px;pointer-events:none;">🎫 Daily Scratch</span>
+                        <a href="scratch-win.html">
+                            <img src="assets/robux/scrarch_image.webp" alt=" scrarch_image" loading="lazy"></img>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Daily RBX Counter -->
+                <div class="rbx-counter-card nav-interstitial" data-href="daily-r-converter.html">
+                    <a href="daily-r-converter.html">
+                        <img src="assets/robux/daily_rbx_counter.webp" alt=" daily-rbx" width="100%"
+                            loading="lazy"></img>
+                    </a>
+                </div>
+
+                <!-- Grid: Daily RBX Gift + How To Win -->
+                <div class="grid-2">
+                    <div class="grid-card daily-rbx earnCoin_section2" style="position:relative;">
+                        <span style="position:absolute;top:8px;left:8px;background:linear-gradient(135deg,#22c55e,#15803d);color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:20px;z-index:2;letter-spacing:0.5px;pointer-events:none;">🎁 Claim Today</span>
+                        <a href="daily-rbx.html">
+                            <img src="assets/robux/gift_image.webp" alt="gift_image" loading="lazy"></img>
+                        </a>
+                    </div>
+                    <div class="grid-card how-to nav-interstitial" data-href="how-to-win.html">
+                        <a href="how-to-win.html">
+                            <img src="assets/robux/win_image.webp" alt="how_to_win_image" loading="lazy"></img>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Funny Memes -->
+                <div class="meme-card-main nav-interstitial" data-href="meme.html">
+                    <a href="meme.html">
+                        <img src="assets/robux/funny_meme_image.webp" alt=" funny_meme_image" width="100%"
+                            loading="lazy"></img>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        <div class="resp_about_section" style="justify-content: flex-start; padding: 0 18px">
             <div class="about_section" style="width: 100%; margin-top: 0">
               <h1>RBX Master <br />Ultimate Tracker &amp; Calc</h1>
 
@@ -149,89 +220,481 @@
               </div>
             </div>
           </div>
-        </div>
-      </main>
-    </section>
+        <div class="bottom-nav-spacer"></div>
+    </div>
 
-    <script>
-      let adLoading = false;
-      let pendingNavUrl = null;
+    <script src="js/nav.js"></script>
+    <nav class="bottom-nav">
+        <a href="index.html" class="active">
+            <span class="nav-icon">🏠</span>
+            <span>Home</span>
+        </a>
+        <a href="spin_to_win.html">
+            <span class="nav-icon">🎰</span>
+            <span>Spin</span>
+        </a>
+        <a href="scratch-win.html">
+            <span class="nav-icon">🎫</span>
+            <span>Scratch</span>
+        </a>
+        <a href="logic-quiz.html">
+            <span class="nav-icon">🧠</span>
+            <span>Quiz</span>
+        </a>
+        <a href="meme.html">
+            <span class="nav-icon">😂</span>
+            <span>Memes</span>
+        </a>
+    </nav>
+</main>
 
-      window.adsbygoogle = window.adsbygoogle || [];
-      window.adReady = false;
+<script>
+    let adLoading = false;
 
-      const adBreak = (window.adBreak = function (o) {
+    window.adsbygoogle = window.adsbygoogle || [];
+    window.adReady = false;
+
+    const adBreak = window.adBreak = function (o) {
         adsbygoogle.push(o);
-      });
+    };
 
-      adBreak({
+    adBreak({
         preloadAdBreaks: "on",
         onReady: () => {
-          window.adReady = true;
-          console.log("✅ AdSense API Ready 4.0");
-          (adsbygoogle = window.adsbygoogle || []).push({});
-        },
-      });
+            window.adReady = true;
+            console.log("✅ AdSense API Ready");
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        }
+    });
 
-      function resetAdState() {
+    document.addEventListener("DOMContentLoaded", function () {
+        const userCoins = parseInt(safeGetItem("coins")) || 0;
+        const coinEl = document.getElementById("coin");
+        if (coinEl) coinEl.textContent = userCoins;
+
+        safeSetItem("hasVisited", "1");
+
+        // Streak tracking
+        const todayStr = new Date().toISOString().split("T")[0];
+        const lastVisit = safeGetItem("lastVisitDate");
+        let streak = parseInt(safeGetItem("visitStreak")) || 0;
+        if (lastVisit !== todayStr) {
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
+            const yStr = yesterday.toISOString().split("T")[0];
+            streak = (lastVisit === yStr) ? streak + 1 : 1;
+            safeSetItem("visitStreak", streak);
+            safeSetItem("lastVisitDate", todayStr);
+        }
+        if (streak >= 2) {
+            const badge = document.getElementById("streakBadge");
+            if (badge) {
+                badge.textContent = `🔥 ${streak} day streak`;
+                badge.style.display = "inline-block";
+            }
+        }
+
+        // Daily bonus button state
+        const dailyBonusBtn = document.getElementById("dailyBonusBtn");
+        const lastDailyClaim = safeGetItem("lastDailyClaim");
+        if (lastDailyClaim === todayStr) {
+            dailyBonusBtn.disabled = true;
+            dailyBonusBtn.style.opacity = "0.45";
+            dailyBonusBtn.style.cursor = "not-allowed";
+            dailyBonusBtn.textContent = "🎁 Daily Bonus Claimed";
+        }
+
+        // Coin progress bar
+        const milestones = [100, 500, 1000, 5000, 10000];
+        const nextMilestone = milestones.find(m => m > userCoins) || milestones[milestones.length - 1];
+        const prevMilestone = milestones[milestones.indexOf(nextMilestone) - 1] || 0;
+        const pct = Math.min(100, Math.round(((userCoins - prevMilestone) / (nextMilestone - prevMilestone)) * 100));
+        const bar = document.getElementById("coinProgressBar");
+        const label = document.getElementById("coinProgressLabel");
+        if (bar) bar.style.width = pct + "%";
+        if (label) label.textContent = `${userCoins} / ${nextMilestone}`;
+
+        // Scroll-triggered preroll (safe — back button trapped during ad)
+        let hasShownScrollAd = false;
+        const mainDiv = document.querySelector(".main_div");
+
+        const onScroll = () => {
+            const scrollTop = Math.max(
+                window.scrollY || 0,
+                document.documentElement.scrollTop || 0,
+                mainDiv ? mainDiv.scrollTop : 0
+            );
+            if (hasShownScrollAd || scrollTop <= 200 || adLoading || !window.adReady) return;
+            hasShownScrollAd = true;
+            window.removeEventListener("scroll", onScroll);
+            if (mainDiv) mainDiv.removeEventListener("scroll", onScroll);
+            showPrerollSafe(() => { resetAdState(); });
+        };
+
+        window.addEventListener("scroll", onScroll, { passive: true });
+        if (mainDiv) mainDiv.addEventListener("scroll", onScroll, { passive: true });
+
+        // All cards: show interstitial ad then navigate
+        document.querySelectorAll(".earnCoin_section2, .nav-interstitial").forEach((card) => {
+            card.addEventListener("click", function (e) {
+                e.preventDefault();
+                const href = this.dataset.href || this.querySelector("a")?.href;
+                if (!href) return;
+                if (adLoading || !window.adReady) {
+                    window.location.href = href;
+                    return;
+                }
+                adLoading = true;
+                let navDone = false;
+                function finishNav() {
+                    if (navDone) return;
+                    navDone = true;
+                    resetAdState();
+                    window.location.href = href;
+                }
+                // Fallback only fires if adBreakDone never fires (SDK failure)
+                const navFallbackTimer = setTimeout(finishNav, 8000);
+                adBreak({
+                    type: "next",
+                    name: "nav-interstitial",
+                    beforeAd: () => { clearTimeout(navFallbackTimer); },
+                    adBreakDone: () => {
+                        clearTimeout(navFallbackTimer);
+                        finishNav();
+                    },
+                });
+            });
+        });
+    });
+
+    function safeGetItem(key) {
+        try { return localStorage.getItem(key); }
+        catch (e) { console.warn("LocalStorage getItem blocked:", e); return null; }
+    }
+
+    function safeSetItem(key, value) {
+        try { localStorage.setItem(key, value); }
+        catch (e) { console.warn("LocalStorage setItem blocked:", e); }
+    }
+
+    function resetAdState() {
         adLoading = false;
-        pendingNavUrl = null;
-      }
+    }
 
-      let indexPreroll5sFired = false;
+    function showPrerollSafe(callback) {
+        if (adLoading) return;
+        adLoading = true;
+        let adActive = true;
+        const PREROLL_FALLBACK_MS = 8000;
 
-      function showIndexAutoPreroll5s() {
-        if (indexPreroll5sFired) return;
-        indexPreroll5sFired = true;
+        // Push a guard state — back button hits this instead of leaving the page
+        history.pushState({ adGuard: true }, '');
+
+        const onPopState = () => {
+            if (adActive) {
+                // Re-push to trap back button presses during the ad
+                history.pushState({ adGuard: true }, '');
+            }
+        };
+        window.addEventListener('popstate', onPopState);
+
+        function cleanupAndCallback() {
+            if (!adActive) return;
+            adActive = false;
+            clearTimeout(prerollFallbackTimer);
+            window.removeEventListener('popstate', onPopState);
+            history.replaceState(null, '', location.href);
+            if (typeof callback === 'function') callback();
+        }
+
+        const prerollFallbackTimer = setTimeout(cleanupAndCallback, PREROLL_FALLBACK_MS);
+
         adBreak({
-          type: "next",
-          name: "index-auto-preroll-5s",
-          beforeAd: () => { document.querySelectorAll("button, a").forEach(el => el.style.pointerEvents = "none"); },
-          afterAd:  () => { document.querySelectorAll("button, a").forEach(el => el.style.pointerEvents = ""); },
-          adBreakDone: function () {},
+            type: 'preroll',
+            name: 'safe_preroll',
+            adBreakDone: () => {
+                clearTimeout(prerollFallbackTimer);
+                cleanupAndCallback();
+            }
         });
-      }
+    }
 
-      document.addEventListener("DOMContentLoaded", function () {
-        setTimeout(showIndexAutoPreroll5s, 5000);
+    function addCoins(amount) {
+        let coins = parseInt(safeGetItem("coins")) || 0;
+        coins += amount;
+        safeSetItem("coins", coins);
+        document.getElementById("coin").textContent = coins;
 
-        document.body.addEventListener("click", function (event) {
-          if (adLoading) return;
+        const milestones = [100, 500, 1000, 5000, 10000];
+        const nextMilestone = milestones.find(m => m > coins) || milestones[milestones.length - 1];
+        const prevMilestone = milestones[milestones.indexOf(nextMilestone) - 1] || 0;
+        const pct = Math.min(100, Math.round(((coins - prevMilestone) / (nextMilestone - prevMilestone)) * 100));
+        const bar = document.getElementById("coinProgressBar");
+        const label = document.getElementById("coinProgressLabel");
+        if (bar) bar.style.width = pct + "%";
+        if (label) label.textContent = `${coins} / ${nextMilestone}`;
+    }
 
-          const button = event.target.closest("button");
-          if (!button) return;
+    function showToast() {
+        let toast = document.getElementById("toast");
+        if (!toast) {
+            toast = document.createElement("div");
+            toast.id = "toast";
+            toast.className = "toast-message";
+            document.body.appendChild(toast);
+        }
+        toast.innerHTML = `<img src="assets/icons/coin-earn.png" alt="" style="width:20px;height:20px;margin-right:8px;"> You've received 10 coins`;
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 5000);
+    }
 
-          event.preventDefault();
-          // adLoading = true;
-          //
-          // adBreak({
-          //   type: "reward",
-          //   name: "index-nav-reward",
-          //   beforeReward: (showAdFn) => {
-          //     showAdFn();
-          //   },
-          //   adDismissed: () => {
-          //     resetAdState();
-          //     window.location.href = "/home.html";
-          //   },
-          //   adViewed: () => {
-          //     resetAdState();
-          //     window.location.href = "/home.html";
-          //   },
-          //   adBreakDone: (placementInfo) => {
-          //     if (
-          //       placementInfo.breakStatus !== "viewed" &&
-          //       placementInfo.breakStatus !== "dismissed"
-          //     ) {
-          //       resetAdState();
-          //       window.location.href = "/home.html";
-          //     }
-          //   },
-          // });
-          // Direct navigation while rewarded ad above is commented out (not in original ad flow).
-          window.location.href = "home.html";
+    function ErrorToast() {
+        let toast = document.getElementById("toast");
+        if (!toast) {
+            toast = document.createElement("div");
+            toast.id = "toast";
+            toast.className = "toast-message";
+            document.body.appendChild(toast);
+        }
+        toast.innerHTML = `❌ Ad not available, try again later`;
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 5000);
+    }
+
+    function showToastCountdown(seconds) {
+        let existingToast = document.querySelector(".timer-toast-message");
+        if (existingToast) existingToast.remove();
+
+        let toast = document.createElement("div");
+        toast.className = "timer-toast-message show";
+
+        let img = document.createElement("img");
+        img.src = "assets/icons/clock.png";
+        img.alt = "";
+        img.style.cssText = "width:20px;height:20px;margin-right:8px;vertical-align:middle;";
+
+        let msg = document.createElement("span");
+        msg.textContent = `Wait ${seconds}s...`;
+
+        toast.appendChild(img);
+        toast.appendChild(msg);
+        document.body.appendChild(toast);
+
+        let count = seconds;
+        let timer = setInterval(() => {
+            count--;
+            msg.textContent = `Wait ${count}s...`;
+            if (count <= 0) {
+                clearInterval(timer);
+                toast.remove();
+            }
+        }, 1000);
+    }
+
+    document.getElementById("earnCoinBtn").addEventListener("click", function () {
+        if (adLoading) return;
+
+        const earnBtn = document.getElementById("earnCoinBtn");
+        const originalHTML = earnBtn.innerHTML;
+        earnBtn.innerHTML = "Loading Ad... ⏳";
+        earnBtn.disabled = true;
+        adLoading = true;
+
+        adBreak({
+            type: "reward",
+            name: "earn-coin-reward",
+            beforeReward: (showAdFn) => {
+                if (window.dataLayer) {
+                    window.dataLayer.push({ event: "6868_earn_button_click" });
+                }
+                showAdFn();
+            },
+            adDismissed: () => {
+                earnBtn.innerHTML = originalHTML;
+                earnBtn.disabled = false;
+                resetAdState();
+            },
+            adViewed: () => {
+                addCoins(10);
+                showToast();
+                earnBtn.innerHTML = originalHTML;
+                earnBtn.disabled = false;
+                resetAdState();
+                showDoubleBtn();
+            },
+            adBreakDone: (placementInfo) => {
+                if (
+                    placementInfo.breakStatus !== "viewed" &&
+                    placementInfo.breakStatus !== "dismissed"
+                ) {
+                    earnBtn.innerHTML = originalHTML;
+                    earnBtn.disabled = false;
+                    ErrorToast();
+                    resetAdState();
+                }
+            },
         });
-      });
-    </script>
-  </body>
+    });
+
+    function showDoubleBtn() {
+        const btn = document.getElementById("doubleCoinsBtn");
+        const timerEl = document.getElementById("doubleTimer");
+        if (!btn) return;
+        btn.style.display = "block";
+        let count = 10;
+        timerEl.textContent = count;
+        clearInterval(btn._hideInterval);
+        btn._hideInterval = setInterval(() => {
+            count--;
+            timerEl.textContent = count;
+            if (count <= 0) {
+                clearInterval(btn._hideInterval);
+                btn.style.display = "none";
+            }
+        }, 1000);
+    }
+
+    document.getElementById("doubleCoinsBtn").addEventListener("click", function () {
+        if (adLoading) return;
+        const btn = this;
+        clearInterval(btn._hideInterval);
+        btn.style.display = "none";
+        adLoading = true;
+        adBreak({
+            type: "reward",
+            name: "double-coin-reward",
+            beforeReward: (showAdFn) => { showAdFn(); },
+            adDismissed: () => { resetAdState(); },
+            adViewed: () => {
+                addCoins(10);
+                showToast();
+                resetAdState();
+            },
+            adBreakDone: (placementInfo) => {
+                if (
+                    placementInfo.breakStatus !== "viewed" &&
+                    placementInfo.breakStatus !== "dismissed"
+                ) {
+                    ErrorToast();
+                    resetAdState();
+                }
+            },
+        });
+    });
+
+    document.getElementById("dailyBonusBtn").addEventListener("click", function () {
+        if (adLoading || this.disabled) return;
+        const btn = this;
+        const todayStr = new Date().toISOString().split("T")[0];
+        if (safeGetItem("lastDailyClaim") === todayStr) {
+            btn.disabled = true;
+            btn.style.opacity = "0.45";
+            btn.style.cursor = "not-allowed";
+            btn.textContent = "🎁 Daily Bonus Claimed";
+            return;
+        }
+        const originalText = btn.textContent;
+        btn.textContent = "Loading Ad... ⏳";
+        btn.disabled = true;
+        adLoading = true;
+        adBreak({
+            type: "reward",
+            name: "daily-bonus-reward",
+            beforeReward: (showAdFn) => { showAdFn(); },
+            adDismissed: () => {
+                btn.textContent = originalText;
+                btn.disabled = false;
+                resetAdState();
+            },
+            adViewed: () => {
+                addCoins(5);
+                safeSetItem("lastDailyClaim", todayStr);
+                btn.disabled = true;
+                btn.style.opacity = "0.45";
+                btn.style.cursor = "not-allowed";
+                btn.textContent = "🎁 Daily Bonus Claimed";
+                resetAdState();
+                let toast = document.getElementById("toast");
+                if (!toast) {
+                    toast = document.createElement("div");
+                    toast.id = "toast";
+                    toast.className = "toast-message";
+                    document.body.appendChild(toast);
+                }
+                toast.innerHTML = `<img src="assets/icons/coin-earn.png" alt="" style="width:20px;height:20px;margin-right:8px;"> You've received 5 bonus coins!`;
+                toast.classList.add("show");
+                setTimeout(() => toast.classList.remove("show"), 5000);
+            },
+            adBreakDone: (placementInfo) => {
+                if (
+                    placementInfo.breakStatus !== "viewed" &&
+                    placementInfo.breakStatus !== "dismissed"
+                ) {
+                    btn.textContent = originalText;
+                    btn.disabled = false;
+                    ErrorToast();
+                    resetAdState();
+                }
+            },
+        });
+    });
+
+    // Streak badge — tap to claim daily streak bonus via rewarded ad
+    const streakBadgeEl = document.getElementById("streakBadge");
+    if (streakBadgeEl) {
+        streakBadgeEl.addEventListener("click", function () {
+            if (adLoading) return;
+
+            const todayStr = new Date().toISOString().split("T")[0];
+            const lastStreakClaim = safeGetItem("lastStreakClaim");
+            if (lastStreakClaim === todayStr) {
+                let toast = document.getElementById("toast");
+                if (!toast) {
+                    toast = document.createElement("div");
+                    toast.id = "toast";
+                    toast.className = "toast-message";
+                    document.body.appendChild(toast);
+                }
+                toast.innerHTML = "🔥 Streak bonus already claimed today!";
+                toast.classList.add("show");
+                setTimeout(() => toast.classList.remove("show"), 3000);
+                return;
+            }
+
+            const streak = parseInt(safeGetItem("visitStreak")) || 1;
+            const bonus = Math.min(streak * 5, 50); // 5 coins per streak day, max 50
+
+            const originalText = streakBadgeEl.textContent;
+            streakBadgeEl.textContent = "⏳ Loading...";
+            adLoading = true;
+
+            adBreak({
+                type: "reward",
+                name: "streak-bonus-reward",
+                beforeReward: (showAdFn) => { showAdFn(); },
+                adDismissed: () => {
+                    streakBadgeEl.textContent = originalText;
+                    resetAdState();
+                },
+                adViewed: () => {
+                    addCoins(bonus);
+                    safeSetItem("lastStreakClaim", todayStr);
+                    streakBadgeEl.textContent = `✅ +${bonus} claimed!`;
+                    setTimeout(() => { streakBadgeEl.textContent = originalText; }, 3000);
+                    resetAdState();
+                },
+                adBreakDone: (placementInfo) => {
+                    if (placementInfo.breakStatus !== "viewed" && placementInfo.breakStatus !== "dismissed") {
+                        streakBadgeEl.textContent = originalText;
+                        ErrorToast();
+                        resetAdState();
+                    }
+                },
+            });
+        });
+    }
+
+</script>
+
+</body>
 </html>
