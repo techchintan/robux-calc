@@ -130,7 +130,11 @@
 
     <script>
       document.getElementById("backButton").addEventListener("click", function () {
-        window.location.href = "index.html";
+        if (!window.adReady) { window.location.href = "home.html"; return; }
+        let done = false;
+        function go() { if (done) return; done = true; window.location.href = "home.html"; }
+        const fallback = setTimeout(go, 8000);
+        adBreak({ type: "next", name: "back_interstitial", beforeAd: () => clearTimeout(fallback), adBreakDone: go });
       });
 
       window.adsbygoogle = window.adsbygoogle || [];
