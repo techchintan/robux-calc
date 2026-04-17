@@ -1973,19 +1973,6 @@ footer {
     animation: spinPulse 2s ease-in-out 1s 3;
 }
 
-/* ── Slot card gold pulse animation (NEW feature attention loop) ── */
-@keyframes slotPulse {
-    0%   { box-shadow: 0 0 0 0 rgba(242, 190, 31, 0),   0 4px 20px rgba(242,190,31,0.08); transform: scale(1); }
-    40%  { box-shadow: 0 0 0 8px rgba(242, 190, 31, 0.22), 0 4px 24px rgba(242,190,31,0.22); transform: scale(1.016); }
-    70%  { box-shadow: 0 0 0 14px rgba(242, 190, 31, 0.08), 0 4px 28px rgba(242,190,31,0.15); transform: scale(1.008); }
-    100% { box-shadow: 0 0 0 0 rgba(242, 190, 31, 0),   0 4px 20px rgba(242,190,31,0.08); transform: scale(1); }
-}
-
-.slot-pulse {
-    border-radius: 16px;
-    animation: slotPulse 2.4s ease-in-out infinite;
-    transform-origin: center;
-}
 
 /* ── Bottom Navigation Bar ── */
 .bottom-nav {
