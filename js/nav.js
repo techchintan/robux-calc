@@ -1,4 +1,4 @@
-// Bottom nav interstitial — fires a type:"next" ad on every page switch
+// Bottom nav interstitial — fires a type:"browse" ad on every page switch
 (function () {
   document.body.addEventListener("click", function (e) {
     const link = e.target.closest(".bottom-nav a");
@@ -15,7 +15,7 @@
       window.location.href = href;
     }
 
-    if (typeof window.adBreak === "function" && window.adReady) {
+    if (typeof window.adBreak === "function") {
       var fallback = setTimeout(go, 8000);
       window.adBreak({
         type: "browse",
