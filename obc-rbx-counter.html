@@ -122,7 +122,6 @@
 
     <script>
       document.getElementById("backButton").addEventListener("click", function () {
-        if (!window.adReady) { window.location.href = "home.html"; return; }
         let done = false;
         function go() { if (done) return; done = true; window.location.href = "home.html"; }
         const fallback = setTimeout(go, 8000);

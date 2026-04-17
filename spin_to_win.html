@@ -341,10 +341,6 @@
     <script>
       // ── Back button ──
       document.getElementById("backBtn").addEventListener("click", () => {
-        if (!window.adReady) {
-          window.location.href = "home.html";
-          return;
-        }
         let done = false;
         function goHome() {
           if (done) return;
@@ -482,21 +478,16 @@
         startCountdownDisplay();
         document.getElementById("spinPromo").style.display = "block";
 
-        if (window.adReady) {
-          adBreak({
-            type: "next",
-            name: "spin_result_interstitial",
-            beforeAd: () => { document.getElementById("spinAgainBtn").disabled = true; },
-            afterAd:  () => { document.getElementById("spinAgainBtn").disabled = false; },
-            adBreakDone: () => {
-              document.getElementById("partyPopper").classList.add("show");
-              congratsCard.classList.add("show");
-            },
-          });
-        } else {
-          document.getElementById("partyPopper").classList.add("show");
-          congratsCard.classList.add("show");
-        }
+        adBreak({
+          type: "next",
+          name: "spin_result_interstitial",
+          beforeAd: () => { document.getElementById("spinAgainBtn").disabled = true; },
+          afterAd:  () => { document.getElementById("spinAgainBtn").disabled = false; },
+          adBreakDone: () => {
+            document.getElementById("partyPopper").classList.add("show");
+            congratsCard.classList.add("show");
+          },
+        });
       }
 
       window.adsbygoogle = window.adsbygoogle || [];
@@ -615,10 +606,6 @@
       });
 
       function goHomeWithAd() {
-        if (!window.adReady) {
-          window.location.href = "home.html";
-          return;
-        }
         let done = false;
         function go() {
           if (done) return;
@@ -636,11 +623,32 @@
           },
         });
       }
+
+      // Promo strip link interstitial
+      document.querySelectorAll(".promo-card").forEach(function (link) {
+        link.addEventListener("click", function (e) {
+          e.preventDefault();
+          var href = this.getAttribute("href");
+          var navigated = false;
+          function go() {
+            if (navigated) return;
+            navigated = true;
+            window.location.href = href;
+          }
+          var fallback = setTimeout(go, 8000);
+          adBreak({
+            type: "next",
+            name: "promo_nav",
+            beforeAd: function () { clearTimeout(fallback); },
+            adBreakDone: function () { clearTimeout(fallback); go(); },
+          });
+        });
+      });
     </script>
 
     <script src="js/nav.js"></script>
     <nav class="bottom-nav">
-      <a href="index.html"><span class="nav-icon">🏠</span><span>Home</span></a>
+      <a href="home.html"><span class="nav-icon">🏠</span><span>Home</span></a>
       <a href="spin_to_win.html" class="active"
         ><span class="nav-icon">🎰</span><span>Spin</span></a
       >

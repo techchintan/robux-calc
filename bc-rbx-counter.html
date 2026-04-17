@@ -214,7 +214,6 @@
 
     <script>
       document.getElementById("backButton").addEventListener("click", function () {
-        if (!window.adReady) { window.location.href = "home.html"; return; }
         let done = false;
         function go() { if (done) return; done = true; window.location.href = "home.html"; }
         const fallback = setTimeout(go, 8000);
@@ -273,11 +272,22 @@
           document.getElementById("continueBtn").click();
         }
       });
+
+      document.querySelectorAll(".promo-card").forEach(function (link) {
+        link.addEventListener("click", function (e) {
+          e.preventDefault();
+          var href = this.getAttribute("href");
+          var navigated = false;
+          function go() { if (navigated) return; navigated = true; window.location.href = href; }
+          var fallback = setTimeout(go, 8000);
+          adBreak({ type: "next", name: "promo_nav", beforeAd: function () { clearTimeout(fallback); }, adBreakDone: function () { clearTimeout(fallback); go(); } });
+        });
+      });
     </script>
 
     <script src="js/nav.js"></script>
     <nav class="bottom-nav">
-      <a href="index.html"><span class="nav-icon">🏠</span><span>Home</span></a>
+      <a href="home.html"><span class="nav-icon">🏠</span><span>Home</span></a>
       <a href="spin_to_win.html"><span class="nav-icon">🎰</span><span>Spin</span></a>
       <a href="scratch-win.html"><span class="nav-icon">🎫</span><span>Scratch</span></a>
       <a href="logic-quiz.html"><span class="nav-icon">🧠</span><span>Quiz</span></a>
