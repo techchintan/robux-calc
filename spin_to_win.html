@@ -603,7 +603,7 @@
         recordSpinToday();
         if (window.adReady) {
           adBreak({
-            type: "next",
+            type: "start",
             name: "spin_wheel",
             beforeAd: () => { spinBtn.disabled = true; },
             afterAd:  () => { spinBtn.disabled = false; },
