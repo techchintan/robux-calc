@@ -38,12 +38,18 @@
 
   <body>
     <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PXKTPB4M"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-PXKTPB4M"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
     <section>
       <main>
         <div class="main_div">
-          <div class="gadsbanner">
+          <div class="gadsbanner" style="min-height: 250px;">
             <ins
               class="adsbygoogle"
               style="display: block"
@@ -68,9 +74,9 @@
             >
           </div>
 
-          <div class="game_section" style="height: auto">
+          <div class="game_section" style="height: auto; margin-top: 20px; position: relative; z-index: 1;">
             <div>
-              <button href="home.html" style="border: none; background: none; cursor: pointer;">
+              <button href="home.html" style="border: none; background: none; cursor: pointer">
                 <div>
                   <picture>
                     <img src="assets/robux/starting.webp" alt="RBX Counter" />
@@ -205,7 +211,10 @@
           adBreak({
             type: "next",
             name: "home-start-interstitial",
-            beforeAd: () => { clearTimeout(fallback); button.style.pointerEvents = "none"; },
+            beforeAd: () => {
+              clearTimeout(fallback);
+              button.style.pointerEvents = "none";
+            },
             adBreakDone: () => {
               clearTimeout(fallback);
               goNext();
