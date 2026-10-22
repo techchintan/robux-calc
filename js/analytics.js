@@ -114,44 +114,38 @@ var isFirstAd = getIsFirstAd();
 //     });
 // }
 
-/* ---------------- REWARDED AD SLOTS ROTATION ---------------- */
-const REWARD_AD_SLOTS = [
-    "3359080448", // RBX_reward1
-    "5378739129", // RBX_reward2
-    "3505103454", // RBX_reward3
-    "9004842142", // RBX_reward4
-    "3920036421"  // RBX_reward5
-];
-
-function getNextRewardedSlot() {
-    try {
-        let currentIndex = parseInt(sessionStorage.getItem("reward_slot_idx") || "0", 10);
-        if (isNaN(currentIndex) || currentIndex < 0 || currentIndex >= REWARD_AD_SLOTS.length) {
-            currentIndex = 0;
-        }
-        const slot = REWARD_AD_SLOTS[currentIndex];
-        const nextIndex = (currentIndex + 1) % REWARD_AD_SLOTS.length;
-        sessionStorage.setItem("reward_slot_idx", nextIndex.toString());
-        console.log(`[RewardedAds] Using slot index ${currentIndex}: ${slot}`);
-        return slot;
-    } catch (e) {
-        return REWARD_AD_SLOTS[0];
-    }
-}
-
+/* ---------------- REWARDED AD (H5 Ad Placement API) ---------------- */
 let adLoading = false;
 
-function initializeAds(adSlot, callback) {
+// Shows an H5 'reward' ad break. onAdDone receives { breakStatus: 'viewed' | 'dismissed' | <adBreakDone status> }
+function showH5RewardedAd(name, onAdDone) {
     adLoading = true;
-    window.adsbygoogle = window.adsbygoogle || [];
-    const slotToUse = adSlot || getNextRewardedSlot();
-    console.log("[AdLogic] Initializing rewarded ad with slot:", slotToUse);
-    adsbygoogle.push({
-        params: {
-            google_ad_loaded_callback: callback,
-            google_ad_slot: slotToUse,
-            google_ad_format: "rewarded",
+    let rewardGranted = false;
+    console.log("[AdLogic] Requesting H5 rewarded ad:", name);
+    adBreak({
+        type: 'reward',
+        name: name,
+        beforeReward: (showAdFn) => {
+            console.log("[AdLogic] beforeReward — showing ad.");
+            showAdFn();
         },
+        adViewed: () => {
+            console.log("[AdLogic] adViewed — reward earned.");
+            rewardGranted = true;
+        },
+        adDismissed: () => {
+            console.log("[AdLogic] adDismissed — no reward.");
+            rewardGranted = false;
+        },
+        adBreakDone: (placementInfo) => {
+            console.log("[AdLogic] Rewarded adBreakDone:", placementInfo.breakStatus);
+            adLoading = false;
+            setTimeout(() => {
+                onAdDone({
+                    breakStatus: rewardGranted ? "viewed" : (placementInfo.breakStatus || "dismissed")
+                });
+            });
+        }
     });
 }
 
@@ -193,23 +187,7 @@ function showAdWithLogic(onAdDone) {
             // }
         } else {
             console.log("[AdLogic] Timer < 60s. Showing Rewarded Ad.");
-            adLoading = true;
-            initializeAds(getNextRewardedSlot(), (rewardedAd) => {
-                if (rewardedAd) {
-                    rewardedAd.show((result) => {
-                        console.log("[AdLogic] Rewarded Ad result:", result.status);
-                        setTimeout(() => {
-                            onAdDone({ breakStatus: result.status === "viewed" ? "viewed" : "dismissed" });
-                            adLoading = false;
-                        });
-                    });
-                } else {
-                    // console.log("[RewardAdLogic] Rewarded Ad not ready, skipping.");
-                    console.log("[RewardAdLogic] Rewarded ad not ready Skipping to GPT reward.")
-                    adLoading = false;
-                    onAdDone({ breakStatus: "notReady" });
-                }
-            })
+            showH5RewardedAd('game_transition_reward', onAdDone);
         }
     } catch (error) {
         console.log("Error in showAdWithLogic : ", error);
@@ -267,22 +245,7 @@ function showRewardAdWithLogic(onAdDone) {
             // } 
         } else {
             console.log("[RewardAdLogic] Timer < 60s. Showing Rewarded Ad.");
-            initializeAds(getNextRewardedSlot(), (rewardedAd) => {
-                if (rewardedAd) {
-                    rewardedAd.show((result) => {
-                        console.log("[AdLogic] Rewarded Ad result:", result.status);
-                        setTimeout(() => {
-                            onAdDone({ breakStatus: result.status === "viewed" ? "viewed" : "dismissed" });
-                            adLoading = false;
-                        });
-                    });
-                } else {
-                    // console.log("[RewardAdLogic] Rewarded Ad not ready, skipping.");
-                    console.log("[RewardAdLogic] Rewarded ad not ready Skipping to GPT reward.")
-                    adLoading = false;
-                    onAdDone({ breakStatus: "notReady" });
-                }
-            })
+            showH5RewardedAd('double_the_coin', onAdDone);
         }
     } catch (error) {
         console.log("Error in showRewardAdWithLogic : ", error);
