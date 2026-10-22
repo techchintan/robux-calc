@@ -1,173 +1,119 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
+
+
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>TBC RBX Counter</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com/">
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net/">
+    <link rel="preconnect" href="https://tpc.googlesyndication.com/">
+    <link rel="preconnect" href="https://www.gstatic.com/">
+    <link rel="preload"
+        href="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7178919035426667"
+        as="script">
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="css/style.css" />
-
-    <link rel="preconnect" href="https://pagead2.googlesyndication.com/" />
-    <link rel="preconnect" href="https://googleads.g.doubleclick.net/" />
-
-    <script
-      async
-      data-ad-frequency-hint="30s"
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4788685016218460"
-      crossorigin="anonymous"
-    ></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&amp;display=swap" rel="stylesheet">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7178919035426667"
+        crossorigin="anonymous"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-W1XE95VFRP"></script>
     <script>
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({
-          "gtm.start": new Date().getTime(),
-          event: "gtm.js",
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-W1XE95VFRP', {
+            page_path: window.location.pathname
         });
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != "dataLayer" ? "&l=" + l : "";
-        j.async = true;
-        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, "script", "dataLayer", "GTM-PXKTPB4M");
     </script>
-  </head>
 
-  <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PXKTPB4M"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+</head>
+
+<body>
     <section>
-      <main>
-        <div class="main_div">
-          <div class="fff_game_section">
-            <div class="header">
-              <img src="assets/robux/back.webp" alt="Back" class="back-button" id="backButton" />
-              <h1 class="home-title">TBC RBX Counter</h1>
+        <main>
+            <div class="bg-top"></div>
+            <div class="bg-bottom"></div>
+            <div class="main_div">
+                <div class="fff_game_section">
+
+                    <div class="header">
+                        <img src="assets/robux/back.webp" alt="Back" class="back-button" id="backButton">
+                        <h1 class="home-title">TBC RBX Counter</h1>
+                    </div>
+
+                    <div class="game_section" style="height: auto">
+                        <div>
+                            <img src="assets/robux/all_calimage.webp" class="rbximage">
+                        </div>
+                        <div>
+                            <input type="text" class="input-field" id="playerNameInput"
+                                placeholder="Enter Number of Days">
+                            <br>
+                            <button class="continue-btn" id="continueBtn">Count Now</button>
+                        </div>
+                    </div>
+
+                    <div id="rbxbuilder">
+                        <div type="text">
+                            If You are a Builder club member
+                            <br>
+                            You will get :
+                        </div>
+                        <div id="result" class="rbxresult"></div>
+                    </div>
+
+                    <!-- <div class="gadsbanner" id="adsense-container">
+                        <ins class="adsbygoogle" id="adsense-slot" style="display:block"
+                            data-ad-client="ca-pub-7178919035426667" data-ad-slot="6352075293"
+                            data-ad-format="auto"></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div> -->
+
+                   
+                </div>
+
+            </div>
             </div>
 
-            <div class="game_section" style="height: auto">
-              <div>
-                <img
-                  src="assets/robux/all_calimage.webp"
-                  class="rbximage"
-                  loading="eager"
-                  alt="RBX Calculator"
-                />
-              </div>
-              <div
-                style="display: flex; flex-direction: column; gap: 8px; justify-content: flex-start"
-              >
-                <p style="text-align: left; color: #ffffff">Enter Number of Days...</p>
-                <div class="input-wrapper">
-                  <input
-                    type="number"
-                    class="input-field"
-                    id="playerNameInput"
-                    placeholder="Enter Number of Days"
-                    min="1"
-                  />
-                </div>
-                <button class="continue-btn" id="continueBtn">Count Now</button>
-              </div>
-            </div>
-
-            <div id="rbxbuilder" style="display: none">
-              <div class="gradient-box">
-                <div style="display: flex; justify-content: center; align-items: center">
-                  <img
-                    src="assets/robux/win.png"
-                    height="90px"
-                    width="90px"
-                    loading="eager"
-                    alt="Win"
-                  />
-                </div>
-                <div style="display: flex; flex-direction: column; text-align: left">
-                  You will Receive :
-                  <div id="result" class="rbxresult"></div>
-                </div>
-              </div>
-            </div>
-
-            <div class="gadsbanner">
-              <ins
-                class="adsbygoogle"
-                style="display: block"
-                data-ad-client="ca-pub-4788685016218460"
-                data-ad-slot="9417114220"
-                data-ad-format="auto"
-                data-full-width-responsive="true"
-              ></ins>
-              <label
-                style="
-                  display: block;
-                  margin: 0px auto;
-                  width: fit-content;
-                  letter-spacing: 4px;
-                  color: rgb(65, 77, 101);
-                  font:
-                    400 9px / 2 Arial,
-                    sans-serif;
-                  opacity: 0.7;
-                "
-                >ADVERTISEMENT</label
-              >
-            </div>
-          </div>
-        </div>
-      </main>
+        </main>
     </section>
 
     <script>
-      document.getElementById("backButton").addEventListener("click", function () {
-        let done = false;
-        function go() { if (done) return; done = true; window.location.href = "home.html"; }
-        const fallback = setTimeout(go, 8000);
-        adBreak({ type: "next", name: "back_interstitial", beforeAd: () => clearTimeout(fallback), adBreakDone: go });
-      });
+        document.getElementById("backButton").addEventListener("click", function () {
+            window.history.back();
+        });
 
-      window.adsbygoogle = window.adsbygoogle || [];
-      window.adReady = false;
-      const adBreak = window.adBreak = function(o) { adsbygoogle.push(o); };
-      adBreak({ preloadAdBreaks: "on", onReady: () => { window.adReady = true; (adsbygoogle = window.adsbygoogle || []).push({}); } });
+        document.getElementById("continueBtn").addEventListener("click", function () {
+            const days = parseInt(document.getElementById("playerNameInput").value, 10);
 
-      document.getElementById("continueBtn").addEventListener("click", function () {
-        const btn = document.getElementById("continueBtn");
-        const days = parseInt(document.getElementById("playerNameInput").value, 10);
+            if (!isNaN(days) && days > 0) {
+                // Each day = 35 Robux
+                const total = days * 35;
 
-        if (!isNaN(days) && days > 0) {
-          const showResult = () => {
-            const total = days * 35;
-            document.getElementById("result").innerText = total.toFixed(2) + " RBX";
-            document.getElementById("rbxbuilder").style.display = "block";
-            document.getElementById("rbxbuilder").scrollIntoView({ behavior: "smooth" });
-            btn.textContent = "Count Now";
-            btn.disabled = false;
-          };
+                // Show the result
+                document.getElementById("result").innerText = total.toFixed(2) + " RBX";
 
-          if (window.adReady) {
-            btn.textContent = "Calculating... ⏳";
-            btn.disabled = true;
-            adBreak({
-              type: "next",
-              name: "tbc_rbx_result",
-              beforeAd: () => { btn.disabled = true; },
-              afterAd:  () => { btn.disabled = false; btn.textContent = "Count Now"; },
-              adBreakDone: showResult,
-            });
-          } else {
-            showResult();
-          }
-        } else {
-          alert("Please enter a valid number of days");
-        }
-      });
-
-      document.getElementById("playerNameInput").addEventListener("keydown", function (e) {
-        if (e.key === "Enter") document.getElementById("continueBtn").click();
-      });
+                // Make div visible
+                document.getElementById("rbxbuilder").style.display = "block";
+            } else {
+                alert("Please enter a valid number of days");
+            }
+        });
     </script>
-  </body>
+
+    <script src="js/analytics.js"></script>
+</body>
+
+
 </html>

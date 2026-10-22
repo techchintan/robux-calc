@@ -1,660 +1,297 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
+
+
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Spin Wheel</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com/">
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net/">
+    <link rel="preconnect" href="https://tpc.googlesyndication.com/">
+    <link rel="preconnect" href="https://www.gstatic.com/">
+    <link rel="preload"
+        href="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7178919035426667"
+        as="script">
 
-    <link rel="preconnect" href="https://pagead2.googlesyndication.com/" />
-    <link rel="preconnect" href="https://googleads.g.doubleclick.net/" />
-    <script
-      async
-      data-ad-frequency-hint="30s"
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4788685016218460"
-      crossorigin="anonymous"
-    ></script>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="css/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&amp;display=swap" rel="stylesheet">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7178919035426667"
+        crossorigin="anonymous"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-W1XE95VFRP"></script>
     <script>
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({
-          "gtm.start": new Date().getTime(),
-          event: "gtm.js",
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-W1XE95VFRP', {
+            page_path: window.location.pathname
         });
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != "dataLayer" ? "&l=" + l : "";
-        j.async = true;
-        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, "script", "dataLayer", "GTM-PXKTPB4M");
     </script>
 
-    <style>
-      .party-popper {
-        display: none;
-        position: relative;
-      }
+</head>
 
-      .party-popper.show {
-        display: block;
-        animation: fadeIn 0.5s ease forwards;
-      }
-
-      .party-img {
-        width: 120px;
-        height: 120px;
-        object-fit: contain;
-        position: absolute;
-        top: 0px;
-        left: 52%;
-        transform: translateX(-50%);
-        animation: float 2.5s ease-in-out infinite;
-        filter: drop-shadow(0 10px 20px rgba(242, 190, 31, 0.35));
-      }
-
-      .congrats-card {
-        display: none;
-        width: calc(100% - 32px);
-        margin: 60px 16px 22px;
-        background: rgba(234, 208, 126, 0.12);
-        border: 1px solid rgba(242, 190, 31, 0.25);
-        border-radius: 18px;
-        padding: 60px 20px 28px;
-        text-align: center;
-        position: relative;
-        opacity: 0;
-        transform: translateY(20px);
-      }
-
-      .congrats-card.show {
-        display: block;
-        animation: cardReveal 0.6s ease forwards;
-      }
-
-      .congrats-text {
-        font-size: 17px;
-        font-weight: 600;
-        color: #ffffff;
-        margin-bottom: 8px;
-      }
-
-      .reward-text {
-        font-size: 26px;
-        font-weight: 800;
-        color: #f2be1f;
-        letter-spacing: 1px;
-        animation: glow 1.5s ease-in-out infinite alternate;
-      }
-
-      @keyframes float {
-        0% {
-          transform: translate(-50%, 0px);
-        }
-
-        50% {
-          transform: translate(-50%, -8px);
-        }
-
-        100% {
-          transform: translate(-50%, 0px);
-        }
-      }
-
-      @keyframes cardReveal {
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-        }
-
-        to {
-          opacity: 1;
-        }
-      }
-
-      @keyframes glow {
-        from {
-          text-shadow: 0 0 8px rgba(242, 190, 31, 0.4);
-        }
-
-        to {
-          text-shadow: 0 0 18px rgba(242, 190, 31, 0.8);
-        }
-      }
-
-      .wheel-area {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        padding: 10px 20px 30px;
-        position: relative;
-        z-index: 5;
-      }
-
-      .wheel-container {
-        position: relative;
-        width: 270px;
-        height: 270px;
-        overflow: visible;
-      }
-
-      .pointer-top {
-        position: absolute;
-        top: 0px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 0;
-        height: 0;
-        border-left: 13px solid transparent;
-        border-right: 13px solid transparent;
-        border-top: 22px solid #ffffff;
-        z-index: 100;
-        filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.7));
-      }
-
-      .pointer-center {
-        position: absolute;
-        top: calc(50% - 42px);
-        left: 50%;
-        transform: translateX(-50%);
-        width: 0;
-        height: 0;
-        border-left: 9px solid transparent;
-        border-right: 9px solid transparent;
-        border-bottom: 16px solid #ffffff;
-        z-index: 100;
-        filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.6));
-      }
-
-      .wheel-ring {
-        position: absolute;
-        inset: 0;
-        border-radius: 50%;
-        border: 8px solid #ffffff;
-        box-shadow:
-          0 0 0 2px rgba(255, 255, 255, 0.1),
-          0 6px 24px rgba(0, 0, 0, 0.5);
-        z-index: 2;
-        pointer-events: none;
-      }
-
-      #wheelCanvas {
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        display: block;
-      }
-
-      .spin-center {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 58px;
-        height: 58px;
-        border-radius: 50%;
-        background: #ffffff;
-        border: 3px solid #cccccc;
-        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.4);
-        font-size: 11px;
-        font-weight: 800;
-        color: #1a1a2e;
-        letter-spacing: 1.5px;
-        cursor: pointer;
-        z-index: 200;
-        transition: transform 0.1s;
-      }
-
-      .spin-center:hover {
-        transform: translate(-50%, -50%) scale(1.05);
-      }
-
-      .spin-center:active {
-        transform: translate(-50%, -50%) scale(0.97);
-      }
-
-      .spin-center:disabled {
-        opacity: 0.55;
-        cursor: not-allowed;
-        transform: translate(-50%, -50%);
-      }
-    </style>
-  </head>
-  <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PXKTPB4M"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<body>
     <section>
-      <main>
-        <div class="main_div">
-          <!-- Header -->
-          <div class="header" style="width: 100%">
-            <img src="assets/robux/back.webp" alt="Back" class="back-button" id="backBtn" />
-            <h1 class="home-title">Spin Wheel</h1>
-          </div>
+        <main>
+            <div class="bg-top"></div>
+            <div class="bg-bottom"></div>
+            <div class="main_div">
+                <div class="fff_game_section">
 
-          <!-- Congrats Card -->
-          <div style="width: 100%">
-            <div class="party-popper" id="partyPopper">
-              <img class="party-img" src="assets/robux/win.png" alt="Congrats" loading="lazy" />
+                    <div class="header">
+                        <img src="assets/robux/back.webp" alt="Back" class="back-button" id="backButton">
+                        <h1 class="home-title">Spin Wheel</h1>
+                    </div>
+
+                    <div class="gadsbanner" id="adsense-container">
+                        <ins class="adsbygoogle" id="adsense-slot" style="display:block"
+                            data-ad-client="ca-pub-7178919035426667" data-ad-slot="1473464117"
+                            data-ad-format="auto"></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
+
+                    <div class="game_section" style="height: auto">
+                        <canvas id="wheel"></canvas>
+                        <button id="spin-btn">Spin</button>
+                        <img class="imgspin" src="assets/robux/iv_weel_point.png" alt="spinner arrow" />
+                    </div>
+                    <div id="final-value">
+                        <p>Click On The Spin Button To Start</p>
+                    </div>
+
+                    <!-- Win Coins Popup Dialog -->
+                    <div id="dialogBox" class="dialog-overlay hidden">
+                        <div class="dialog-box">
+                            <img src="assets/robux/skiff_cong.webp" alt="Congratulations" class="dialog-icon">
+                            <h2 id="dialogTitle"
+                                style="color: #ff7655; font-size: 22px; font-weight: bold; margin: 10px 0;">
+                                Congratulations!</h2>
+                            <p class="countryP" id="winCoinsMsg"
+                                style="color: #333; font-size: 17px; margin: 10px 0 20px; font-weight: 600;">You won 0
+                                Coins!</p>
+                            <a href="home.html" id="claimWinBtn" style="display: block; text-decoration: none;">
+                                <img src="assets/robux/skiff_okbtn.png" class="dialog-button" alt="OK"
+                                    style="cursor: pointer; max-width: 220px; margin: 0 auto; display: block;">
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="congrats-card" id="congratsCard">
-              <p class="congrats-text">Congratulation</p>
-              <p class="reward-text" id="rewardDisplay">Your Reward: 0</p>
-              <p
-                id="spinCountdownMsg"
-                style="font-size: 13px; color: #aaa; margin: 10px 0 0; display: none"
-              ></p>
-              <div style="display: flex; gap: 10px; margin-top: 16px; justify-content: center">
-                <button
-                  class="continue-btn"
-                  id="spinAgainBtn"
-                  style="flex: 1; padding: 12px 8px; font-size: 14px"
-                >
-                  Spin Again
-                </button>
-                <button
-                  class="continue-btn"
-                  onclick="goHomeWithAd()"
-                  style="
-                    flex: 1;
-                    padding: 12px 8px;
-                    font-size: 14px;
-                    background: linear-gradient(106.87deg, #1a3a6b 0%, #1e4f8c 100%);
-                  "
-                >
-                  Go Home
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Cross-promo (shown after spin result) -->
-          <div class="promo-strip" id="spinPromo" style="display: none">
-            <span class="promo-strip-title">Try These Next</span>
-            <div class="promo-scroll">
-              <a href="scratch-win.html" class="promo-card">
-                <img src="assets/robux/scrarch_image.webp" alt="Scratch Card" loading="lazy" />
-                <span class="promo-card-name">Scratch Card</span>
-              </a>
-              <a href="daily-rbx.html" class="promo-card">
-                <img src="assets/robux/gift_image.webp" alt="Daily RBX" loading="lazy" />
-                <span class="promo-card-name">Daily RBX</span>
-              </a>
-              <a href="logic-quiz.html" class="promo-card">
-                <img src="assets/robux/logic_image.webp" alt="Logic Quiz" loading="lazy" />
-                <span class="promo-card-name">Logic Quiz</span>
-              </a>
-            </div>
-          </div>
-
-          <!-- Wheel -->
-          <div class="wheel-area">
-            <div class="wheel-container">
-              <div class="wheel-ring"></div>
-              <canvas id="wheelCanvas" width="270" height="270"></canvas>
-              <div class="pointer-top"></div>
-              <div class="pointer-center"></div>
-              <button class="spin-center" id="spinBtn">SPIN</button>
-            </div>
-          </div>
-
-          <div class="gadsbanner">
-            <ins
-              class="adsbygoogle"
-              style="display: block"
-              data-ad-client="ca-pub-4788685016218460"
-              data-ad-slot="9417114220"
-              data-ad-format="auto"
-              data-full-width-responsive="true"
-            ></ins>
-            <label
-              style="
-                display: block;
-                margin: 0px auto;
-                width: fit-content;
-                letter-spacing: 4px;
-                color: rgb(65, 77, 101);
-                font:
-                  400 9px / 2 Arial,
-                  sans-serif;
-                opacity: 0.7;
-              "
-              >ADVERTISEMENT</label
-            >
-          </div>
-          <div class="bottom-nav-spacer"></div>
-        </div>
-      </main>
+        </main>
     </section>
 
+    <!-- Chart JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <!-- Chart JS Plugin for displaying text over chart -->
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-datalabels/2.1.0/chartjs-plugin-datalabels.min.js">
+        </script>
+    <!-- Script -->
     <script>
-      // ── Back button ──
-      document.getElementById("backBtn").addEventListener("click", () => {
-        let done = false;
-        function goHome() {
-          if (done) return;
-          done = true;
-          window.location.href = "home.html";
-        }
-        const fallback = setTimeout(goHome, 8000);
-        adBreak({
-          type: "next",
-          name: "spin_back_interstitial",
-          beforeAd: () => { clearTimeout(fallback); document.getElementById("backBtn").disabled = true; },
-          adBreakDone: () => {
-            clearTimeout(fallback);
-            goHome();
-          },
-        });
-      });
-
-      const segments = [159, 125, 237, 1, 666, 475, 400, 79, 131, 777];
-      const colors = [
-        "#0F1C31",
-        "#2E77E9",
-        "#0F1C31",
-        "#2E77E9",
-        "#0F1C31",
-        "#2E77E9",
-        "#0F1C31",
-        "#2E77E9",
-        "#0F1C31",
-        "#2E77E9",
-      ];
-      const NUM_SEG = segments.length;
-      const SEG_ANGLE = (2 * Math.PI) / NUM_SEG; // radians per segment
-
-      const canvas = document.getElementById("wheelCanvas");
-      const ctx = canvas.getContext("2d");
-      const spinBtn = document.getElementById("spinBtn");
-      const congratsCard = document.getElementById("congratsCard");
-      const rewardDisplay = document.getElementById("rewardDisplay");
-
-      let currentAngle = 0;
-
-      function drawWheel(rotation) {
-        const cx = canvas.width / 2;
-        const cy = canvas.height / 2;
-        const r = cx - 2;
-
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        for (let i = 0; i < NUM_SEG; i++) {
-          const startAngle = rotation + i * SEG_ANGLE;
-          const endAngle = startAngle + SEG_ANGLE;
-
-          ctx.beginPath();
-          ctx.moveTo(cx, cy);
-          ctx.arc(cx, cy, r, startAngle, endAngle);
-          ctx.closePath();
-          ctx.fillStyle = colors[i];
-          ctx.fill();
-
-          ctx.strokeStyle = "rgba(255,255,255,0.15)";
-          ctx.lineWidth = 1.5;
-          ctx.stroke();
-
-          ctx.save();
-          ctx.translate(cx, cy);
-          ctx.rotate(startAngle + SEG_ANGLE / 2);
-          ctx.textAlign = "right";
-          ctx.fillStyle = "#ffffff";
-          ctx.font = "bold 14px Montserrat, sans-serif";
-          ctx.fillText(segments[i], r - 14, 5);
-          ctx.restore();
-        }
-
-        ctx.beginPath();
-        ctx.arc(cx, cy, 30, 0, 2 * Math.PI);
-        ctx.fillStyle = "#ffffff";
-        ctx.fill();
-      }
-
-      drawWheel(currentAngle);
-
-      let spinning = false;
-      let speed = 0;
-      let targetAngle = 0;
-
-      function spinLoop() {
-        if (!spinning) return;
-
-        currentAngle += speed;
-        drawWheel(currentAngle);
-
-        speed *= 0.985;
-
-        if (speed < 0.001) {
-          spinning = false;
-          showResult();
-          return;
-        }
-
-        requestAnimationFrame(spinLoop);
-      }
-
-      function safeGetItem(key) {
-        try {
-          return localStorage.getItem(key);
-        } catch (e) {
-          console.warn("LocalStorage getItem blocked:", e);
-          return null;
-        }
-      }
-
-      function safeSetItem(key, value) {
-        try {
-          localStorage.setItem(key, value);
-        } catch (e) {
-          console.warn("LocalStorage setItem blocked:", e);
-        }
-      }
-
-      function showResult() {
-        const rot = currentAngle % (2 * Math.PI);
-
-        const localPointer = (((-Math.PI / 2 - rot) % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
-        const segIndex = Math.floor(localPointer / SEG_ANGLE) % NUM_SEG;
-        const won = segments[segIndex];
-
-        rewardDisplay.textContent = `Your Reward: ${won}`;
-
-        let coins = parseInt(safeGetItem("coins")) || 0;
-        coins += won;
-        safeSetItem("coins", coins);
-
-        spinBtn.disabled = false;
-        startCountdownDisplay();
-        document.getElementById("spinPromo").style.display = "block";
-
-        adBreak({
-          type: "next",
-          name: "spin_result_interstitial",
-          beforeAd: () => { document.getElementById("spinAgainBtn").disabled = true; },
-          afterAd:  () => { document.getElementById("spinAgainBtn").disabled = false; },
-          adBreakDone: () => {
-            document.getElementById("partyPopper").classList.add("show");
-            congratsCard.classList.add("show");
-          },
-        });
-      }
-
-      window.adsbygoogle = window.adsbygoogle || [];
-      window.adReady = false;
-      const adBreak = (window.adBreak = function (o) {
-        adsbygoogle.push(o);
-      });
-      adBreak({
-        preloadAdBreaks: "on",
-        onReady: () => {
-          window.adReady = true;
-          (adsbygoogle = window.adsbygoogle || []).push({});
+        const wheel = document.getElementById("wheel");
+        const spinBtn = document.getElementById("spin-btn");
+        const finalValue = document.getElementById("final-value");
+        //Object that stores values of minimum and maximum angle for a value
+        const rotationValues = [{
+            minDegree: 0,
+            maxDegree: 30,
+            value: 0
         },
-      });
+        {
+            minDegree: 31,
+            maxDegree: 90,
+            value: "20 Rewards"
+        },
+        {
+            minDegree: 91,
+            maxDegree: 150,
+            value: "120 Rewards"
+        },
+        {
+            minDegree: 151,
+            maxDegree: 210,
+            value: "100 Rewards"
+        },
+        {
+            minDegree: 211,
+            maxDegree: 270,
+            value: "80 Rewards"
+        },
+        {
+            minDegree: 271,
+            maxDegree: 330,
+            value: "60 Rewards"
+        },
+        {
+            minDegree: 331,
+            maxDegree: 360,
+            value: "40 Rewards"
+        },
+        ];
+        //Size of each piece
+        const data = [16, 16, 16, 16, 16, 16];
+        //background color for each piece
+        var pieColors = [
+            "#DA0000",
+            "#DA00B4",
+            "#63ADB9",
+            "#528820",
+            "#95D952",
+            "#E69423    ",
+        ];
+        //Create chart
+        let myChart = new Chart(wheel, {
+            //Plugin for displaying text on pie chart
+            plugins: [ChartDataLabels],
+            //Chart Type Pie
+            type: "pie",
+            data: {
+                //Labels(values which are to be displayed on chart)
+                labels: [20, 40, 60, 80, 100, 120],
+                //Settings for dataset/pie
+                datasets: [{
+                    backgroundColor: pieColors,
+                    data: data,
+                },],
+            },
+            options: {
+                //Responsive chart
+                responsive: true,
+                animation: {
+                    duration: 0
+                },
+                plugins: {
+                    //hide tooltip and legend
+                    tooltip: false,
+                    legend: {
+                        display: false,
+                    },
+                    //display labels inside pie chart
+                    datalabels: {
+                        color: "#ffffff",
+                        formatter: (_, context) => context.chart.data.labels[context.dataIndex],
+                        font: {
+                            size: 24
+                        },
+                    },
+                },
+            },
+        });
+        //display value based on the randomAngle
+        const valueGenerator = (angleValue) => {
+            for (let i of rotationValues) {
+                //if the angleValue is between min and max then display it
+                if (angleValue >= i.minDegree && angleValue <= i.maxDegree) {
+                    const coinsWon = parseInt(i.value, 10) || 0;
 
-      function todayStr() {
-        return new Date().toISOString().split("T")[0];
-      }
+                    // Calculate and add won coins to localStorage
+                    try {
+                        let currentCoins = parseInt(localStorage.getItem("coins") || "0", 10) || 0;
+                        currentCoins += coinsWon;
+                        localStorage.setItem("coins", currentCoins.toString());
+                    } catch (e) {
+                        console.error("Error updating coins:", e);
+                    }
 
-      function hasSpunToday() {
-        return localStorage.getItem("lastSpinDate") === todayStr();
-      }
+                    // Reset status text under wheel
+                    finalValue.innerHTML = `<p>Spin Completed!</p>`;
 
-      function recordSpinToday() {
-        localStorage.setItem("lastSpinDate", todayStr());
-      }
+                    // Show Win Coins Popup after a short delay so user can see where the wheel stopped
+                    setTimeout(() => {
+                        const dialogBox = document.getElementById("dialogBox");
+                        const dialogTitle = document.getElementById("dialogTitle");
+                        const winCoinsMsg = document.getElementById("winCoinsMsg");
 
-      function secondsUntilMidnight() {
-        const now = new Date();
-        const midnight = new Date(now);
-        midnight.setHours(24, 0, 0, 0);
-        return Math.ceil((midnight - now) / 1000);
-      }
+                        if (coinsWon > 0) {
+                            dialogTitle.textContent = "Congratulations!";
+                            winCoinsMsg.innerHTML = `You won <span style="color: #4caf50; font-size: 22px; font-weight: bold;">${coinsWon}</span> Coins!`;
+                        } else {
+                            dialogTitle.textContent = "Better Luck Next Time!";
+                            winCoinsMsg.textContent = "You won 0 Coins!";
+                        }
 
-      function formatCountdown(secs) {
-        const h = Math.floor(secs / 3600);
-        const m = Math.floor((secs % 3600) / 60);
-        const s = secs % 60;
-        return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
-      }
-
-      let countdownTimer = null;
-
-      function startCountdownDisplay() {
-        const msg = document.getElementById("spinCountdownMsg");
-        if (!msg) return;
-        msg.style.display = "block";
-        clearInterval(countdownTimer);
-        countdownTimer = setInterval(() => {
-          const secs = secondsUntilMidnight();
-          msg.textContent = `Next free spin in: ${formatCountdown(secs)}`;
-          if (secs <= 0) {
-            clearInterval(countdownTimer);
-            msg.textContent = "Free spin ready!";
-          }
-        }, 1000);
-        const secs = secondsUntilMidnight();
-        msg.textContent = `Next free spin in: ${formatCountdown(secs)}`;
-      }
-
-      function startSpin() {
-        spinBtn.disabled = true;
-        congratsCard.classList.remove("show");
-        document.getElementById("partyPopper").classList.remove("show");
-        clearInterval(countdownTimer);
-        const msg = document.getElementById("spinCountdownMsg");
-        if (msg) msg.style.display = "none";
-
-        const landSegment = Math.floor(Math.random() * NUM_SEG);
-        const segCenter = landSegment * SEG_ANGLE + SEG_ANGLE / 2;
-        const extraSpins = (5 + Math.floor(Math.random() * 5)) * 2 * Math.PI;
-        const targetFinal = (-Math.PI / 2 - segCenter + 2 * Math.PI * 10) % (2 * Math.PI);
-        const totalRotation = extraSpins + targetFinal - (currentAngle % (2 * Math.PI));
-
-        speed = totalRotation / 200;
-        spinning = true;
-        requestAnimationFrame(spinLoop);
-      }
-
-      document.getElementById("spinAgainBtn").addEventListener("click", () => {
-        if (spinning) return;
-        adBreak({
-          type: "reward",
-          name: "spin_again_reward",
-          beforeReward: (showAdFn) => { showAdFn(); },
-          adViewed: () => {
-            recordSpinToday();
-            startSpin();
-          },
-          adDismissed: () => {
-            recordSpinToday();
-            startSpin();
-          },
-          adBreakDone: (info) => {
-            if (info.breakStatus !== "viewed" && info.breakStatus !== "dismissed") {
-              startCountdownDisplay();
+                        dialogBox.classList.remove("hidden");
+                    }, 1200);
+                    break;
+                }
             }
-          },
-        });
-      });
+        };
 
-      spinBtn.addEventListener("click", () => {
-        if (spinning) return;
-        recordSpinToday();
-        if (window.adReady) {
-          adBreak({
-            type: "start",
-            name: "spin_wheel",
-            beforeAd: () => { spinBtn.disabled = true; },
-            afterAd:  () => { spinBtn.disabled = false; },
-            adBreakDone: () => startSpin(),
-          });
-        } else {
-          startSpin();
-        }
-      });
-
-      function goHomeWithAd() {
-        let done = false;
-        function go() {
-          if (done) return;
-          done = true;
-          window.location.href = "home.html";
-        }
-        const fallback = setTimeout(go, 8000);
-        adBreak({
-          type: "next",
-          name: "spin_gohome_interstitial",
-          beforeAd: () => { clearTimeout(fallback); document.querySelector('[onclick="goHomeWithAd()"]') && (document.querySelector('[onclick="goHomeWithAd()"]').disabled = true); },
-          adBreakDone: () => {
-            clearTimeout(fallback);
-            go();
-          },
+        // Click on popup OK button redirects directly to home.html
+        document.getElementById("claimWinBtn").addEventListener("click", function (e) {
+            e.preventDefault();
+            window.location.href = "home.html";
         });
-      }
 
-      // Promo strip link interstitial
-      document.querySelectorAll(".promo-card").forEach(function (link) {
-        link.addEventListener("click", function (e) {
-          e.preventDefault();
-          var href = this.getAttribute("href");
-          var navigated = false;
-          function go() {
-            if (navigated) return;
-            navigated = true;
-            window.location.href = href;
-          }
-          var fallback = setTimeout(go, 8000);
-          adBreak({
-            type: "next",
-            name: "promo_nav",
-            beforeAd: function () { clearTimeout(fallback); },
-            adBreakDone: function () { clearTimeout(fallback); go(); },
-          });
+        //Spinner count
+        let count = 0;
+        //100 rotations for animation and last rotation for result
+        let resultValue = 101;
+        let isFirstSpin = true;
+
+        //Start spinning
+        spinBtn.addEventListener("click", () => {
+            // First spin was paid on entry from home (10 coins). If user spins again, verify & deduct 10 coins
+            if (!isFirstSpin) {
+                let currentCoins = parseInt(localStorage.getItem("coins") || "0", 10) || 0;
+                if (currentCoins < 10) {
+                    finalValue.innerHTML = `<p style="color:#ff6b6b;font-weight:600;">You need 10 Coins to spin again!</p>`;
+                    return;
+                }
+                currentCoins -= 10;
+                localStorage.setItem("coins", currentCoins.toString());
+            }
+            isFirstSpin = false;
+
+            spinBtn.disabled = true;
+            //Empty final value
+            finalValue.innerHTML = `<p>Good Luck!</p>`;
+            //Generate random degrees to stop at
+            let randomDegree = Math.floor(Math.random() * (355 - 0 + 1) + 0);
+            //Interval for rotation animation
+            let rotationInterval = window.setInterval(() => {
+                //Set rotation for piechart
+                /*
+                Initially to make the piechart rotate faster we set resultValue to 101 so it rotates 101 degrees at a time and this reduces by 1 with every count. Eventually on last rotation we rotate by 1 degree at a time.
+                */
+                myChart.options.rotation = myChart.options.rotation + resultValue;
+                //Update chart with new value;
+                myChart.update();
+                //If rotation>360 reset it back to 0
+                if (myChart.options.rotation >= 360) {
+                    count += 1;
+                    resultValue -= 5;
+                    myChart.options.rotation = 0;
+                } else if (count > 15 && myChart.options.rotation == randomDegree) {
+                    valueGenerator(randomDegree);
+                    clearInterval(rotationInterval);
+                    count = 0;
+                    resultValue = 101;
+                }
+            }, 10);
         });
-      });
     </script>
 
-    <script src="js/nav.js"></script>
-    <nav class="bottom-nav">
-      <a href="home.html"><span class="nav-icon">🏠</span><span>Home</span></a>
-      <a href="spin_to_win.html" class="active"
-        ><span class="nav-icon">🎰</span><span>Spin</span></a
-      >
-      <a href="scratch-win.html"><span class="nav-icon">🎫</span><span>Scratch</span></a>
-      <a href="logic-quiz.html"><span class="nav-icon">🧠</span><span>Quiz</span></a>
-      <a href="meme.html"><span class="nav-icon">😂</span><span>Memes</span></a>
-    </nav>
-  </body>
+    <script>
+        document.getElementById("backButton").addEventListener("click", function () {
+            window.history.back();
+        });
+
+
+    </script>
+
+    <script src="js/analytics.js"></script>
+</body>
+
+
 </html>

@@ -1,0 +1,189 @@
+{
+    "quizzes": [
+        {
+            "id": "roblox-basics",
+            "title": "Roblox Basics",
+            "description": "How well do you know the fundamentals of Roblox?",
+            "icon": "assets/robux/quiz_cup.webp",
+            "questions": [
+                {
+                    "question": "What is the name of Roblox's virtual currency?",
+                    "options": ["Robux", "Roblocks", "RoCoins", "RBucks"],
+                    "answer": 0
+                },
+                {
+                    "question": "What is a user-created Roblox game called?",
+                    "options": ["Level", "Experience", "Session", "Map"],
+                    "answer": 1
+                },
+                {
+                    "question": "Which company owns Roblox?",
+                    "options": ["Epic Games", "Roblox Corporation", "Mojang", "Unity Technologies"],
+                    "answer": 1
+                },
+                {
+                    "question": "What is the default avatar body type called?",
+                    "options": ["Classic", "Rthro", "Dynamic Head", "Woodcut"],
+                    "answer": 0
+                },
+                {
+                    "question": "What programming language is used to script Roblox games?",
+                    "options": ["Python", "Java", "Lua", "C++"],
+                    "answer": 2
+                },
+                {
+                    "question": "What is the Roblox game creation tool called?",
+                    "options": ["Roblox Maker", "Roblox Studio", "Roblox Builder", "Roblox Engine"],
+                    "answer": 1
+                }
+            ]
+        },
+        {
+            "id": "robux-currency",
+            "title": "Robux & Currency",
+            "description": "Test your knowledge about Robux, pricing and spending.",
+            "icon": "assets/robux/quiz_cup.webp",
+            "questions": [
+                {
+                    "question": "How can you legitimately earn Robux?",
+                    "options": ["Selling items on the marketplace", "Third-party generator sites", "Sharing your password", "Editing game files"],
+                    "answer": 0
+                },
+                {
+                    "question": "What is a Roblox subscription that grants a monthly Robux stipend called?",
+                    "options": ["Roblox Plus", "Roblox Premium", "Roblox Gold", "Roblox VIP"],
+                    "answer": 1
+                },
+                {
+                    "question": "What percentage cut does Roblox typically take from marketplace sales?",
+                    "options": ["A small cut", "None, sellers keep 100%", "A large majority cut", "It's random each time"],
+                    "answer": 2
+                },
+                {
+                    "question": "What can Robux be used for?",
+                    "options": ["Buying avatar items and game passes", "Changing your username for free", "Unlocking Wi-Fi", "Deleting other players' games"],
+                    "answer": 0
+                },
+                {
+                    "question": "What should you do if a site promises 'free unlimited Robux'?",
+                    "options": ["Enter your password immediately", "Avoid it, it's likely a scam", "Share it with friends first", "Give them your email and birthday"],
+                    "answer": 1
+                },
+                {
+                    "question": "Where can you safely purchase Robux?",
+                    "options": ["Only from the official Roblox website or app", "Random Discord links", "Any website that shows a Robux logo", "Comments under YouTube videos"],
+                    "answer": 0
+                }
+            ]
+        },
+        {
+            "id": "popular-games",
+            "title": "Popular Roblox Games",
+            "description": "Do you know your way around the most popular experiences?",
+            "icon": "assets/robux/quiz_cup.webp",
+            "questions": [
+                {
+                    "question": "Which game involves guessing what other players are drawing?",
+                    "options": ["Adopt Me!", "Blox Fruits", "Guess the Build", "Brookhaven"],
+                    "answer": 2
+                },
+                {
+                    "question": "Which Roblox game is themed around raising and trading pets?",
+                    "options": ["Adopt Me!", "Tower of Hell", "Arsenal", "Bloxburg"],
+                    "answer": 0
+                },
+                {
+                    "question": "Which game is a fast-paced obstacle course focused on climbing towers?",
+                    "options": ["Murder Mystery 2", "Tower of Hell", "Piggy", "Jailbreak"],
+                    "answer": 1
+                },
+                {
+                    "question": "Which game lets you roam a city as a cop or a robber?",
+                    "options": ["Jailbreak", "Blox Fruits", "Royale High", "Natural Disaster Survival"],
+                    "answer": 0
+                },
+                {
+                    "question": "Which game features a roleplay town with jobs and houses?",
+                    "options": ["Arsenal", "Brookhaven RP", "Piggy", "MeepCity"],
+                    "answer": 1
+                },
+                {
+                    "question": "Which game is an anime-inspired fighting and pirate adventure game?",
+                    "options": ["Blox Fruits", "Royale High", "Adopt Me!", "Work at a Pizza Place"],
+                    "answer": 0
+                }
+            ]
+        },
+        {
+            "id": "roblox-history",
+            "title": "Roblox History & Facts",
+            "description": "Interesting trivia from Roblox's journey over the years.",
+            "icon": "assets/robux/quiz_cup.webp",
+            "questions": [
+                {
+                    "question": "In what year was Roblox originally released?",
+                    "options": ["2004", "2006", "2010", "2013"],
+                    "answer": 1
+                },
+                {
+                    "question": "Who co-founded Roblox alongside Erik Cassel?",
+                    "options": ["David Baszucki", "Markus Persson", "Gabe Newell", "Tim Sweeney"],
+                    "answer": 0
+                },
+                {
+                    "question": "What was Roblox's original name during early development?",
+                    "options": ["DynaBlocks", "BlockWorld", "CubeCraft", "PlayForge"],
+                    "answer": 0
+                },
+                {
+                    "question": "In what year did Roblox go public on the stock market?",
+                    "options": ["2018", "2019", "2020", "2021"],
+                    "answer": 3
+                },
+                {
+                    "question": "What is Roblox's annual community event that awards top creators called?",
+                    "options": ["Bloxy Awards", "RoblCon", "Studio Summit", "CreatorFest"],
+                    "answer": 0
+                }
+            ]
+        },
+        {
+            "id": "safety-tips",
+            "title": "Roblox Safety & Tips",
+            "description": "Stay safe and play smart with these essential tips.",
+            "icon": "assets/robux/quiz_cup.webp",
+            "questions": [
+                {
+                    "question": "What should you never share with strangers online?",
+                    "options": ["Your password and personal info", "Your favorite game genre", "Your username", "Your avatar's outfit"],
+                    "answer": 0
+                },
+                {
+                    "question": "What security feature adds an extra layer of protection to your account?",
+                    "options": ["Two-Step Verification", "Auto-login", "Guest Mode", "Public Profile"],
+                    "answer": 0
+                },
+                {
+                    "question": "What should you do if another player is being abusive in chat?",
+                    "options": ["Report and block them", "Reply with insults", "Give them your account details", "Ignore Roblox's rules"],
+                    "answer": 0
+                },
+                {
+                    "question": "Why should you avoid clicking links promising free Robux?",
+                    "options": ["They are usually scams or phishing attempts", "They always work instantly", "They are made by Roblox staff", "They give double rewards"],
+                    "answer": 0
+                },
+                {
+                    "question": "What setting can parents use to manage what a child sees on Roblox?",
+                    "options": ["Parental Controls", "Guest Access", "Trade Lock", "Studio Mode"],
+                    "answer": 0
+                },
+                {
+                    "question": "What should you check before trusting a trade offer?",
+                    "options": ["That it's fair and from a legitimate account", "Nothing, all trades are safe", "Only the item's color", "The other player's avatar outfit"],
+                    "answer": 0
+                }
+            ]
+        }
+    ]
+}

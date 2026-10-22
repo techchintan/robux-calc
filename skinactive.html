@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Rbux Skin</title>
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com/">
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net/">
+    <link rel="preconnect" href="https://tpc.googlesyndication.com/">
+    <link rel="preconnect" href="https://www.gstatic.com/">
+    <link rel="preload"
+        href="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7178919035426667"
+        as="script">
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="css/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&amp;display=swap" rel="stylesheet">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7178919035426667"
+        crossorigin="anonymous"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-W1XE95VFRP"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-W1XE95VFRP', {
+            page_path: window.location.pathname
+        });
+    </script>
+
+    <script src="js/skin_data.js"></script>
+</head>
+
+<body>
+
+    <section>
+        <main>
+            <div class="bg-top"></div>
+            <div class="bg-bottom"></div>
+            <div class="main_div">
+                <div class="fff_game_section">
+
+                    <div class="header">
+                        <img src="assets/robux/back.webp" alt="Back" class="back-button" id="backButton">
+                        <h1 class="home-title">Rbux Skin</h1>
+                    </div>
+
+                    <img id="skinImage" src="assets/robux/favskin1.webp" alt="Rbux Skin" style="width: 70%;">
+                    <script>
+                        (function () {
+                            var params = new URLSearchParams(window.location.search);
+                            var skinKey = params.get("skin") || localStorage.getItem("selectedSkin") || "favskin1";
+                            var validSkins = ["favskin1", "favskin2", "favskin3", "favskin4", "favskin5", "favskin6"];
+                            if (validSkins.indexOf(skinKey) !== -1) {
+                                document.getElementById("skinImage").src = "assets/robux/" + skinKey + ".webp";
+                            }
+                        })();
+                    </script>
+
+                    <!-- <div class="gadsbanner" id="adsense-container">
+                        <ins class="adsbygoogle" id="adsense-slot" style="display:block"
+                            data-ad-client="ca-pub-7178919035426667" data-ad-slot="7665156967"
+                            data-ad-format="auto"></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div> -->
+
+                    
+
+                    <div class="contentButton">
+                        <p class="countryP" id="skinDescription">This Roblox avatar features a stylish look with a black
+                            hoodie branded with
+                            “ROBLOX” paired with ripped black jeans and trendy sneakers. The spiky black hairstyle with
+                            a red headband adds a bold touch. Perfect for casual yet cool gameplay, this character
+                            stands out with confidence and modern streetwear vibes.</p>
+                        <button id="downloadSkinBtn" class="download-skin-btn no-ad" type="button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                            <span>Download Now</span>
+                        </button>
+                    </div>
+
+                </div>
+
+                <!-- Dialog Box -->
+                <div id="dialogBox" class="dialog-overlay hidden">
+                    <div class="dialog-box">
+                        <img src="assets/robux/skiff_cong.webp" alt="Party Icon" class="dialog-icon">
+                        <h2>Congratulation</h2>
+                        <p class="countryP">Your Rbux Skin has been downloaded successfully.</p>
+                        <div class="earnCoinSection">
+                            <a href="home.html">
+                                <img src="assets/robux/skiff_okbtn.png" class="dialog-button">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+    </section>
+
+    <style>
+        .download-skin-btn {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 14px 20px;
+            background: linear-gradient(135deg, #ff852b 0%, #ff5722 100%);
+            color: #ffffff;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            border-radius: var(--btn-rounded, 393px);
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(255, 87, 34, 0.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .download-skin-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 22px rgba(255, 87, 34, 0.6);
+        }
+
+        .download-skin-btn:active {
+            transform: translateY(1px);
+        }
+
+        .download-toast {
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(30, 30, 30, 0.95);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 30px;
+            border: 1px solid #4caf50;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            font-size: 15px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 9999;
+            animation: fadeInToast 0.3s ease-out;
+        }
+
+        @keyframes fadeInToast {
+            from {
+                opacity: 0;
+                transform: translate(-50%, 15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
+        }
+    </style>
+
+    <script>
+        var skinDescriptions = {
+            favskin1: "This Roblox avatar features a stylish look with a black hoodie branded with “ROBLOX” paired with ripped black jeans and trendy sneakers. The spiky black hairstyle with a red headband adds a bold touch. Perfect for casual yet cool gameplay, this character stands out with confidence and modern streetwear vibes.",
+            favskin2: "An iconic anime-inspired avatar featuring custom styled hair, vibrant jacket design, and sleek accessories. Ideal for players looking to stand out with bold personality and high-energy style across popular Roblox worlds.",
+            favskin3: "Equipped with futuristic cybernetic accents, bold contrast tones, and neon-ready styling. This avatar is designed for gamers who love high-tech themes and sharp modern design.",
+            favskin4: "A cute and trendy avatar dressed in coordinated pastel streetwear with modern accessories. A versatile and popular choice for social and adventure gameplay.",
+            favskin5: "Featuring dark tactical apparel with glowing neon accents and premium gear. This avatar exudes confidence, stealth, and futuristic gaming prestige.",
+            favskin6: "A powerful warrior avatar featuring legendary combat apparel, ornate armor touches, and an epic battle-ready aesthetic. Stand out in any Roblox action game with true champion style."
+        };
+
+        var skinFiles = {
+            favskin1: { path: "assets/robux/favskin1.png", name: "Roblox_Streetwear_Skin.png" },
+            favskin2: { path: "assets/robux/favskin2.png", name: "Roblox_Anime_Hero_Skin.png" },
+            favskin3: { path: "assets/robux/favskin3.png", name: "Roblox_Cyberpunk_Skin.png" },
+            favskin4: { path: "assets/robux/favskin4.png", name: "Roblox_Trendy_Fashion_Skin.png" },
+            favskin5: { path: "assets/robux/favskin5.png", name: "Roblox_Neon_Tactical_Skin.png" },
+            favskin6: { path: "assets/robux/favskin6.png", name: "Roblox_Legendary_Warrior_Skin.png" }
+        };
+
+        var urlParams = new URLSearchParams(window.location.search);
+        var currentSkin = urlParams.get("skin") || localStorage.getItem("selectedSkin") || "favskin1";
+
+        if (skinDescriptions[currentSkin]) {
+            var skinImg = document.getElementById("skinImage");
+            if (skinImg) skinImg.src = "assets/robux/" + currentSkin + ".webp";
+            var descElem = document.getElementById("skinDescription");
+            if (descElem) descElem.textContent = skinDescriptions[currentSkin];
+        }
+
+        function showToast(msg) {
+            var existing = document.querySelector(".download-toast");
+            if (existing) existing.remove();
+            var toast = document.createElement("div");
+            toast.className = "download-toast";
+            toast.innerHTML = '<span>🎉</span> <span>' + msg + '</span>';
+            document.body.appendChild(toast);
+            setTimeout(function () { toast.remove(); }, 3500);
+        }
+
+        function downloadCurrentSkin() {
+            var fileInfo = skinFiles[currentSkin] || skinFiles.favskin1;
+
+            try {
+                var dataUri = (window.skinBase64Data && window.skinBase64Data[currentSkin]) ? window.skinBase64Data[currentSkin] : null;
+                if (dataUri) {
+                    var byteCharacters = atob(dataUri.split(",")[1]);
+                    var byteNumbers = new Array(byteCharacters.length);
+                    for (var i = 0; i < byteCharacters.length; i++) {
+                        byteNumbers[i] = byteCharacters.charCodeAt(i);
+                    }
+                    var byteArray = new Uint8Array(byteNumbers);
+                    var blob = new Blob([byteArray], { type: "image/png" });
+                    var blobUrl = window.URL.createObjectURL(blob);
+
+                    var link = document.createElement("a");
+                    link.className = "no-ad";
+                    link.href = blobUrl;
+                    link.download = fileInfo.name;
+                    link.addEventListener("click", function (e) {
+                        e.stopPropagation();
+                    });
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+
+                    setTimeout(function () {
+                        window.URL.revokeObjectURL(blobUrl);
+                    }, 5000);
+
+                    showToast("Skin downloaded successfully!");
+                    setTimeout(function () {
+                        document.getElementById("dialogBox").classList.remove("hidden");
+                    }, 600);
+                    return;
+                }
+            } catch (err) {
+                console.error("Base64 blob conversion failed:", err);
+            }
+
+            // Fallback using direct fetch & blob or direct link
+            fetch(fileInfo.path)
+                .then(function (res) { return res.blob(); })
+                .then(function (blob) {
+                    var blobUrl = window.URL.createObjectURL(blob);
+                    var link = document.createElement("a");
+                    link.className = "no-ad";
+                    link.href = blobUrl;
+                    link.download = fileInfo.name;
+                    link.addEventListener("click", function (e) {
+                        e.stopPropagation();
+                    });
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    setTimeout(function () {
+                        window.URL.revokeObjectURL(blobUrl);
+                    }, 5000);
+                    showToast("Skin downloaded successfully!");
+                    setTimeout(function () {
+                        document.getElementById("dialogBox").classList.remove("hidden");
+                    }, 600);
+                })
+                .catch(function () {
+                    var link = document.createElement("a");
+                    link.className = "no-ad";
+                    link.href = fileInfo.path;
+                    link.download = fileInfo.name;
+                    link.addEventListener("click", function (e) {
+                        e.stopPropagation();
+                    });
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    showToast("Skin downloaded successfully!");
+                    setTimeout(function () {
+                        document.getElementById("dialogBox").classList.remove("hidden");
+                    }, 600);
+                });
+        }
+
+        document.getElementById("downloadSkinBtn").addEventListener("click", function (e) {
+            e.stopPropagation();
+            downloadCurrentSkin();
+        });
+
+        document.getElementById("backButton").addEventListener("click", function () {
+            window.history.back();
+        });
+
+        var closeBtn = document.getElementById("closeDialog");
+        if (closeBtn) {
+            closeBtn.addEventListener("click", function () {
+                document.getElementById("dialogBox").classList.add("hidden");
+            });
+        }
+    </script>
+
+    <script src="js/analytics.js"></script>
+</body>
+
+
+</html>

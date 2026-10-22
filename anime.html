@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Rbux Counter : Anime</title>
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com/">
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net/">
+    <link rel="preconnect" href="https://tpc.googlesyndication.com/">
+    <link rel="preconnect" href="https://www.gstatic.com/">
+    <link rel="preload"
+        href="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7178919035426667"
+        as="script">
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="css/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&amp;display=swap" rel="stylesheet">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7178919035426667"
+        crossorigin="anonymous"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-W1XE95VFRP"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-W1XE95VFRP', {
+            page_path: window.location.pathname
+        });
+    </script>
+
+</head>
+
+<body>
+
+
+    <section>
+        <main>
+            <div class="bg-top"></div>
+            <div class="bg-bottom"></div>
+            <div class="main_div">
+                <div class="fff_game_section">
+
+                    <div class="header">
+                        <img src="assets/robux/back.webp" alt="Back" class="back-button" id="backButton">
+                        <h1 class="home-title">Select Anime</h1>
+                    </div>
+
+                    <div class="game_section" style="height: auto">
+                        <div class="animesec rewards">
+                            <a href="skin.html?anime=anime1" data-anime="anime1">
+                                <img src="assets/robux/anime1.png" class="homeimage">
+                            </a>
+                        </div>
+                        <div class="animesec rewards">
+                            <a href="skin.html?anime=anime2" data-anime="anime2">
+                                <img src="assets/robux/anime2.png" class="homeimage">
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- <div class="gadsbanner" id="adsense-container">
+                        <ins class="adsbygoogle" id="adsense-slot" style="display:block"
+                            data-ad-client="ca-pub-7178919035426667" data-ad-slot="9377693888"
+                            data-ad-format="auto"></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div> -->
+
+
+                    <div class="game_section" style="height: auto">
+                        <div class="animesec rewards">
+                            <a href="skin.html?anime=anime3" data-anime="anime3">
+                                <img src="assets/robux/anime3.png" class="homeimage">
+                            </a>
+                        </div>
+                        <div class="animesec rewards">
+                            <a href="skin.html?anime=anime4" data-anime="anime4">
+                                <img src="assets/robux/anime4.png" class="homeimage">
+                            </a>
+                        </div>
+                        <div class="animesec rewards">
+                            <a href="skin.html?anime=anime5" data-anime="anime5">
+                                <img src="assets/robux/anime5.png" class="homeimage">
+                            </a>
+                        </div>
+                        <div class="animesec rewards">
+                            <a href="skin.html?anime=anime6" data-anime="anime6">
+                                <img src="assets/robux/anime6.png" class="homeimage">
+                            </a>
+                        </div>
+                        <div class="animesec rewards">
+                            <a href="skin.html?anime=anime7" data-anime="anime7">
+                                <img src="assets/robux/anime7.png" class="homeimage">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            </div>
+            </div>
+
+        </main>
+    </section>
+
+    <script>
+        document.getElementById("backButton").addEventListener("click", function () {
+            window.history.back();
+        });
+
+        document.querySelectorAll("a[data-anime]").forEach(function(link) {
+            link.addEventListener("click", function() {
+                localStorage.setItem("selectedAnime", this.getAttribute("data-anime"));
+            });
+        });
+    </script>
+
+    <script src="js/analytics.js"></script>
+
+    <script>
+        let clickedGameUrl = null;
+
+        /* ---------------- GAME SECTION CLICK ---------------- */
+        document.querySelectorAll(".earnCoinSection").forEach((section) => {
+            section.addEventListener("click", function (e) {
+                e.preventDefault();
+                clickedGameUrl = this.querySelector("a").href;
+                showToastCountdown(7);
+                startRewardAdFlow();
+            });
+        });
+
+        function startRewardAdFlow() {
+            if (adLoading) return;
+            adLoading = true;
+
+            showAdWithLogic((result) => {
+                if (clickedGameUrl) setTimeout(() => (window.location.href = clickedGameUrl), 100);
+                adLoading = false;
+            });
+        }
+
+        function showToastCountdown(seconds) {
+            let toast = document.createElement("div");
+            toast.className = "timer-toast-message show";
+            let msg = document.createElement("span");
+            msg.textContent = `Wait ${seconds}s...`;
+            toast.innerHTML = `<img src="assets/icons/clock.png" alt="" style="width:20px;height:20px;margin-right:8px;">`;
+            toast.appendChild(msg);
+            document.body.appendChild(toast);
+            let count = seconds;
+            let timer = setInterval(() => {
+                count--;
+                msg.textContent = `Wait ${count}s...`;
+                if (count <= 0) {
+                    clearInterval(timer);
+                    toast.remove();
+                }
+            }, 1000);
+        }
+    </script>
+
+</body>
+
+
+</html>

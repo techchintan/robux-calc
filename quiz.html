@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Roblox Quiz</title>
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com/">
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net/">
+    <link rel="preconnect" href="https://tpc.googlesyndication.com/">
+    <link rel="preconnect" href="https://www.gstatic.com/">
+    <link rel="preload"
+        href="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7178919035426667"
+        as="script">
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="css/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&amp;display=swap" rel="stylesheet">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7178919035426667"
+        crossorigin="anonymous"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-W1XE95VFRP"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-W1XE95VFRP', {
+            page_path: window.location.pathname
+        });
+    </script>
+
+</head>
+
+<body>
+    <section>
+        <main>
+            <div class="bg-top"></div>
+            <div class="bg-bottom"></div>
+            <div class="main_div">
+                <div class="fff_game_section">
+
+                    <div class="header">
+                        <img src="assets/robux/back.webp" alt="Back" class="back-button" id="backButton">
+                        <h1 class="home-title" id="quizHeaderTitle">Quizzes</h1>
+                    </div>
+
+                    <div class="gadsbanner" id="adsense-container">
+                        <ins class="adsbygoogle" id="adsense-slot" style="display:block"
+                            data-ad-client="ca-pub-7178919035426667" data-ad-slot="5075381594"
+                            data-ad-format="auto"></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div>
+
+                    <div class="game_section" style="height: auto">
+
+                        <div class="quiz-list" id="quizList">
+                            <div class="quiz-loading">Loading quizzes...</div>
+                        </div>
+
+                        <div class="quiz-play" id="quizPlay">
+                            <div class="quiz-progress-bar">
+                                <div class="quiz-progress-fill" id="quizProgressFill"></div>
+                            </div>
+                            <div class="quiz-progress-text" id="quizProgressText"></div>
+
+                            <div class="quiz-question-card">
+                                <h3 id="quizQuestionText"></h3>
+                                <div class="quiz-options" id="quizOptions"></div>
+                            </div>
+
+                            <div class="quiz-nav">
+                                <button id="quizNextBtn" disabled>Next</button>
+                            </div>
+                        </div>
+
+                        <div class="quiz-result hidden" id="quizResult">
+                            <h2 id="quizResultTitle"></h2>
+                            <div class="quiz-score" id="quizScore"></div>
+                            <p id="quizScoreText"></p>
+                            <div class="quiz-result-actions">
+                                <button class="quiz-retry-btn" id="quizRetryBtn">Retry</button>
+                                <button class="quiz-back-btn" id="quizBackToListBtn">All Quizzes</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </main>
+    </section>
+
+    <script src="js/analytics.js"></script>
+
+    <script>
+        document.getElementById("backButton").addEventListener("click", function () {
+            if (currentQuiz) {
+                showList();
+            } else {
+                window.history.back();
+            }
+        });
+
+        const quizListEl = document.getElementById("quizList");
+        const quizPlayEl = document.getElementById("quizPlay");
+        const quizResultEl = document.getElementById("quizResult");
+        const quizHeaderTitle = document.getElementById("quizHeaderTitle");
+        const quizProgressFill = document.getElementById("quizProgressFill");
+        const quizProgressText = document.getElementById("quizProgressText");
+        const quizQuestionText = document.getElementById("quizQuestionText");
+        const quizOptionsEl = document.getElementById("quizOptions");
+        const quizNextBtn = document.getElementById("quizNextBtn");
+        const quizScoreEl = document.getElementById("quizScore");
+        const quizScoreTextEl = document.getElementById("quizScoreText");
+        const quizResultTitle = document.getElementById("quizResultTitle");
+
+        let quizzes = [];
+        let currentQuiz = null;
+        let currentQuestionIndex = 0;
+        let selectedOptionIndex = null;
+        let correctCount = 0;
+
+        fetch("data/quizzes.json")
+            .then((res) => {
+                if (!res.ok) throw new Error("Failed to load quizzes");
+                return res.json();
+            })
+            .then((data) => {
+                quizzes = data.quizzes || [];
+                renderQuizList();
+            })
+            .catch(() => {
+                quizListEl.innerHTML = `<div class="quiz-error">Could not load quizzes. Please try again later.</div>`;
+            });
+
+        function renderQuizList() {
+            if (!quizzes.length) {
+                quizListEl.innerHTML = `<div class="quiz-error">No quizzes available right now.</div>`;
+                return;
+            }
+            quizListEl.innerHTML = quizzes.map((quiz, index) => `
+                <div class="quiz-card" data-index="${index}">
+                    <img class="quiz-card-icon" src="${quiz.icon || 'assets/robux/quiz_cup.webp'}" alt="${quiz.title}">
+                    <div class="quiz-card-info">
+                        <h3>${quiz.title}</h3>
+                        <p>${quiz.description || ""}</p>
+                    </div>
+                    <span class="quiz-card-arrow">&#8250;</span>
+                </div>
+            `).join("");
+
+            quizListEl.querySelectorAll(".quiz-card").forEach((card) => {
+                card.addEventListener("click", () => {
+                    const index = parseInt(card.getAttribute("data-index"), 10);
+                    startQuiz(quizzes[index]);
+                });
+            });
+        }
+
+        function startQuiz(quiz) {
+            currentQuiz = quiz;
+            currentQuestionIndex = 0;
+            correctCount = 0;
+            quizHeaderTitle.textContent = quiz.title;
+            quizListEl.classList.add("hidden");
+            quizResultEl.classList.add("hidden");
+            quizPlayEl.classList.add("active");
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            const question = currentQuiz.questions[currentQuestionIndex];
+            selectedOptionIndex = null;
+            quizNextBtn.disabled = true;
+            quizNextBtn.textContent = currentQuestionIndex === currentQuiz.questions.length - 1 ? "Finish" : "Next";
+
+            const progressPercent = ((currentQuestionIndex) / currentQuiz.questions.length) * 100;
+            quizProgressFill.style.width = progressPercent + "%";
+            quizProgressText.textContent = `Question ${currentQuestionIndex + 1} of ${currentQuiz.questions.length}`;
+
+            quizQuestionText.textContent = question.question;
+            quizOptionsEl.innerHTML = question.options.map((option, i) => `
+                <button class="quiz-option" data-index="${i}">${option}</button>
+            `).join("");
+
+            quizOptionsEl.querySelectorAll(".quiz-option").forEach((btn) => {
+                btn.addEventListener("click", () => selectOption(btn, question));
+            });
+        }
+
+        function selectOption(btn, question) {
+            if (selectedOptionIndex !== null) return;
+            selectedOptionIndex = parseInt(btn.getAttribute("data-index"), 10);
+
+            const allOptions = quizOptionsEl.querySelectorAll(".quiz-option");
+            allOptions.forEach((opt) => (opt.disabled = true));
+
+            if (selectedOptionIndex === question.answer) {
+                btn.classList.add("correct");
+                correctCount++;
+            } else {
+                btn.classList.add("wrong");
+                allOptions[question.answer].classList.add("correct");
+            }
+
+            quizNextBtn.disabled = false;
+        }
+
+        quizNextBtn.addEventListener("click", () => {
+            if (currentQuestionIndex < currentQuiz.questions.length - 1) {
+                currentQuestionIndex++;
+                renderQuestion();
+            } else {
+                finishQuiz();
+            }
+        });
+
+        function finishQuiz() {
+            quizPlayEl.classList.remove("active");
+            quizResultEl.classList.remove("hidden");
+
+            const total = currentQuiz.questions.length;
+            quizResultTitle.textContent = `${currentQuiz.title} Complete!`;
+            quizScoreEl.textContent = `${correctCount} / ${total}`;
+
+            let message;
+            const percent = Math.round((correctCount / total) * 100);
+            if (percent === 100) message = "Perfect score! You know your stuff.";
+            else if (percent >= 60) message = "Nice work! Keep it up.";
+            else message = "Give it another shot and see if you can improve!";
+            quizScoreTextEl.textContent = message;
+        }
+
+        document.getElementById("quizRetryBtn").addEventListener("click", () => {
+            quizResultEl.classList.add("hidden");
+            quizPlayEl.classList.add("active");
+            currentQuestionIndex = 0;
+            correctCount = 0;
+            renderQuestion();
+        });
+
+        document.getElementById("quizBackToListBtn").addEventListener("click", showList);
+
+        function showList() {
+            currentQuiz = null;
+            quizHeaderTitle.textContent = "Quizzes";
+            quizPlayEl.classList.remove("active");
+            quizResultEl.classList.add("hidden");
+            quizListEl.classList.remove("hidden");
+        }
+    </script>
+</body>
+
+
+</html>

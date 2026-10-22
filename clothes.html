@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Rbux Counter: Clothes</title>
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com/">
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net/">
+    <link rel="preconnect" href="https://tpc.googlesyndication.com/">
+    <link rel="preconnect" href="https://www.gstatic.com/">
+    <link rel="preload"
+        href="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7178919035426667"
+        as="script">
+
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="css/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&amp;display=swap" rel="stylesheet">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7178919035426667"
+        crossorigin="anonymous"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-W1XE95VFRP"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-W1XE95VFRP', {
+            page_path: window.location.pathname
+        });
+    </script>
+
+</head>
+
+<body>
+
+
+    <section>
+        <main>
+            <div class="bg-top"></div>
+            <div class="bg-bottom"></div>
+            <div class="main_div">
+                <div class="fff_game_section">
+
+                    <div class="header">
+                        <img src="assets/robux/back.webp" alt="Back" class="back-button" id="backButton">
+                        <h1 class="home-title">Select Clothes</h1>
+                    </div>
+
+                    <div class="game_section" style="height: auto">
+                        <div class="game_section1">
+                            <div class="game_section2">
+                                <a href="anime.html?clothes=neon_jeans" class="game_section3" data-clothes="neon_jeans">
+                                    <div class="game_section4">
+                                        <picture>
+                                            <img src="assets/robux/neon_jeans.png" alt="Rbux Counter" loading="eager"
+                                                class="game_section_img">
+                                        </picture>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="game_section2">
+                                <a href="anime.html?clothes=girltshirt" class="game_section3" data-clothes="girltshirt">
+                                    <div class="game_section4">
+                                        <picture>
+                                            <img src="assets/robux/girltshirt.png" alt="Rbux Counter" loading="eager"
+                                                class="game_section_img">
+                                        </picture>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="gadsbanner" id="adsense-container">
+                        <ins class="adsbygoogle" id="adsense-slot" style="display:block"
+                            data-ad-client="ca-pub-7178919035426667" data-ad-slot="3063566972"
+                            data-ad-format="auto"></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div> -->
+
+
+                    <div class="game_section" style="height: auto">
+                        <div class="game_section1">
+                            <div class="game_section2">
+                                <a href="anime.html?clothes=boytshirt" class="game_section3" data-clothes="boytshirt">
+                                    <div class="game_section4">
+                                        <picture>
+                                            <img src="assets/robux/boytshirt.png" alt="Rbux Counter" loading="eager"
+                                                class="game_section_img">
+                                        </picture>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="game_section2">
+                                <a href="anime.html?clothes=hoodie" class="game_section3" data-clothes="hoodie">
+                                    <div class="game_section4">
+                                        <picture>
+                                            <img src="assets/robux/hoodie.png" alt="Rbux Counter" loading="eager"
+                                                class="game_section_img">
+                                        </picture>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="game_section2">
+                                <a href="anime.html?clothes=shortcoat" class="game_section3" data-clothes="shortcoat">
+                                    <div class="game_section4">
+                                        <picture>
+                                            <img src="assets/robux/shortcoat.png" alt="Rbux Counter" loading="eager"
+                                                class="game_section_img">
+                                        </picture>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="game_section2">
+                                <a href="anime.html?clothes=longcoat" class="game_section3" data-clothes="longcoat">
+                                    <div class="game_section4">
+                                        <picture>
+                                            <img src="assets/robux/longcoat.png" alt="Rbux Counter" loading="eager"
+                                                class="game_section_img">
+                                        </picture>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            </div>
+
+        </main>
+    </section>
+
+    <script>
+        document.getElementById("backButton").addEventListener("click", function () {
+            window.history.back();
+        });
+
+        document.querySelectorAll("a[data-clothes]").forEach(function(link) {
+            link.addEventListener("click", function() {
+                localStorage.setItem("selectedClothes", this.getAttribute("data-clothes"));
+            });
+        });
+    </script>
+
+    <script src="js/analytics.js"></script>
+</body>
+
+
+</html>

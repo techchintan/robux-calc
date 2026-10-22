@@ -1,297 +1,157 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
+
+
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>BC RBX Counter</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com/">
+    <link rel="preconnect" href="https://googleads.g.doubleclick.net/">
+    <link rel="preconnect" href="https://tpc.googlesyndication.com/">
+    <link rel="preconnect" href="https://www.gstatic.com/">
+    <link rel="preload"
+        href="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7178919035426667"
+        as="script">
 
-    <link rel="preconnect" href="https://pagead2.googlesyndication.com/" />
-    <link rel="preconnect" href="https://googleads.g.doubleclick.net/" />
-
-    <script
-      async
-      data-ad-frequency-hint="30s"
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4788685016218460"
-      crossorigin="anonymous"
-    ></script>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="css/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&amp;display=swap" rel="stylesheet">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7178919035426667"
+        crossorigin="anonymous"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-W1XE95VFRP"></script>
     <script>
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({
-          "gtm.start": new Date().getTime(),
-          event: "gtm.js",
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-W1XE95VFRP', {
+            page_path: window.location.pathname
         });
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != "dataLayer" ? "&l=" + l : "";
-        j.async = true;
-        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, "script", "dataLayer", "GTM-PXKTPB4M");
     </script>
 
-    <link rel="stylesheet" href="css/style.css" />
-  </head>
+</head>
 
-  <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PXKTPB4M"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<body>
     <section>
-      <main>
-        <div class="main_div">
-          <div class="">
-            <div class="header">
-              <img src="assets/robux/back.webp" alt="Back" class="back-button" id="backButton" />
-              <h1 class="home-title">BC RBX Counter</h1>
-            </div>
+        <main>
+            <div class="bg-top"></div>
+            <div class="bg-bottom"></div>
+            <div class="main_div">
+                <div class="fff_game_section">
 
-            <div class="game_section" style="height: auto">
-              <div style="justify-content: center; text-align: center">
-                <img
-                  src="assets/robux/all_calimage.webp"
-                  class="rbximage"
-                  loading="eager"
-                  alt="RBX Calculator"
-                />
-              </div>
-              <div
-                style="display: flex; flex-direction: column; gap: 8px; justify-content: flex-start"
-              >
-                <p style="text-align: left; color: #ffffff">Enter Number of Days...</p>
-                <div class="input-wrapper">
-                  <input
-                    type="number"
-                    class="input-field"
-                    id="playerNameInput"
-                    placeholder="Enter Number of Days"
-                    min="1"
-                  />
+                    <div class="header">
+                        <img src="assets/robux/back.webp" alt="Back" class="back-button" id="backButton">
+                        <h1 class="home-title">BC RBX Counter</h1>
+                    </div>
+
+                    <div class="game_section" style="height: auto">
+                        <div>
+                            <img src="assets/robux/all_calimage.webp" class="rbximage">
+                        </div>
+                        <div>
+                            <input type="text" class="input-field" id="playerNameInput"
+                                placeholder="Enter Number of Days">
+                            <br>
+                            <button class="continue-btn" id="continueBtn">Count Now</button>
+                        </div>
+                    </div>
+
+                    <div id="rbxbuilder">
+                        <div type="text">
+                            If You are a Builder club member
+                            <br>
+                            You will get :
+                        </div>
+                        <div id="result" class="rbxresult"></div>
+                    </div>
+
+                    <!-- <div class="gadsbanner" id="adsense-container">
+                        <ins class="adsbygoogle" id="adsense-slot" style="display:block"
+                            data-ad-client="ca-pub-7178919035426667" data-ad-slot="2449218251"
+                            data-ad-format="auto"></ins>
+                        <script>
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
+                    </div> -->
+
+
+                    <div class="resp_about_section">
+                        <div class="about_section">
+                            <h1>RBX Counter &amp; Fun Rewards – Your Ultimate Robux Calculator!</h1>
+
+                            <p>
+                                Count your daily free robux with our easy-to-use and powerful free robux
+                                counter, RBX calc and free robux converter.
+                            </p>
+
+                            <h1>Features</h1>
+                            <ul>
+                                <li>RBX calculator</li>
+                                <li>Convert BC, TBC, and OBX to RBX instantly</li>
+                                <li>RBX to Dollar counter</li>
+                                <li>Spin &amp; Win – Try your luck and win surprises!</li>
+                                <li>Quiz Time – Test your RB knowledge and earn points</li>
+                                <li>Lucky Scratch – Scratch &amp; reveal exciting rewards.</li>
+                            </ul>
+
+                            <h1>Important Information</h1>
+                            <p>
+                                RBLX Calc : Robox Counters is an unofficial application and is not affiliated
+                                with ROBLOX CORPORATION. It is designed to help players and fans discover free
+                                items and is fully compliant with Roblox's community usage guidelines.
+                            </p>
+
+                            <h1>Refer to</h1>
+                            <p>
+                                The name, logo and information provided by the application used in accordance
+                                with the guidelines indicated in:
+                            </p>
+                            <p>
+                                <a href="https://en.help.roblox.com/hc/en-us/articles/115001708126-Roblox-Name-and-Logo-Community-Usage-Guidelines"
+                                    target="_blank">
+                                    https://en.help.roblox.com/hc/en-us/articles/115001708126-Roblox-Name-and-Logo-Community-Usage-Guidelines
+                                </a>
+                            </p>
+                            <p>Thank you!</p>
+                        </div>
+                    </div>
                 </div>
-                <button class="continue-btn" id="continueBtn">Count Now</button>
-              </div>
             </div>
-
-            <div id="rbxbuilder" style="display: none">
-              <div class="gradient-box">
-                <div style="display: flex; justify-content: center; align-items: center">
-                  <img
-                    src="assets/robux/win.png"
-                    height="90px"
-                    width="90px"
-                    loading="eager"
-                    alt="Win"
-                  />
-                </div>
-                <div style="display: flex; flex-direction: column; text-align: left">
-                  You will Receive :
-                  <div id="result" class="rbxresult"></div>
-                </div>
-              </div>
             </div>
-
-            <!-- Cross-promo -->
-            <div class="promo-strip">
-              <span class="promo-strip-title">Try These Next</span>
-              <div class="promo-scroll">
-                <a href="scratch-win.html" class="promo-card">
-                  <img src="assets/robux/scrarch_image.webp" alt="Scratch Card" loading="lazy" />
-                  <span class="promo-card-name">Scratch Card</span>
-                </a>
-                <a href="spin_to_win.html" class="promo-card">
-                  <img src="assets/robux/spin wheel square.jpg" alt="Spin Wheel" loading="lazy" />
-                  <span class="promo-card-name">Spin Wheel</span>
-                </a>
-                <a href="daily-rbx.html" class="promo-card">
-                  <img src="assets/robux/gift_image.webp" alt="Daily RBX" loading="lazy" />
-                  <span class="promo-card-name">Daily RBX</span>
-                </a>
-              </div>
-            </div>
-
-            <div class="gadsbanner">
-              <ins
-                class="adsbygoogle"
-                style="display: block"
-                data-ad-client="ca-pub-4788685016218460"
-                data-ad-slot="9147865924"
-                data-ad-format="auto"
-                data-full-width-responsive="true"
-              ></ins>
-              <label
-                style="
-                  display: block;
-                  margin: 0 auto;
-                  width: fit-content;
-                  letter-spacing: 4px;
-                  color: rgb(65, 77, 101);
-                  font:
-                    400 9px/2 Arial,
-                    sans-serif;
-                  opacity: 0.7;
-                "
-                >ADVERTISEMENT</label
-              >
-            </div>
-
-            <div class="resp_about_section" style="justify-content: flex-start; padding: 0 18px">
-              <div class="about_section" style="width: 100%; margin-top: 0">
-                <h1>RBX Master <br />Ultimate Tracker &amp; Calc</h1>
-
-                <p>
-                  Manage your counts, convert values, and stay updated. Your all-in-one companion
-                  for your favorite platform.
-                </p>
-
-                <h1 class="section-title features-title" style="margin: 20px 0 10px 0">Features</h1>
-
-                <div class="feature-list">
-                  <div class="feature-item">
-                    <h3>RBX calculator</h3>
-                    <ul>
-                      <li>Convert BC, TBC, and OBX to RBX instantly</li>
-                    </ul>
-                  </div>
-                  <div class="feature-item">
-                    <h3>Spin &amp; Win</h3>
-                    <ul>
-                      <li>Spin &amp; Win Exciting Rewards</li>
-                    </ul>
-                  </div>
-                  <div class="feature-item">
-                    <h3>Scratch Card</h3>
-                    <ul>
-                      <li>Try Your Luck – Scratch</li>
-                    </ul>
-                  </div>
-                  <div class="feature-item">
-                    <h3>Logic Quiz</h3>
-                    <ul>
-                      <li>Play the Logic Challenge</li>
-                    </ul>
-                  </div>
-                  <div class="feature-item">
-                    <h3>Funny Memes</h3>
-                    <ul>
-                      <li>Trending Funny Memes</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <h1 class="section-title disclaimer-title">Disclaimer</h1>
-
-                <div class="disclaimer-content">
-                  <p>
-                    RBX Master: Ultimate Tracker &amp; Calc is an independent and unofficial
-                    application and is not affiliated with, endorsed by, or sponsored by Roblox
-                    Corporation. This app is created for informational and entertainment purposes
-                    only and is intended for players and fans.
-                  </p>
-                  <p>
-                    All names, logos, and trademarks mentioned belong to their respective owners.
-                    Any references to Roblox are used in accordance with the community usage
-                    guidelines.
-                  </p>
-                  <p>For more information, please refer to the official guidelines:</p>
-                  <p>
-                    <a
-                      href="https://en.help.roblox.com/hc/en-us/articles/115001708126-Roblox-Name-and-Logo-Community-Usage-Guidelines"
-                      target="_blank"
-                      class="guidelines-link"
-                    >
-                      https://en.help.roblox.com/hc/en-us/articles/115001708126-Roblox-Name-and-Logo-Community-Usage-Guidelines
-                    </a>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
+        </main>
     </section>
 
     <script>
-      document.getElementById("backButton").addEventListener("click", function () {
-        let done = false;
-        function go() { if (done) return; done = true; window.location.href = "home.html"; }
-        const fallback = setTimeout(go, 8000);
-        adBreak({ type: "next", name: "back_interstitial", beforeAd: () => clearTimeout(fallback), adBreakDone: go });
-      });
-
-      window.adsbygoogle = window.adsbygoogle || [];
-      window.adReady = false;
-
-      const adBreak = (window.adBreak = function (o) {
-        adsbygoogle.push(o);
-      });
-
-      adBreak({
-        preloadAdBreaks: "on",
-        onReady: () => {
-          window.adReady = true;
-          (adsbygoogle = window.adsbygoogle || []).push({});
-        },
-      });
-
-      function showInterstitialThenResult(days) {
-        const btn = document.getElementById("continueBtn");
-        btn.textContent = "Calculating... ⏳";
-        btn.disabled = true;
-
-        adBreak({
-          type: "next",
-          name: "show_rbx_result",
-          beforeAd: () => { btn.disabled = true; },
-          afterAd:  () => { btn.disabled = false; btn.textContent = "Count Now"; },
-          adBreakDone: () => {
-            const total = days * 15;
-            document.getElementById("result").innerText = total.toFixed(2) + " RBX";
-            document.getElementById("rbxbuilder").style.display = "block";
-            document.getElementById("rbxbuilder").scrollIntoView({behavior: "smooth"});
-            btn.textContent = "Count Now";
-            btn.disabled = false;
-          },
+        document.getElementById("backButton").addEventListener("click", function () {
+            window.history.back();
         });
-      }
 
-      document.getElementById("continueBtn").addEventListener("click", function () {
-        const input = document.getElementById("playerNameInput").value;
-        const days = parseInt(input, 10);
+        document.getElementById("continueBtn").addEventListener("click", function () {
+            const days = parseInt(document.getElementById("playerNameInput").value, 10);
 
-        if (!isNaN(days) && days > 0) {
-          showInterstitialThenResult(days);
-        } else {
-          alert("Please enter a valid number of days");
-        }
-      });
+            if (!isNaN(days) && days > 0) {
+                // Each day = 15 Robux
+                const total = days * 15;
 
-      document.getElementById("playerNameInput").addEventListener("keydown", function (e) {
-        if (e.key === "Enter") {
-          document.getElementById("continueBtn").click();
-        }
-      });
+                // Show the result
+                document.getElementById("result").innerText = total.toFixed(2) + " RBX";
 
-      document.querySelectorAll(".promo-card").forEach(function (link) {
-        link.addEventListener("click", function (e) {
-          e.preventDefault();
-          var href = this.getAttribute("href");
-          var navigated = false;
-          function go() { if (navigated) return; navigated = true; window.location.href = href; }
-          var fallback = setTimeout(go, 8000);
-          adBreak({ type: "next", name: "promo_nav", beforeAd: function () { clearTimeout(fallback); }, adBreakDone: function () { clearTimeout(fallback); go(); } });
+                // Make div visible
+                document.getElementById("rbxbuilder").style.display = "block";
+            } else {
+                alert("Please enter a valid number of days");
+            }
         });
-      });
     </script>
 
-    <script src="js/nav.js"></script>
-    <nav class="bottom-nav">
-      <a href="home.html"><span class="nav-icon">🏠</span><span>Home</span></a>
-      <a href="spin_to_win.html"><span class="nav-icon">🎰</span><span>Spin</span></a>
-      <a href="scratch-win.html"><span class="nav-icon">🎫</span><span>Scratch</span></a>
-      <a href="logic-quiz.html"><span class="nav-icon">🧠</span><span>Quiz</span></a>
-      <a href="meme.html"><span class="nav-icon">😂</span><span>Memes</span></a>
-    </nav>
-  </body>
+    <script src="js/analytics.js"></script>
+</body>
+
+
 </html>
