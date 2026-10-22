@@ -27,31 +27,33 @@ function getPageName() {
 }
 
 async function onPaidEventHandler(ilar_message) {
-    const sessionId = getCookie("session_id");
-    const { currencyCode, valueMicros } = ilar_message;
-    const actualValue = valueMicros / 1000000 || 0;
+    // Revenue reporting to the roboxquiz analytics API is disabled for this site.
+    return;
+    // const sessionId = getCookie("session_id");
+    // const { currencyCode, valueMicros } = ilar_message;
+    // const actualValue = valueMicros / 1000000 || 0;
 
-    await fetch("https://1001.roboxquiz.com/api/analytics", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            Domain: window.location.hostname,
-            SubDomain: getSubdomainOrDomain(window.location.hostname),
-            EventName: `${getSubdomainOrDomain(window.location.hostname)}_ad_impression`,
-            AdsPlatform: 'Google',
-            AdsFormat: 'Display',
-            Currency: 'USD',
-            Value: actualValue,
-            AdsSource: 'AdSense',
-            GClId: getCookie('gclId') || null,
-            AdsUnitName: getPageName(),
-            SessionId: sessionId
-        }),
-    });
+    // await fetch("https://1001.roboxquiz.com/api/analytics", {
+    //     method: "POST",
+    //     headers: {
+    //         "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({
+    //         Domain: window.location.hostname,
+    //         SubDomain: getSubdomainOrDomain(window.location.hostname),
+    //         EventName: `${getSubdomainOrDomain(window.location.hostname)}_ad_impression`,
+    //         AdsPlatform: 'Google',
+    //         AdsFormat: 'Display',
+    //         Currency: 'USD',
+    //         Value: actualValue,
+    //         AdsSource: 'AdSense',
+    //         GClId: getCookie('gclId') || null,
+    //         AdsUnitName: getPageName(),
+    //         SessionId: sessionId
+    //     }),
+    // });
 
-    console.log("ilar_message", ilar_message);
+    // console.log("ilar_message", ilar_message);
 }
 
 // adBreak/adConfig and onPaidEvent are set up below after timer logic
@@ -204,7 +206,8 @@ function showAdWithLogic(onAdDone) {
                 } else {
                     // console.log("[RewardAdLogic] Rewarded Ad not ready, skipping.");
                     console.log("[RewardAdLogic] Rewarded ad not ready Skipping to GPT reward.")
-                   
+                    adLoading = false;
+                    onAdDone({ breakStatus: "notReady" });
                 }
             })
         }
@@ -276,7 +279,8 @@ function showRewardAdWithLogic(onAdDone) {
                 } else {
                     // console.log("[RewardAdLogic] Rewarded Ad not ready, skipping.");
                     console.log("[RewardAdLogic] Rewarded ad not ready Skipping to GPT reward.")
-                   
+                    adLoading = false;
+                    onAdDone({ breakStatus: "notReady" });
                 }
             })
         }
